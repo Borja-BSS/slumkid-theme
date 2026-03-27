@@ -751,13 +751,13 @@ a.btn-cart,a.nav-icon-btn{text-decoration:none;display:inline-flex;align-items:c
 
 </footer>
 
-<script>
+<script>{% raw %}
 /* Feed scroll */
 const feed = document.getElementById('footFeed');
 // feed: swipe only on mobile, no arrows
-</script>
+{% endraw %}</script>
 
-<script>
+<script>{% raw %}
 /* ── NAV scroll ── */
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
@@ -934,10 +934,25 @@ hAuto();
   }
   setTimeout(tick, 600);
 })();
-</script>
+{% endraw %}</script>
 
 <script>
-var SK={s1:"{{ 'slide-1.jpg'|asset_url }}",s2:"{{ 'slide-2.jpg'|asset_url }}",s3:"{{ 'slide-3.jpg'|asset_url }}",c0:"{{ 'prod-storm.jpg'|asset_url }}",c1:"{{ 'prod-pink.jpg'|asset_url }}",c2:"{{ 'prod-grey.jpg'|asset_url }}",c3:"{{ 'prod-blue.jpg'|asset_url }}",c4:"{{ 'prod-black.jpg'|asset_url }}",c5:"{{ 'prod-kaki.jpg'|asset_url }}",f0:"{{ 'feed-1.jpg'|asset_url }}",f1:"{{ 'feed-2.jpg'|asset_url }}",f2:"{{ 'feed-3.jpg'|asset_url }}",f3:"{{ 'feed-4.jpg'|asset_url }}",f4:"{{ 'feed-5.jpg'|asset_url }}"  };
+var SK={
+  s1:"{{ 'slide-1.jpg' | asset_url }}",
+  s2:"{{ 'slide-2.jpg' | asset_url }}",
+  s3:"{{ 'slide-3.jpg' | asset_url }}",
+  c0:"{{ 'prod-storm.jpg' | asset_url }}",
+  c1:"{{ 'prod-pink.jpg' | asset_url }}",
+  c2:"{{ 'prod-grey.jpg' | asset_url }}",
+  c3:"{{ 'prod-blue.jpg' | asset_url }}",
+  c4:"{{ 'prod-black.jpg' | asset_url }}",
+  c5:"{{ 'prod-kaki.jpg' | asset_url }}",
+  f0:"{{ 'feed-1.jpg' | asset_url }}",
+  f1:"{{ 'feed-2.jpg' | asset_url }}",
+  f2:"{{ 'feed-3.jpg' | asset_url }}",
+  f3:"{{ 'feed-4.jpg' | asset_url }}",
+  f4:"{{ 'feed-5.jpg' | asset_url }}"
+};
 function applyImgs(){
   document.querySelectorAll('.hero-slide').forEach(function(s,i){var bg=s.querySelector('.hero-bg');var src=[SK.s1,SK.s2,SK.s3][i];if(bg&&src){bg.style.backgroundImage='url('+src+')';bg.style.backgroundSize='cover';bg.style.backgroundPosition='center top';}});
   var ci=[SK.c0,SK.c1,SK.c2,SK.c3,SK.c4,SK.c5];
@@ -946,7 +961,8 @@ function applyImgs(){
   document.querySelectorAll('.foot-feed-item img').forEach(function(img,i){if(fi[i])img.src=fi[i];});
 }
 document.addEventListener('DOMContentLoaded',applyImgs);
-setTimeout(applyImgs,600);setTimeout(applyImgs,1800);
+setTimeout(applyImgs,600);
+setTimeout(applyImgs,1800);
 </script>
 
 {% schema %}
