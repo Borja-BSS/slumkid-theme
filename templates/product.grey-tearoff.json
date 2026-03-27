@@ -9,31 +9,12 @@
  */
 {
   "sections": {
-    "gp_section_601925780502479823": {
-      "settings": {
-        "checksum": "8a8947ad1b0d0f1a18f2fd00c66dec7e5bdebd513148ed42b1013402d12e993f_1_1_0_0__1",
-        "ggKeQqFr-33_label": "AJOUTER AU PANIER",
-        "ggKeQqFr-33_outOfStockLabel": "Out of stock",
-        "ggKeQqFr-33_unavailableLabel": "Unavailable",
-        "ggOFbUFw89W_text": "<strong>Details du produit</strong><ul><li>Coupe oversize.</li><li>Slum kid logo en relief sur la poche et le dos</li><li>Boutons personnalisés Slum Kid.</li><li>Capuche ajustable avec élastique.</li><li>Poche au niveau du cou avec cagoule intégrée.</li><li>100% polyester.</li><li>&nbsp;Le model mesure 177 cm et porte du S.<br><br>Instructions de lavage:<br>&nbsp;</li><li>Laver à la main.</li><li>Ne pas mettre au sèche linge.</li><li>Laver avec des couleurs similaires.</li><li>Ne pas utiliser d’adoucissant.</li></ul>",
-        "ggTwl36hFqu_text": "<p><br><strong>Temps de livraison:</strong><br>Le délai de livraison est généralement de 7 à 14 jours à compter de la date de commande.</p><p>Les délais de livraison peuvent varier en fonction des conditions de production et de transport.<br><br><strong>Frais de livraison:</strong></p><ul><li><strong>Suisse:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>UE:</strong> 14.50 €</li><li><strong>Hors de l'UE:</strong> 35.90 € to 70.80 €</li></ul><p>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/shipping-policy\"><u>Conditions de livraisons</u></a></p><p>&nbsp;</p><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:16px;\"><strong>Retour</strong></span></p><p>Nous n'acceptons pas les retours. Toutes les ventes sont finales.<br><br>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/exchange-return-refund\"><u>Echange, Remboursement &amp; Ret</u></a><u>our</u></p>",
-        "ggV4V5UZ2hS_text": "ASSORTI AVEC",
-        "ggtoxz7Gpog_childItem_0": "<p>DETAILS DU PRODUIT</p>",
-        "ggtoxz7Gpog_childItem_1": "<p>GUIDE DES TAILLES</p>",
-        "ggtoxz7Gpog_childItem_2": "<p>LIVRAISON ET RETOUR</p>",
-        "section_preload": "true"
-      },
-      "type": "gp-section-601925780502479823"
-    },
-    "gp_section_601926605857620914": {
-      "settings": {
-        "checksum": "aee3b48e8fb924a24ac5eb5811687cfa3cb8e427c395a24e08f429ed61ac9f7f_1_1_0_0__1"
-      },
-      "type": "gp-section-601926605857620914"
+    "main": {
+      "type": "product-pink-puffer",
+      "settings": {}
     }
   },
   "order": [
-    "gp_section_601925780502479823",
-    "gp_section_601926605857620914"
+    "main"
   ]
 }
