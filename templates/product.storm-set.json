@@ -1,9 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "product-storm",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}
+{"sections":{"main":{"type":"product-storm-set","settings":{}}},"order":["main"]}
