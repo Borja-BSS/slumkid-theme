@@ -165,7 +165,7 @@ nav.scrolled {
 ════════════════════════════ */
 .products-section {
   background: #f5f5f7;
-  padding: 6rem 0 5rem;
+  padding: 6rem 0 0;
   border-top: 1px solid rgba(0,0,0,0.07);
 }
 .section-header { text-align: center; margin-bottom: 3.5rem; padding: 0 2rem; }
@@ -447,9 +447,9 @@ footer {
    SECTION SLOGANS TYPEWRITER
 ════════════════════════════ */
 .slogan-section {
-  background: var(--white);
-  padding: 7rem 2rem;
-  border-top: 1px solid rgba(0,0,0,0.07);
+  background: #f5f5f7;
+  padding: 4rem 2rem;
+  border-top: none;
   display: flex; align-items: center; justify-content: center;
   min-height: 28vh;
 }
@@ -481,6 +481,15 @@ footer {
   .feed-arrow { display: none; }
 }
 
+
+.nav-text-btn {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(0,0,0,0.65);
+  text-decoration: none; padding: 0.3rem 0.2rem;
+  transition: color 0.2s;
+}
+.nav-text-btn:hover { color: var(--black); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
@@ -495,12 +504,11 @@ footer {
   .foot-links { display: none; }
 }
 
-/* Hero slide backgrounds - set by JS below */
 </style>
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a class="nav-logo" href="#">Slum Kid</a>
+  <a class="nav-logo" href="#">KID</a>
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
     <li><a href="#">Lookbook</a></li>
@@ -508,12 +516,9 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <button class="nav-icon-btn" aria-label="Recherche">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </button>
-    <button class="nav-icon-btn" aria-label="Panier">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-    </button>
+    <a class="nav-text-btn" href="#catalogue">New In</a>
+    <a class="nav-text-btn" href="#catalogue">Shop All</a>
+    <a class="nav-text-btn" href="#">Brand</a>
   </div>
 </nav>
 
@@ -572,10 +577,7 @@ footer {
 
 <!-- ═══ S2 : CAROUSEL ═══ -->
 <section class="products-section" id="catalogue">
-  <div class="section-header">
-    <span class="section-eyebrow">Drop SS25</span>
-    <h2 class="section-title">Le Catalogue</h2>
-  </div>
+
   <div class="carousel-scene" id="carouselScene">
   <div class="carousel-inner" id="carouselInner">
 
@@ -587,7 +589,7 @@ footer {
       <div class="p-card-info">
         <span class="p-badge new">✦ New In</span>
         <div class="p-name">Storm Set<br>White</div>
-        <div class="p-desc">Season 26<br>Exclusive Edition</div>
+        <div class="p-desc">Veste + Jogger<br>Imperméable &amp; Réflectif</div>
         <div class="p-card-footer">
           <button class="btn-cart">View</button>
         </div>
@@ -602,7 +604,7 @@ footer {
       <div class="p-card-info">
         <span class="p-badge">Collection</span>
         <div class="p-name">Puffer<br>Pink</div>
-        <div class="p-desc">Quilted<br>Winter Jacket</div>
+        <div class="p-desc">Doudoune matelassée<br>Édition hivernale</div>
         <div class="p-card-footer">
           <button class="btn-cart">View</button>
         </div>
@@ -617,7 +619,7 @@ footer {
       <div class="p-card-info">
         <span class="p-badge">Bestseller</span>
         <div class="p-name">Tear-Off<br>Grey</div>
-        <div class="p-desc">Zip Set<br>Heavy Cotton</div>
+        <div class="p-desc">Ensemble tear-off<br>Coton lourd</div>
         <div class="p-card-footer">
           <button class="btn-cart">View</button>
         </div>
@@ -647,7 +649,7 @@ footer {
       <div class="p-card-info">
         <span class="p-badge">Collection</span>
         <div class="p-name">Tear-Off<br>Black</div>
-        <div class="p-desc">Zip Set<br>All Black</div>
+        <div class="p-desc">Ensemble tear-off<br>Full Black</div>
         <div class="p-card-footer">
           <button class="btn-cart">View</button>
         </div>
@@ -693,8 +695,8 @@ footer {
   <!-- Feed Instagram -->
   <div class="foot-insta">
     <div class="foot-insta-header">
-      <a class="foot-insta-handle" href="https://instagram.com/slumkid" target="_blank">@slumkid</a>
-      <a class="foot-follow" href="https://instagram.com/slumkid" target="_blank">Follow Us</a>
+      <a class="foot-insta-handle" href="https://www.instagram.com/slumkid_official" target="_blank">@slumkid</a>
+      <a class="foot-follow" href="https://www.instagram.com/slumkid_official" target="_blank">Follow Us</a>
     </div>
     <div class="foot-feed-wrap">
       <div class="foot-feed" id="footFeed">
@@ -721,17 +723,14 @@ footer {
     </form>
     <div class="foot-socials">
       <!-- Instagram -->
-      <a class="foot-social-icon" href="#" aria-label="Instagram">
+      <a class="foot-social-icon" href="https://www.instagram.com/slumkid_official" target="_blank" aria-label="Instagram">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
       </a>
       <!-- TikTok -->
-      <a class="foot-social-icon" href="#" aria-label="TikTok">
+      <a class="foot-social-icon" href="https://www.tiktok.com/@slumkid" target="_blank" aria-label="TikTok">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
       </a>
-      <!-- WhatsApp -->
-      <a class="foot-social-icon" href="#" aria-label="WhatsApp">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-      </a>
+      
     </div>
   </div>
 
@@ -739,11 +738,11 @@ footer {
   <div class="foot-legal">
     <span class="foot-copy">© 2026 Slum Kid</span>
     <div class="foot-legal-links">
-      <a href="#">Support</a>
-      <a href="#">Shipping terms</a>
-      <a href="#">Terms of service</a>
-      <a href="#">Legal notice</a>
-      <a href="#">Privacy policy</a>
+      <a href="/pages/support">Support</a>
+      <a href="/policies/shipping-policy">Shipping terms</a>
+      <a href="/policies/terms-of-service">Terms of service</a>
+      <a href="/policies/legal-notice">Legal notice</a>
+      <a href="/policies/privacy-policy">Privacy policy</a>
     </div>
   </div>
 
@@ -908,12 +907,11 @@ hAuto();
 /* ── TYPEWRITER SLOGANS ── */
 (function(){
   const slogans = [
-    'BUILT FROM THE SLUM',
+    'FROM SLUM TO FASHION',
     'WEAR WHAT YOU ARE',
     'BE PART OF IT',
     'NEW DROP — SEASON 26',
     'SLUM LIFE',
-    'STREET NEVER SLEEPS',
   ];
   const el = document.getElementById('sloganText');
   let si = 0, ci = 0, deleting = false;
@@ -936,9 +934,6 @@ hAuto();
 </script>
 
 <script>
-/* ═══ SLUM KID — IMAGE LOADER ═══
-   Remplacez chaque URL ci-dessous par l'URL Shopify CDN de votre image
-   après upload dans Contenu > Fichiers                              */
 var SK = {
   s1: "{{ 'slide-1.jpg' | asset_url }}",
   s2: "{{ 'slide-2.jpg' | asset_url }}",
@@ -955,22 +950,18 @@ var SK = {
   f3: "{{ 'feed-4.jpg' | asset_url }}",
   f4: "{{ 'feed-5.jpg' | asset_url }}"
 };
-
 function applyImgs() {
-  // Hero slides
   document.querySelectorAll('.hero-slide').forEach(function(slide, i) {
     var bg = slide.querySelector('.hero-bg');
     var src = [SK.s1, SK.s2, SK.s3][i];
     if (bg && src) { bg.style.backgroundImage='url('+src+')'; bg.style.backgroundSize='cover'; bg.style.backgroundPosition='center top'; }
   });
-  // Carousel cards (including clones)
   var cimgs = [SK.c0,SK.c1,SK.c2,SK.c3,SK.c4,SK.c5];
   document.querySelectorAll('.p-card').forEach(function(card) {
     var ci = parseInt(card.getAttribute('data-ci')||'0');
     var bg = card.querySelector('.p-card-bg');
     if (bg && cimgs[ci]) { bg.style.backgroundImage='url('+cimgs[ci]+')'; bg.style.backgroundSize='cover'; bg.style.backgroundPosition='center top'; }
   });
-  // Feed
   var fimgs=[SK.f0,SK.f1,SK.f2,SK.f3,SK.f4,SK.f0,SK.f1,SK.f2,SK.f3,SK.f4];
   document.querySelectorAll('.foot-feed-item img').forEach(function(img,i){ if(fimgs[i]) img.src=fimgs[i]; });
 }
@@ -1138,12 +1129,11 @@ hAuto();
 /* ── TYPEWRITER SLOGANS ── */
 (function(){
   const slogans = [
-    'BUILT FROM THE SLUM',
+    'FROM SLUM TO FASHION',
     'WEAR WHAT YOU ARE',
     'BE PART OF IT',
     'NEW DROP — SEASON 26',
     'SLUM LIFE',
-    'STREET NEVER SLEEPS',
   ];
   const el = document.getElementById('sloganText');
   let si = 0, ci = 0, deleting = false;
