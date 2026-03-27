@@ -439,11 +439,18 @@ var IMGS = {
 };
 window.IMGS = IMGS;
 
+// Images jogger : cadrage bas pour voir les pieds
+var BOTTOM_IMGS = ['p9','p10','p11','p12'];
+
 document.querySelectorAll('.thumb').forEach(function(th) {
   th.addEventListener('click', function() {
     document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
     th.classList.add('active');
-    document.getElementById('mainImg').src = IMGS[th.dataset.src];
+    var key = th.dataset.src;
+    var mainImg = document.getElementById('mainImg');
+    mainImg.src = IMGS[key];
+    // Cadrage : bas pour les photos jogger, haut pour le reste
+    mainImg.style.objectPosition = BOTTOM_IMGS.indexOf(key) !== -1 ? 'center bottom' : 'center top';
   });
 });
 
