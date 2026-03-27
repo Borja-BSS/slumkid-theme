@@ -441,6 +441,14 @@ var IMGS = {
 };
 window.IMGS = IMGS;
 
+document.querySelectorAll('.thumb').forEach(function(th) {
+  th.addEventListener('click', function() {
+    document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
+    th.classList.add('active');
+    document.getElementById('mainImg').src = IMGS[th.dataset.src];
+  });
+});
+
 /* Galerie — clic sur thumbnail */
 document.querySelectorAll('.thumb').forEach(function(th) {
   th.addEventListener('click', function() {
