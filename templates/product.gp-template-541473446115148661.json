@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541473639170573173": {
+      "settings": {
+        "checksum": "cd0b085e13be11277f22d62fe1197d1a25e75ac996529f98b09dd3bd8f42c984_1_1_0_0__1",
+        "gg50Gm2nFQG_text": "<p><strong>Temps de livraison:</strong><br>Le délai de livraison est généralement de 7 à 14 jours à compter de la date de commande.</p><p>Les délais de livraison peuvent varier en fonction des conditions de production et de transport.<br><br><strong>Frais de livraison:</strong></p><ul><li><strong>Suisse:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>UE:</strong> 14.50 €</li><li><strong>Hors de l'UE:</strong> 35.90 € to 70.80 €</li></ul><p>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/shipping-policy\"><u>Conditions de livraisons</u></a></p><p>&nbsp;</p><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:16px;\"><strong>Retour</strong></span></p><p>Nous n'acceptons pas les retours. Toutes les ventes sont finales.<br><br>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/exchange-return-refund\"><u>Echange, Remboursement &amp; Ret</u></a><u>our</u></p>",
+        "ggRIKH_q5J9_childItem_0": "<p>DETAILS DU PRODUIT</p>",
+        "ggRIKH_q5J9_childItem_1": "<p>GUIDE DES TAILLES</p>",
+        "ggRIKH_q5J9_childItem_2": "<p>LIVRAISON ET RETOUR</p>",
+        "ggZRhPwrIxs_text": "<strong>Details du produit</strong><ul><li>Coupe ample</li><li>Jambe large</li><li>Elastique avec cordon de serrage à l'intérieur</li><li>Logo Slum Kid brodé</li><li>Double poche avec broderie à l'arrière</li><li>100% cotton</li><li>500 GSM</li><li>Le model (H) mesure 177 cm et porte du M</li><li>Le model (F) mesure 165 cm et porte du S<br><br>Instructions de lavage:<br>&nbsp;</li><li>Laver à 30 degrés &nbsp;</li><li>Laver avec des couleurs similaires<br>&nbsp;</li></ul>&nbsp;",
+        "ggxw4cwxXYA_label": "ADD TO BAG",
+        "ggxw4cwxXYA_outOfStockLabel": "Out of stock",
+        "ggxw4cwxXYA_unavailableLabel": "Unavailable",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541473639170573173"
+    },
+    "gp_section_541482467492627568": {
+      "settings": {
+        "checksum": "599f32b61221030e20c73fc93b9487ff720b675f896dbf9946a320bdaf14be91_1_1_0_0__1",
+        "ggiYN36XRUh_text": "ASSORTI AVEC"
+      },
+      "type": "gp-section-541482467492627568"
+    }
+  },
+  "order": [
+    "gp_section_541473639170573173",
+    "gp_section_541482467492627568"
+  ]
+}
