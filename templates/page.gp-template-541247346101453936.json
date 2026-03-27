@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541247447721050997": {
+      "settings": {
+        "checksum": "54949931545dc72ca0703a1360ab2fdda4d0e2e254bcbb3df1a0bab5fc2f8b61_1_1_0_0__1",
+        "ggCkDo1KaGs_text": "<p>When a new drop takes place, item availability is <strong>limited</strong>. If an item is sold out, it may become available again as part of a <strong>return drop.</strong> Return drops are <strong>announced via Instagram or </strong><a href=\"https://whatsapp.com/channel/0029Vau9UhCDJ6H6pQZlMy2x\"><strong><u>Whatsapp</u></strong></a><strong>.</strong></p>",
+        "ggYd4og_aMA_text": "<strong>&nbsp;Products &amp; Orders</strong>",
+        "ggbcUr7zFwi_childItem_0": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Size or article is sold out?</span></p>",
+        "ggbcUr7zFwi_childItem_1": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Information on new drops</span></p>",
+        "ggoZRjW9uT6_text": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(28,28,28);font-size:17.4016px;\">Sign up for the </span><a href=\"https://whatsapp.com/channel/0029Vau9UhCDJ6H6pQZlMy2x\"><strong><u>Whatsapp Channel</u></strong></a><strong> </strong><span style=\"background-color:rgb(255,255,255);color:rgb(28,28,28);font-size:17.4016px;\">to receive regular information about new drops.</span></p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541247447721050997"
+    },
+    "gp_section_541247790597014640": {
+      "settings": {
+        "checksum": "14b014298e75438a738767b9f2ce229badaefe1af1d27efc78ecb4c7ea275143_1_1_0_0__1",
+        "ggCCkj_19tv_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support\"><u>Slum Kid Support</u></a>",
+        "ggTthFuN4sp_text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>"
+      },
+      "type": "gp-section-541247790597014640"
+    }
+  },
+  "order": [
+    "gp_section_541247447721050997",
+    "gp_section_541247790597014640"
+  ]
+}
