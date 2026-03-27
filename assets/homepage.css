@@ -61,9 +61,9 @@ nav.scrolled {
   display: flex; align-items: flex-end;
 }
 /* Images réelles */
-.hero-slide:nth-child(1) .hero-bg { background-image: url("{{ 'home_00.jpg' | asset_url }}"); }
-.hero-slide:nth-child(2) .hero-bg { background-image: url("{{ 'home_01.jpg' | asset_url }}"); }
-.hero-slide:nth-child(3) .hero-bg { background-image: url("{{ 'home_02.jpg' | asset_url }}"); }
+}"); }
+}"); }
+}"); }
 
 .hero-bg {
   position: absolute; inset: 0;
