@@ -86,7 +86,7 @@ nav {
 .banner-card-sub { font-size: 0.78rem; color: rgba(0,0,0,0.5); line-height: 1.55; margin-bottom: 1.4rem; }
 .dual-strip { display: grid; grid-template-columns: 1fr 1fr; height: 70vh; gap: 4px; }
 .dual-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.page-footer { background: var(--black); color: var(--white); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+.page-footer { background: #0a0a0a !important; color: var(--white); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10; }
 .foot-logo { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
 .foot-copy { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
 .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px); background: rgba(10,10,10,0.88); color: var(--white); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); padding: 0.85rem 2rem; border-radius: var(--radius-btn); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; z-index: 999; transition: transform 0.4s var(--ease); white-space: nowrap; }
@@ -263,7 +263,7 @@ nav {
 </div>
 
 <!-- CLOSING BANNER -->
-<div class="full-banner" style="height:60vh;">
+<div class="full-banner" style="height:60vh;overflow:hidden;">
   <img id="banner2" src="" alt="Storm Set" style="object-position:center 30%;">
   <div class="banner-overlay" style="background:linear-gradient(to right,rgba(0,0,0,0.75) 0%,transparent 65%);align-items:center;">
     <div>
@@ -274,6 +274,7 @@ nav {
   </div>
 </div>
 
+<div style="height:4px;background:#0a0a0a;"></div>
 <div class="page-footer">
   <span class="foot-logo">Slum Kid</span>
   <span class="foot-copy">© 2026 Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
