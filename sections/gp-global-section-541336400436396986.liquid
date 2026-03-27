@@ -5,6 +5,14 @@
     <style {% if section.settings.section_preload == "false" %} class="gps-link" type="text/disabled-css" {% endif %}>@font-face {
   font-family: 'Open Sans';
   font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4n.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
   font-weight: 700;
   font-stretch: normal;
   font-display: swap;
@@ -21,11 +29,12 @@
   src: url(https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4n.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'Poppins';
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
+  font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7V1s.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1y4n.ttf) format('truetype');
 }
 </style>
   
@@ -119,7 +128,7 @@
           class="gp-g-paragraph-2  gp-text-instant gp-text"
           style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--c:var(--g-c-text-2, text-2);word-break:break-word;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;overflow:hidden;--tdl:"
         >
-          {{ section.settings.ggcVgUyksr6_text_1362873254 | replace: '$locationOrigin', locationOrigin }}
+          {{ section.settings.ggcVgUyksr6_text_1439570843 | replace: '$locationOrigin', locationOrigin }}
         </h2>
       </div>
     </div>
@@ -154,7 +163,7 @@
           {%- assign gpBkProducts = products -%}
           
       {%- liquid
-        assign productHandles = 'tear-off-jacket,tear-off-jacket-1,tear-off-jogger-1,tear-off-jogger,rose-gold-jersey-t-shirt,rose-gold-jersey-short,ice-blue-short,ice-blue-t-shirt,green-kaki-short,green-kaki-t-shirt,pink-puffer,storm-set,storm-jogger'| split: ','
+        assign productHandles = 'storm-set,storm-jogger,grey-tearoff,tear-off-jacket-1,tear-off-jogger-1,tear-off-jogger,rose-gold-jersey-t-shirt,rose-gold-jersey-short,ice-blue-short,ice-blue-t-shirt,green-kaki-short,green-kaki-t-shirt,pink-puffer'| split: ','
         assign products = null
         assign target_collection = null
         assign productSrc = 'PickProduct'
@@ -320,7 +329,7 @@
     }
   '
       section-id="{{section.id}}" data-id="grMQtsVesJ"
-      style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-l)"
+      style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mt:0px;--mb:var(--g-s-l)"
       class="gp-relative gp-w-full grMQtsVesJ "
     >
       <div
@@ -977,7 +986,7 @@
     "name": "LISTE PRODUIT JERSEY",
     "tag": "section",
     "class": "gps-541336400436396986 gps gpsil",
-    "settings": [{"type":"paragraph","content":"Section design by GemPages. [Click here to start design](https://admin.shopify.com/store/b1i9bd-14/apps/gempages-cro/app/shopify/edit?pageType=THEME_SECTION&editorId=541336400436396986)"},{"type":"select","label":"Section Preload","id":"section_preload","options":[{"label":"On","value":"true"},{"label":"Off","value":"false"},{"label":"Off Lazy Script","value":"off_lazy_script"}],"default":"off_lazy_script"},{"type":"text","label":"Checksum","id":"checksum"},{"type":"html","id":"gglt7r7CeHl_text_96277139","label":"gglt7r7CeHl_text_96277139","default":"ALL ITEMS"},{"type":"html","id":"ggcVgUyksr6_text_1362873254","label":"ggcVgUyksr6_text_1362873254","default":"11 products"}],
+    "settings": [{"type":"paragraph","content":"Section design by GemPages. [Click here to start design](https://admin.shopify.com/store/b1i9bd-14/apps/gempages-cro/app/shopify/edit?pageType=THEME_SECTION&editorId=541336400436396986)"},{"type":"select","label":"Section Preload","id":"section_preload","options":[{"label":"On","value":"true"},{"label":"Off","value":"false"},{"label":"Off Lazy Script","value":"off_lazy_script"}],"default":"off_lazy_script"},{"type":"text","label":"Checksum","id":"checksum"},{"type":"html","id":"gglt7r7CeHl_text_96277139","label":"gglt7r7CeHl_text_96277139","default":"ALL ITEMS"},{"type":"html","id":"ggcVgUyksr6_text_1439570843","label":"ggcVgUyksr6_text_1439570843","default":"13 products"}],
     "blocks": [{"type": "@app"}],
     "locales": {}
   }
