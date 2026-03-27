@@ -512,7 +512,7 @@ nav {
 
     <div class="buy-stack">
       <button class="btn-primary" onclick="cartAndRedirect('https://slumkid.myshopify.com/checkout')">Ajouter au panier</button>
-      <a href="/cart?product=storm-set" class="btn-glass" style="text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;">Acheter maintenant</a>
+      <button class="btn-glass" onclick="if(window.SKShopify){window.SKShopify.buyNow();}else{window.location.href='/cart';}">Acheter maintenant</button>
       <button class="btn-glass" onclick="openSizeQuiz()" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
         Find My Size
@@ -981,55 +981,32 @@ function resetQuiz() {
 })();
 </script>
 
-
 <script>
 (function() {
   var img00 = "{{ 'storm-set-img-00.jpg' | asset_url }}";
   var img01 = "{{ 'storm-set-img-01.jpg' | asset_url }}";
   var img02 = "{{ 'storm-set-img-02.jpg' | asset_url }}";
-  var IMGS = [img00, img01, img02];
-  
-  function applyProductImages() {
-    // Thumbnails
+  var img03 = "{{ 'storm-set-img-03.jpg' | asset_url }}";
+  var img04 = "{{ 'storm-set-img-04.jpg' | asset_url }}";
+  var img05 = "{{ 'storm-set-img-05.jpg' | asset_url }}";
+  var img06 = "{{ 'storm-set-img-06.jpg' | asset_url }}";
+  var IMGS = [img00, img01, img02, img03, img04, img05, img06];
+  function apply() {
     IMGS.forEach(function(src, i) {
       var t = document.getElementById('t' + (i+1));
       if (t) t.src = src;
     });
-    // Main image
-    var main = document.getElementById('mainImg');
-    if (main && IMGS[0]) main.src = IMGS[0];
-    // Detail sections
-    var d1 = document.getElementById('d1');
-    if (d1 && IMGS[IMGS.length > 2 ? 2 : 0]) d1.src = IMGS[IMGS.length > 2 ? 2 : 0];
-    var b1 = document.getElementById('banner1');
-    if (b1 && IMGS[1]) b1.src = IMGS[1];
-    var d2 = document.getElementById('d2');
-    if (d2 && IMGS[IMGS.length > 3 ? 3 : 0]) d2.src = IMGS[IMGS.length > 3 ? 3 : 0];
-    var b2 = document.getElementById('banner2');
-    if (b2 && IMGS[IMGS.length > 4 ? 4 : 1]) b2.src = IMGS[IMGS.length > 4 ? 4 : 1];
-    // Gallery: update IMGS global for thumb click handler
+    var main = document.getElementById('mainImg'); if (main) main.src = IMGS[0];
+    var d1 = document.getElementById('d1'); if (d1) d1.src = IMGS[2];
+    var b1 = document.getElementById('banner1'); if (b1) b1.src = IMGS[1];
+    var d2 = document.getElementById('d2'); if (d2) d2.src = IMGS[4];
+    var b2 = document.getElementById('banner2'); if (b2) b2.src = IMGS[5];
     window.IMGS = {};
-    IMGS.forEach(function(src, i) {
-      window.IMGS['p' + (i+1)] = src;
-    });
-    // Hero bg (story page)
-    var heroBg = document.getElementById('heroBg');
-    if (heroBg && IMGS[0]) heroBg.style.backgroundImage = 'url(' + IMGS[0] + ')';
-    var ctaBg = document.getElementById('ctaBg');
-    if (ctaBg && IMGS[2]) ctaBg.style.backgroundImage = 'url(' + IMGS[2] + ')';
-    // Story images
-    ['img1','img2','img3','img4','img5'].forEach(function(id, i) {
-      var el = document.getElementById(id);
-      if (el && IMGS[i+1]) el.src = IMGS[i+1];
-    });
+    IMGS.forEach(function(src, i) { window.IMGS['p' + (i+1)] = src; });
   }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyProductImages);
-  } else {
-    applyProductImages();
-  }
-  setTimeout(applyProductImages, 500);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
+  else apply();
+  setTimeout(apply, 500);
 })();
 </script>
 
@@ -1239,6 +1216,143 @@ function resetQuiz() {
   };
 })();
 
+</script>
+
+
+<!-- ═══ SHOPIFY BUY BUTTON SDK ═══ -->
+<script type="text/javascript">
+(function() {
+  var SHOPIFY_DOMAIN = 'b1i9bd-14.myshopify.com';
+  var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
+  var PRODUCT_ID = '9983421808968';
+
+  // Load Shopify Buy SDK
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  
+  function initShopify() {
+    var client = ShopifyBuy.buildClient({
+      domain: SHOPIFY_DOMAIN,
+      storefrontAccessToken: STOREFRONT_TOKEN,
+    });
+
+    // Store client globally for cart operations
+    window.SKShopify = {
+      client: client,
+      checkout: null,
+      productId: PRODUCT_ID,
+      
+      // Create or get checkout
+      getCheckout: function(cb) {
+        var saved = localStorage.getItem('sk_checkout_id');
+        if (saved) {
+          client.checkout.fetch(saved).then(function(checkout) {
+            if (checkout && !checkout.completedAt) {
+              window.SKShopify.checkout = checkout;
+              cb(checkout);
+            } else {
+              client.checkout.create().then(function(c) {
+                localStorage.setItem('sk_checkout_id', c.id);
+                window.SKShopify.checkout = c;
+                cb(c);
+              });
+            }
+          }).catch(function() {
+            client.checkout.create().then(function(c) {
+              localStorage.setItem('sk_checkout_id', c.id);
+              window.SKShopify.checkout = c;
+              cb(c);
+            });
+          });
+        } else {
+          client.checkout.create().then(function(c) {
+            localStorage.setItem('sk_checkout_id', c.id);
+            window.SKShopify.checkout = c;
+            cb(c);
+          });
+        }
+      },
+
+      // Fetch variants for this product
+      getVariants: function(cb) {
+        client.product.fetch('gid://shopify/Product/' + PRODUCT_ID).then(function(product) {
+          if (product) cb(product.variants);
+        });
+      },
+
+      // Add to cart and redirect to checkout
+      addToCart: function() {
+        var sizeEl = document.getElementById('sizeVal');
+        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
+        
+        var toast = document.getElementById('toast');
+        if (toast) {
+          toast.textContent = 'Chargement...';
+          toast.classList.add('show');
+        }
+
+        window.SKShopify.getVariants(function(variants) {
+          // Find variant matching selected size
+          var variant = variants.find(function(v) {
+            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
+          }) || variants[0];
+
+          if (!variant) {
+            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/products/' + PRODUCT_ID;
+            return;
+          }
+
+          window.SKShopify.getCheckout(function(checkout) {
+            var lineItems = [{ variantId: variant.id, quantity: 1 }];
+            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
+              if (toast) {
+                toast.textContent = 'Taille ' + selectedSize + ' — Ajouté !';
+              }
+              setTimeout(function() {
+                if (toast) toast.classList.remove('show');
+                window.location.href = c.webUrl;
+              }, 1000);
+            });
+          });
+        });
+      },
+
+      // Buy now - direct checkout
+      buyNow: function() {
+        var sizeEl = document.getElementById('sizeVal');
+        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
+
+        window.SKShopify.getVariants(function(variants) {
+          var variant = variants.find(function(v) {
+            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
+          }) || variants[0];
+
+          if (!variant) {
+            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart';
+            return;
+          }
+
+          window.SKShopify.getCheckout(function(checkout) {
+            var lineItems = [{ variantId: variant.id, quantity: 1 }];
+            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
+              window.location.href = c.webUrl;
+            });
+          });
+        });
+      }
+    };
+  }
+
+  // Load SDK then init
+  if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+    initShopify();
+  } else {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    script.onload = initShopify;
+    document.head.appendChild(script);
+  }
+})();
 </script>
 
 {% schema %}

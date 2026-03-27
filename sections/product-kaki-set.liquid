@@ -234,8 +234,8 @@ nav {
     </div>
 
     <div class="buy-stack">
-      <button class="btn-primary" onclick="cartGo('/kaki-set')">Ajouter au panier</button>
-      <a href="/cart?product=kaki-set" class="btn-glass" style="text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;">Acheter maintenant</a>
+      <button class="btn-primary" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Ajouter au panier</button>
+      <button class="btn-glass" onclick="if(window.SKShopify){window.SKShopify.buyNow();}else{window.location.href='/cart';}">Acheter maintenant</button>
     </div>
 
     <div class="delivery">
@@ -446,15 +446,20 @@ function toggleAcc(id) {
 }
 
 // Cart
-function cartGo(productUrl) {
-  var t = document.getElementById('toast');
-  t.classList.add('show');
-  var size = document.getElementById('sizeVal') ? document.getElementById('sizeVal').textContent : '';
-  t.textContent = size ? 'Taille ' + size + ' — Ajouté au panier' : 'Ajouté au panier';
-  setTimeout(function(){
-    t.classList.remove('show');
-    window.location.href = productUrl || '/cart';
-  }, 1400);
+
+function cartGo() {
+  if (window.SKShopify) {
+    window.SKShopify.addToCart();
+  } else {
+    // Fallback
+    var t = document.getElementById('toast');
+    if (t) { t.textContent = 'Ajout...'; t.classList.add('show'); }
+    setTimeout(function() {
+      if (t) t.classList.remove('show');
+      window.location.href = '/cart';
+    }, 1000);
+  }
+}, 1400);
 }
 </script>
 
@@ -758,6 +763,143 @@ function cartGo(productUrl) {
   };
 })();
 
+</script>
+
+
+<!-- ═══ SHOPIFY BUY BUTTON SDK ═══ -->
+<script type="text/javascript">
+(function() {
+  var SHOPIFY_DOMAIN = 'b1i9bd-14.myshopify.com';
+  var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
+  var PRODUCT_ID = '9623946625352';
+
+  // Load Shopify Buy SDK
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  
+  function initShopify() {
+    var client = ShopifyBuy.buildClient({
+      domain: SHOPIFY_DOMAIN,
+      storefrontAccessToken: STOREFRONT_TOKEN,
+    });
+
+    // Store client globally for cart operations
+    window.SKShopify = {
+      client: client,
+      checkout: null,
+      productId: PRODUCT_ID,
+      
+      // Create or get checkout
+      getCheckout: function(cb) {
+        var saved = localStorage.getItem('sk_checkout_id');
+        if (saved) {
+          client.checkout.fetch(saved).then(function(checkout) {
+            if (checkout && !checkout.completedAt) {
+              window.SKShopify.checkout = checkout;
+              cb(checkout);
+            } else {
+              client.checkout.create().then(function(c) {
+                localStorage.setItem('sk_checkout_id', c.id);
+                window.SKShopify.checkout = c;
+                cb(c);
+              });
+            }
+          }).catch(function() {
+            client.checkout.create().then(function(c) {
+              localStorage.setItem('sk_checkout_id', c.id);
+              window.SKShopify.checkout = c;
+              cb(c);
+            });
+          });
+        } else {
+          client.checkout.create().then(function(c) {
+            localStorage.setItem('sk_checkout_id', c.id);
+            window.SKShopify.checkout = c;
+            cb(c);
+          });
+        }
+      },
+
+      // Fetch variants for this product
+      getVariants: function(cb) {
+        client.product.fetch('gid://shopify/Product/' + PRODUCT_ID).then(function(product) {
+          if (product) cb(product.variants);
+        });
+      },
+
+      // Add to cart and redirect to checkout
+      addToCart: function() {
+        var sizeEl = document.getElementById('sizeVal');
+        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
+        
+        var toast = document.getElementById('toast');
+        if (toast) {
+          toast.textContent = 'Chargement...';
+          toast.classList.add('show');
+        }
+
+        window.SKShopify.getVariants(function(variants) {
+          // Find variant matching selected size
+          var variant = variants.find(function(v) {
+            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
+          }) || variants[0];
+
+          if (!variant) {
+            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/products/' + PRODUCT_ID;
+            return;
+          }
+
+          window.SKShopify.getCheckout(function(checkout) {
+            var lineItems = [{ variantId: variant.id, quantity: 1 }];
+            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
+              if (toast) {
+                toast.textContent = 'Taille ' + selectedSize + ' — Ajouté !';
+              }
+              setTimeout(function() {
+                if (toast) toast.classList.remove('show');
+                window.location.href = c.webUrl;
+              }, 1000);
+            });
+          });
+        });
+      },
+
+      // Buy now - direct checkout
+      buyNow: function() {
+        var sizeEl = document.getElementById('sizeVal');
+        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
+
+        window.SKShopify.getVariants(function(variants) {
+          var variant = variants.find(function(v) {
+            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
+          }) || variants[0];
+
+          if (!variant) {
+            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart';
+            return;
+          }
+
+          window.SKShopify.getCheckout(function(checkout) {
+            var lineItems = [{ variantId: variant.id, quantity: 1 }];
+            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
+              window.location.href = c.webUrl;
+            });
+          });
+        });
+      }
+    };
+  }
+
+  // Load SDK then init
+  if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+    initShopify();
+  } else {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    script.onload = initShopify;
+    document.head.appendChild(script);
+  }
+})();
 </script>
 
 {% schema %}
