@@ -287,11 +287,21 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
   .nav-links { display: none; }
-  .slide-content { padding: 0 1.5rem 5.5rem; }
+
+  /* Hero : plein écran sans scroll interne */
+  .hero { height: 100svh; overflow: hidden; touch-action: pan-x; }
+  .hero-track { touch-action: pan-x; }
+  .hero-slide { overflow: hidden; }
+  .slide-content { padding: 0 1.5rem 5.5rem; overflow: hidden; max-height: 100%; }
   .slide-title { font-size: clamp(3rem, 14vw, 5rem); }
-  .carousel-scene { height: 480px; }
+
+  /* Carousel */
+  .carousel-scene { height: 480px; overflow: hidden; touch-action: pan-x; }
   .carousel-ctrl .c-arrow { display: none; }
+
+  /* Footer */
   .foot-feed-item { flex: 0 0 100px; height: 100px; }
+  .foot-feed { touch-action: pan-x; }
   .foot-legal { flex-direction: column; text-align: center; }
   .foot-legal-links { justify-content: center; }
 }
