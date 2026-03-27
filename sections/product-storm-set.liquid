@@ -981,6 +981,58 @@ function resetQuiz() {
 })();
 </script>
 
+
+<script>
+(function() {
+  var img00 = "{{ 'storm-set-img-00.jpg' | asset_url }}";
+  var img01 = "{{ 'storm-set-img-01.jpg' | asset_url }}";
+  var img02 = "{{ 'storm-set-img-02.jpg' | asset_url }}";
+  var IMGS = [img00, img01, img02];
+  
+  function applyProductImages() {
+    // Thumbnails
+    IMGS.forEach(function(src, i) {
+      var t = document.getElementById('t' + (i+1));
+      if (t) t.src = src;
+    });
+    // Main image
+    var main = document.getElementById('mainImg');
+    if (main && IMGS[0]) main.src = IMGS[0];
+    // Detail sections
+    var d1 = document.getElementById('d1');
+    if (d1 && IMGS[IMGS.length > 2 ? 2 : 0]) d1.src = IMGS[IMGS.length > 2 ? 2 : 0];
+    var b1 = document.getElementById('banner1');
+    if (b1 && IMGS[1]) b1.src = IMGS[1];
+    var d2 = document.getElementById('d2');
+    if (d2 && IMGS[IMGS.length > 3 ? 3 : 0]) d2.src = IMGS[IMGS.length > 3 ? 3 : 0];
+    var b2 = document.getElementById('banner2');
+    if (b2 && IMGS[IMGS.length > 4 ? 4 : 1]) b2.src = IMGS[IMGS.length > 4 ? 4 : 1];
+    // Gallery: update IMGS global for thumb click handler
+    window.IMGS = {};
+    IMGS.forEach(function(src, i) {
+      window.IMGS['p' + (i+1)] = src;
+    });
+    // Hero bg (story page)
+    var heroBg = document.getElementById('heroBg');
+    if (heroBg && IMGS[0]) heroBg.style.backgroundImage = 'url(' + IMGS[0] + ')';
+    var ctaBg = document.getElementById('ctaBg');
+    if (ctaBg && IMGS[2]) ctaBg.style.backgroundImage = 'url(' + IMGS[2] + ')';
+    // Story images
+    ['img1','img2','img3','img4','img5'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (el && IMGS[i+1]) el.src = IMGS[i+1];
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyProductImages);
+  } else {
+    applyProductImages();
+  }
+  setTimeout(applyProductImages, 500);
+})();
+</script>
+
 <script>
 
 /* Galerie */
