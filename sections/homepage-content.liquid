@@ -1,8 +1,3 @@
-<style>
-.hero-slide:nth-child(1) .hero-bg { background-image: url("{{ 'home_00.jpg' | asset_url }}"); background-size: cover; background-position: center top; }
-.hero-slide:nth-child(2) .hero-bg { background-image: url("{{ 'home_01.jpg' | asset_url }}"); background-size: cover; background-position: center; }
-.hero-slide:nth-child(3) .hero-bg { background-image: url("{{ 'home_02.jpg' | asset_url }}"); background-size: cover; background-position: center top; }
-</style>
 <style>{{ 'homepage.css' | asset_url }}</style>
 <!-- NAV -->
 <nav id="mainNav">
@@ -28,7 +23,7 @@
   <div class="hero-track" id="heroTrack">
 
     <div class="hero-slide active">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url({{ 'home_00.jpg' | asset_url }}); background-size:cover; background-position:center top;"></div>
       <div class="slide-content">
         <span class="slide-eyebrow">Season 26</span>
         <h1 class="slide-title">NEW<br>IN</h1>
@@ -40,7 +35,7 @@
     </div>
 
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url({{ 'home_01.jpg' | asset_url }}); background-size:cover; background-position:center;"></div>
       <div class="slide-content">
         <span class="slide-eyebrow">What's About</span>
         <h1 class="slide-title">SLUM<br>LIFE</h1>
@@ -52,7 +47,7 @@
     </div>
 
     <div class="hero-slide">
-      <div class="hero-bg"></div>
+      <div class="hero-bg" style="background-image:url({{ 'home_02.jpg' | asset_url }}); background-size:cover; background-position:center top;"></div>
       <div class="slide-content">
         <span class="slide-eyebrow">Find Your Favorite Design</span>
         <h1 class="slide-title">BEST<br>SELLER</h1>
