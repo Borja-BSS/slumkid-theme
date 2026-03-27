@@ -56,7 +56,8 @@ nav.scrolled {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
-.nav-logo { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.18em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; }
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 26px; width: auto; display: block; }
 .nav-links { display: flex; gap: 2.2rem; list-style: none; }
 .nav-links a { font-size: 0.72rem; letter-spacing: 0.14em; font-weight: 500; color: rgba(0,0,0,0.65); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
 .nav-links a:hover { color: var(--black); }
@@ -179,7 +180,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 
 <!-- ═══ NAV ═══ -->
 <nav id="mainNav">
-  <a class="nav-logo" href="{{ routes.root_url }}">KID</a>
+  <a class="nav-logo" href="{{ routes.root_url }}"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:26px;width:auto;filter:brightness(0);"></a>
 </nav>
 
 <!-- ═══ S1 : HERO SLIDER ═══ -->
