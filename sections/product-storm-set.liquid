@@ -173,7 +173,6 @@ nav {
     <div class="type-tabs">
       <button class="type-tab active" onclick="switchTab(this,'jacket')">Jacket</button>
       <button class="type-tab" onclick="switchTab(this,'jogger')">Jogger</button>
-      <button class="type-tab" onclick="switchTab(this,'set')">Set Complet</button>
     </div>
     <div class="price-block">
       <span class="price-main" id="priceMain">129.90 CHF</span>
@@ -349,13 +348,17 @@ document.querySelectorAll('.thumb').forEach(function(th) {
   });
 });
 
-/* Tabs */
-var prices = { jacket: ['129.90 CHF','Storm Jacket'], jogger: ['84.90 CHF','Storm Jogger'], set: ['199.90 CHF','Set Complet'] };
+/* Tabs — IDs séparés par produit */
+var PRODUCT_IDS = { jacket: '9983380390216', jogger: '9983421808968' };
+var prices = { jacket: ['129.90 CHF','Storm Jacket'], jogger: ['84.90 CHF','Storm Jogger'] };
+var currentTab = 'jacket';
 function switchTab(el, key) {
   document.querySelectorAll('.type-tab').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
   document.getElementById('priceMain').textContent = prices[key][0];
   document.getElementById('priceLabel').textContent = prices[key][1];
+  currentTab = key;
+  if (window.SKShopify) window.SKShopify.productId = PRODUCT_IDS[key];
 }
 
 /* Taille */
@@ -367,12 +370,6 @@ function pick(btn) {
 }
 
 /* Cart fallback */
-function cartAndRedirect(url) {
-  if (window.SKShopify) { window.SKShopify.addToCart(); return; }
-  var t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); window.location.href = url || '/cart'; }, 1200);
-}
 function cartGo() {
   if (window.SKShopify) { window.SKShopify.addToCart(); return; }
   var t = document.getElementById('toast');
@@ -429,26 +426,17 @@ function cartGo() {
   var img05 = "{{ 'storm-set-img-05.jpg' | asset_url }}";
   var img06 = "{{ 'storm-set-img-06.jpg' | asset_url }}";
   var IMGS = [img00, img01, img02, img03, img04, img05, img06];
-
   function apply() {
-    /* Thumbnails */
-    IMGS.forEach(function(src, i) {
-      var t = document.getElementById('t' + (i+1));
-      if (t) t.src = src;
-    });
-    /* Main image */
+    IMGS.forEach(function(src, i) { var t = document.getElementById('t' + (i+1)); if (t) t.src = src; });
     var main = document.getElementById('mainImg'); if (main) main.src = IMGS[0];
-    /* Detail sections */
     var d1 = document.getElementById('d1'); if (d1) d1.src = IMGS[2];
     var b1 = document.getElementById('banner1'); if (b1) b1.src = IMGS[1];
     var d2 = document.getElementById('d2'); if (d2) d2.src = IMGS[3];
     var du1 = document.getElementById('dual1'); if (du1) du1.src = IMGS[4];
     var du2 = document.getElementById('dual2'); if (du2) du2.src = IMGS[5];
     var b2 = document.getElementById('banner2'); if (b2) b2.src = IMGS[6];
-    /* window.IMGS pour thumb click */
     window.IMGS = { p1:IMGS[0], p2:IMGS[1], p3:IMGS[2], p4:IMGS[3], p5:IMGS[4], p6:IMGS[5], p7:IMGS[6] };
   }
-
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
   else apply();
   setTimeout(apply, 500);
@@ -460,22 +448,24 @@ function cartGo() {
 (function() {
   var SHOPIFY_DOMAIN = 'b1i9bd-14.myshopify.com';
   var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
-  var PRODUCT_ID = '9983421808968';
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   function initShopify() {
     var client = ShopifyBuy.buildClient({ domain: SHOPIFY_DOMAIN, storefrontAccessToken: STOREFRONT_TOKEN });
     window.SKShopify = {
       client: client,
+      productId: '9983380390216',
       getCheckout: function(cb) {
         var saved = localStorage.getItem('sk_checkout_id');
         if (saved) {
           client.checkout.fetch(saved).then(function(c) {
-            if (c && !c.completedAt) { window.SKShopify.checkout = c; cb(c); }
+            if (c && !c.completedAt) { cb(c); }
             else { client.checkout.create().then(function(c2) { localStorage.setItem('sk_checkout_id', c2.id); cb(c2); }); }
           }).catch(function() { client.checkout.create().then(function(c) { localStorage.setItem('sk_checkout_id', c.id); cb(c); }); });
         } else { client.checkout.create().then(function(c) { localStorage.setItem('sk_checkout_id', c.id); cb(c); }); }
       },
-      getVariants: function(cb) { client.product.fetch('gid://shopify/Product/' + PRODUCT_ID).then(function(p) { if (p) cb(p.variants); }); },
+      getVariants: function(cb) {
+        client.product.fetch('gid://shopify/Product/' + window.SKShopify.productId).then(function(p) { if (p) cb(p.variants); });
+      },
       addToCart: function() {
         var size = document.getElementById('sizeVal') ? document.getElementById('sizeVal').textContent.trim() : 'M';
         var toast = document.getElementById('toast'); if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
