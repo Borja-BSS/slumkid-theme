@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541047932464399590": {
+      "settings": {
+        "checksum": "c9b7db559079ff2bb743b6f92dfec30b4d51f2713d3ec99727a28d94d0532e7d_1_1_0_0__1",
+        "ggBK_5cPi1y_text": "Problems with order and emails",
+        "ggHjcVFynT8_text": "<p>On rare occasions you may be expecting an email from us but not receive one.</p><p>&nbsp;</p><p><strong>We recommend you to take the following steps:</strong><br>&nbsp;</p><p>Please check your <strong>spam</strong> or <strong>promotions</strong> folder first.</p><p>If you do not find an email from us in there, please contact our <strong>support team</strong> (<a href=\"mailto:support@slumkid.store\">support@slumkid.store</a>).</p>",
+        "ggZxEnWWXhG_childItem_0": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:22.912px;\">I do not receive any emails from Slum Kid</span></p>",
+        "ggZxEnWWXhG_childItem_1": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:22.912px;\">Can I change the delivery address after placing the order?</span></p>",
+        "ggZxEnWWXhG_childItem_2": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:22.912px;\">My order did not arrive in the delivery time</span></p>",
+        "ggxSnnBKXH9_text": "<p><strong>We make every effort to meet delivery times, however in some cases there may be delays, especially with pre order drops.</strong></p><p>Other factors, such as delays with the delivery partner, traffic delays or receiving address discrepancies, will also affect the delivery time.</p><p><strong>Please keep an eye on the shipment tracking.</strong> We will keep you informed as far as we can.&nbsp;</p><p><strong>If you have any other problems, please contact our customer service (</strong><a href=\"mailto:support@slumkid.store\"><strong>support@slumkid.store</strong></a><strong>).</strong></p>",
+        "ggxjvIxG4cE_text": "<p><br>&nbsp;</p><p><strong>If part of your address is missing or there is a typing error in the address, please contact the customer service (</strong><a href=\"mailto:support@slumkid.store\"><strong>support@slumkid.store</strong></a><strong>).</strong></p><p>However, we can only change the delivery address if the package is not yet in transit and you have not yet received a shipping confirmation.</p><p>&nbsp;</p><p><strong>If the package is already on its way</strong>, you can <strong>change your address yourself via the tracking link.</strong> The tracking link can be found in the shipping confirmation.</p><p><strong>Please note that this is only possible as soon as the package has left our warehouse and has been scanned by the shipping service provider.</strong></p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541047932464399590"
+    },
+    "gp_section_541256757666644922": {
+      "settings": {
+        "checksum": "352a326b936356005253ad2f7ff903dd012b3a316dabf4fe1cbd3f308e864665_1_1_0_0__1",
+        "ggZ2PF7_pci_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support\"><u>Slum Kid Support</u></a>",
+        "ggx43JQwDP__text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>"
+      },
+      "type": "gp-section-541256757666644922"
+    }
+  },
+  "order": [
+    "gp_section_541047932464399590",
+    "gp_section_541256757666644922"
+  ]
+}

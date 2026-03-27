@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541205487752840368": {
+      "settings": {
+        "checksum": "14bc86d713cbcd82760f4f1392fc62ee5b2101761e643fad96f3cd107c068d3f_1_1_0_0__1",
+        "ggSmJC7TYt6_text": "&nbsp;Exchange, Return &amp; Refund",
+        "gg_AiHu--w__text": "<p>We do not accept returns. All sales are final.&nbsp;</p><p>&nbsp;</p>",
+        "ggcCCAuSPnR_text": "<p><br>If you would like to exchange an item for a different size, please contact us within <strong>14&nbsp;days</strong> of receiving your order. Exchanges are subject to product availability. If the item you want is out of stock, we will offer you a refund instead.</p><p>The item must be in his <strong>original condition</strong>, unused, and with all original packaging. Please note that items that have been worn, washed, or damaged cannot be exchanged.</p><p><strong>To initiate an exchange</strong>, please follow these steps:</p><ul><li>Contact our customer service team at <strong>contact@slumkid.store</strong> with your order number and the reason for the return.</li><li>We will provide you with a exchange authorization and instructions on how to send the product back to us.</li><li>Exchange shipping costs are&nbsp;<strong>the responsibility of the customer</strong> unless the exchange is due to a defect or our error.</li></ul>",
+        "ggnS9slVcq0_text": "<p>If you receive an item that is damaged or defective, please contact us immediately at <strong>contact@slumkid.store</strong> with photos of the damaged product and we will arrange for a replacement.</p>",
+        "ggzIHctIsul_childItem_0": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Return</span></p>",
+        "ggzIHctIsul_childItem_1": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Exchange&nbsp;</span></p>",
+        "ggzIHctIsul_childItem_2": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Damaged item</span></p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541205487752840368"
+    },
+    "gp_section_541246347353785205": {
+      "settings": {
+        "checksum": "abccffc92c77412a0f73980e40567e1fadb867a80087cc3c26af02c626126c14_1_1_0_0__1",
+        "gg3WGsB6a6l_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support\"><u>Slum Kid Support</u></a>",
+        "ggagQvOiEiM_text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>"
+      },
+      "type": "gp-section-541246347353785205"
+    }
+  },
+  "order": [
+    "gp_section_541205487752840368",
+    "gp_section_541246347353785205"
+  ]
+}

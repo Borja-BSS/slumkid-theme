@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541255020033606517": {
+      "settings": {
+        "checksum": "405fb1804bb120009d27d34b40aa192fb39e794efbd9c0a25b4cb2ecce505875_1_1_0_0__1",
+        "gg4GdnnLYGB_childItem_0": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">How to contact Slum Kid ?</span></p>",
+        "ggQLoR5bdeY_text": "&nbsp;Contact",
+        "ggb_qqK5ax5_text": "<p><a href=\"mailto:support@slumkid.store\">support@slumkid.store</a></p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541255020033606517"
+    },
+    "gp_section_541255282748031861": {
+      "settings": {
+        "checksum": "dc8b356c81ad6442789ebd5bd4d2b5684069b2c054366b48b6f6bd41bfd04140_1_1_0_0__1"
+      },
+      "type": "gp-section-541255282748031861"
+    },
+    "gp_section_541255299642688373": {
+      "settings": {
+        "checksum": "e5bdb489466238abcc88180ded8b640e9c8f26da897a3bffa34e367b42f4081f_1_1_0_0__1",
+        "gg8VWwQ0Lzz_text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>",
+        "ggVlBcMEiqF_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support\"><u>Slum Kid Support</u></a>"
+      },
+      "type": "gp-section-541255299642688373"
+    }
+  },
+  "order": [
+    "gp_section_541255020033606517",
+    "gp_section_541255282748031861",
+    "gp_section_541255299642688373"
+  ]
+}

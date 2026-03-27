@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541201917359948661": {
+      "settings": {
+        "checksum": "5320e99a8de90f376e55fe3abcf06479e68a0011fc60147a98cd743b996cdf09_1_1_0_0__1",
+        "gg9gEfgouKT_text": "<strong>Privacy Policy – Slum Kid</strong>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541201917359948661"
+    },
+    "gp_section_541201936687301562": {
+      "settings": {
+        "checksum": "aa6e89de6f1025771fe91603c854926d4f48744a82a34244e068a63219afbf88_1_1_0_0__1",
+        "ggDiPOQe6S8_text": "<strong>Privacy Policy – Slum Kid</strong><br>&nbsp;<br>Last updated: 06.11.2024<br>&nbsp;<br>At <strong>Slum Kid</strong>, we value and respect the privacy of our customers. This Privacy Policy outlines how we collect, use, store, and protect your personal information when you visit our website and make purchases.<br>&nbsp;<br><strong>1. Information We Collect</strong><br>&nbsp;<br>We collect personal information when you interact with our store, such as when you create an account, place an order, or contact us. The types of personal data we may collect include:<ul><li><strong>Personal Identification Information</strong>: Name, email address, mailing address, phone number.</li><li><strong>Payment Information</strong>: Credit card details (processed securely via Shopify Payments or third-party payment gateways).</li><li><strong>Purchase Information</strong>: Order history, product preferences, and shipping details.</li></ul><strong>2. How We Use Your Information</strong><br>&nbsp;<br>We use the information we collect to:<ul><li>Process and fulfill your orders.</li><li>Communicate with you about your orders and provide customer support.</li><li>Improve our products, services, and website.</li><li>Send promotional emails, if you have opted in to receive them (you can unsubscribe at any time).</li></ul><strong>3. Data Retention</strong><br>&nbsp;<br>We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required by law.<br>&nbsp;<br><strong>4. Sharing Your Information</strong><br>&nbsp;<br>We do not sell or rent your personal information to third parties. However, we may share your information with trusted service providers who assist in operating our business (e.g., payment processors, shipping companies) and in complying with legal obligations.<br>&nbsp;<br><strong>5. Security of Your Information</strong><br>&nbsp;<br>We take reasonable precautions to protect your personal information from unauthorized access, alteration, or destruction. Our website uses SSL encryption for secure transactions and Shopify’s secure payment system.<br>&nbsp;<br><strong>6. Cookies</strong><br>&nbsp;<br>We use cookies to improve your shopping experience. Cookies help us remember your preferences and track browsing behavior to improve our website’s performance and functionality.<br>&nbsp;<br><strong>7. Your Rights</strong><br>&nbsp;<br>Depending on your location, you may have rights regarding your personal information, including the right to access, update, or delete your personal data. You may also have the right to withdraw your consent at any time for any processing carried out based on consent.<br>To exercise any of your rights, please contact us at <strong>contact@slumkid.store</strong>.<br>&nbsp;<br><strong>8. Third-Party Links</strong><br>&nbsp;<br>Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites. We recommend reviewing their privacy policies before providing any personal information.<br>&nbsp;<br><strong>9. Changes to This Privacy Policy</strong><br>&nbsp;<br>We may update this Privacy Policy periodically. Any changes will be posted on this page, and the \"Effective Date\" at the top will reflect the date of the latest update.<br>&nbsp;<br><strong>10. Contact Us</strong><br>&nbsp;<br>If you have any questions or concerns about our Privacy Policy, please contact us at:<br>&nbsp;<br><strong>Slum Kid SNC</strong><br><br>Chemin Daniel-IHLY 9<br>1213 Petit-Lancy<br>Email: contact@slumkid.store"
+      },
+      "type": "gp-section-541201936687301562"
+    }
+  },
+  "order": [
+    "gp_section_541201917359948661",
+    "gp_section_541201936687301562"
+  ]
+}
