@@ -509,7 +509,7 @@ footer {
 }
 a.btn-cart { text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
 
-a.btn-cart { text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+a.btn-cart,a.nav-icon-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 
 </style>
 
@@ -937,40 +937,16 @@ hAuto();
 </script>
 
 <script>
-var SK = {
-  s1: "{{ 'slide-1.jpg' | asset_url }}",
-  s2: "{{ 'slide-2.jpg' | asset_url }}",
-  s3: "{{ 'slide-3.jpg' | asset_url }}",
-  c0: "{{ 'prod-storm.jpg' | asset_url }}",
-  c1: "{{ 'prod-pink.jpg' | asset_url }}",
-  c2: "{{ 'prod-grey.jpg' | asset_url }}",
-  c3: "{{ 'prod-blue.jpg' | asset_url }}",
-  c4: "{{ 'prod-black.jpg' | asset_url }}",
-  c5: "{{ 'prod-kaki.jpg' | asset_url }}",
-  f0: "{{ 'feed-1.jpg' | asset_url }}",
-  f1: "{{ 'feed-2.jpg' | asset_url }}",
-  f2: "{{ 'feed-3.jpg' | asset_url }}",
-  f3: "{{ 'feed-4.jpg' | asset_url }}",
-  f4: "{{ 'feed-5.jpg' | asset_url }}"
-};
-function applyImgs() {
-  document.querySelectorAll('.hero-slide').forEach(function(slide, i) {
-    var bg = slide.querySelector('.hero-bg');
-    var src = [SK.s1, SK.s2, SK.s3][i];
-    if (bg && src) { bg.style.backgroundImage='url('+src+')'; bg.style.backgroundSize='cover'; bg.style.backgroundPosition='center top'; }
-  });
-  var cimgs = [SK.c0,SK.c1,SK.c2,SK.c3,SK.c4,SK.c5];
-  document.querySelectorAll('.p-card').forEach(function(card) {
-    var ci = parseInt(card.getAttribute('data-ci')||'0');
-    var bg = card.querySelector('.p-card-bg');
-    if (bg && cimgs[ci]) { bg.style.backgroundImage='url('+cimgs[ci]+')'; bg.style.backgroundSize='cover'; bg.style.backgroundPosition='center top'; }
-  });
-  var fimgs=[SK.f0,SK.f1,SK.f2,SK.f3,SK.f4,SK.f0,SK.f1,SK.f2,SK.f3,SK.f4];
-  document.querySelectorAll('.foot-feed-item img').forEach(function(img,i){ if(fimgs[i]) img.src=fimgs[i]; });
+var SK={s1:"{{ 'slide-1.jpg'|asset_url }}",s2:"{{ 'slide-2.jpg'|asset_url }}",s3:"{{ 'slide-3.jpg'|asset_url }}",c0:"{{ 'prod-storm.jpg'|asset_url }}",c1:"{{ 'prod-pink.jpg'|asset_url }}",c2:"{{ 'prod-grey.jpg'|asset_url }}",c3:"{{ 'prod-blue.jpg'|asset_url }}",c4:"{{ 'prod-black.jpg'|asset_url }}",c5:"{{ 'prod-kaki.jpg'|asset_url }}",f0:"{{ 'feed-1.jpg'|asset_url }}",f1:"{{ 'feed-2.jpg'|asset_url }}",f2:"{{ 'feed-3.jpg'|asset_url }}",f3:"{{ 'feed-4.jpg'|asset_url }}",f4:"{{ 'feed-5.jpg'|asset_url }}"  };
+function applyImgs(){
+  document.querySelectorAll('.hero-slide').forEach(function(s,i){var bg=s.querySelector('.hero-bg');var src=[SK.s1,SK.s2,SK.s3][i];if(bg&&src){bg.style.backgroundImage='url('+src+')';bg.style.backgroundSize='cover';bg.style.backgroundPosition='center top';}});
+  var ci=[SK.c0,SK.c1,SK.c2,SK.c3,SK.c4,SK.c5];
+  document.querySelectorAll('.p-card').forEach(function(card){var c=parseInt(card.getAttribute('data-ci')||'0');var bg=card.querySelector('.p-card-bg');if(bg&&ci[c]){bg.style.backgroundImage='url('+ci[c]+')';bg.style.backgroundSize='cover';bg.style.backgroundPosition='center top';}});
+  var fi=[SK.f0,SK.f1,SK.f2,SK.f3,SK.f4,SK.f0,SK.f1,SK.f2,SK.f3,SK.f4];
+  document.querySelectorAll('.foot-feed-item img').forEach(function(img,i){if(fi[i])img.src=fi[i];});
 }
-document.addEventListener('DOMContentLoaded', applyImgs);
-setTimeout(applyImgs, 600);
-setTimeout(applyImgs, 1800);
+document.addEventListener('DOMContentLoaded',applyImgs);
+setTimeout(applyImgs,600);setTimeout(applyImgs,1800);
 </script>
 
 {% schema %}
