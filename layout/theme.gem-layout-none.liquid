@@ -1,0 +1,28 @@
+{% comment %}
+	GEMPAGES BUILDER (https://apps.shopify.com/gempages)
+
+	You SHOULD NOT modify source code in this file because
+	It is automatically generated from GEMPAGES BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {%- if template == 'index' -%}{{ shop.name }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}
+  </title>
+  <meta name="description" content="{{ page_description | escape }}">
+  {{ content_for_header }}
+  {%- if template == 'index' -%}
+    {{ 'homepage.css' | asset_url | stylesheet_tag }}
+  {%- elsif template contains 'product' -%}
+    {{ 'product.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+</head>
+<body>
+<div class="gem-container">
+	{{ content_for_layout }}
+</div><!-- end .gem-container --></body>
+</html>
