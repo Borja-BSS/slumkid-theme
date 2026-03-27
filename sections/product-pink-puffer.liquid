@@ -127,7 +127,7 @@ nav {
 .toast.show { transform: translateX(-50%) translateY(0); }
 
 /* Footer */
-.page-footer { background: var(--black); color: var(--white); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+.page-footer { background: #0a0a0a; color: var(--white); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10; }
 .foot-logo { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
 .foot-copy { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
 
@@ -183,9 +183,9 @@ nav {
 <nav>
   <a class="nav-back" href="/">&#8592; Retour</a>
   <a class="nav-logo" href="/">KID</a>
-  <button class="nav-icon-btn" aria-label="Panier">
+  <a href="/cart" style="text-decoration:none;display:flex;"><button class="nav-icon-btn" aria-label="Panier">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-  </button>
+  </button></a>
 </nav>
 
 <!-- HERO -->
@@ -362,7 +362,7 @@ nav {
 <!-- CLOSING BANNER -->
 <div class="full-banner" style="height:55vh;">
   <img id="banner2" alt="Pink Puffer" style="object-position:center 20%;">
-  <div class="banner-overlay" style="background:linear-gradient(to right,rgba(0,0,0,0.7) 0%,transparent 65%);align-items:center;padding:0 5rem;">
+  <div class="banner-overlay" style="background:linear-gradient(to bottom,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.8) 100%);align-items:center;padding:0 5rem;">
     <div>
       <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Pink Puffer — 160.00 CHF</p>
       <h2 style="font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;color:#fff;margin-bottom:1.8rem;">PINK<br>PUFFER</h2>
@@ -735,121 +735,57 @@ function cartGo(productUrl) {
 </script>
 
 
-<!-- ═══ SHOPIFY BUY BUTTON SDK ═══ -->
+
+<!-- ═══ SHOPIFY BUY BUTTON ═══ -->
 <script type="text/javascript">
 (function() {
-  var SHOPIFY_DOMAIN = 'b1i9bd-14.myshopify.com';
-  var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
-  var PRODUCT_ID = '9856965509448';
+  var DOMAIN = 'b1i9bd-14.myshopify.com';
+  var TOKEN  = 'dee105ca8f9997a702cfbc013fd5e30f';
+  var PID    = '9856965509448';
+  var SDK    = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
 
-  // Load Shopify Buy SDK
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  
   function initShopify() {
-    var client = ShopifyBuy.buildClient({
-      domain: SHOPIFY_DOMAIN,
-      storefrontAccessToken: STOREFRONT_TOKEN,
-    });
-
-    // Store client globally for cart operations
+    var client = ShopifyBuy.buildClient({ domain: DOMAIN, storefrontAccessToken: TOKEN });
     window.SKShopify = {
-      client: client,
-      checkout: null,
-      productId: PRODUCT_ID,
-      
-      // Create or get checkout
       getCheckout: function(cb) {
-        var saved = localStorage.getItem('sk_checkout_id');
-        if (saved) {
-          client.checkout.fetch(saved).then(function(checkout) {
-            if (checkout && !checkout.completedAt) {
-              window.SKShopify.checkout = checkout;
-              cb(checkout);
-            } else {
-              client.checkout.create().then(function(c) {
-                localStorage.setItem('sk_checkout_id', c.id);
-                window.SKShopify.checkout = c;
-                cb(c);
-              });
-            }
-          }).catch(function() {
-            client.checkout.create().then(function(c) {
-              localStorage.setItem('sk_checkout_id', c.id);
-              window.SKShopify.checkout = c;
-              cb(c);
-            });
-          });
-        } else {
+        var id = localStorage.getItem('sk_checkout_id');
+        var create = function() {
           client.checkout.create().then(function(c) {
             localStorage.setItem('sk_checkout_id', c.id);
-            window.SKShopify.checkout = c;
             cb(c);
           });
-        }
+        };
+        if (id) {
+          client.checkout.fetch(id).then(function(c) {
+            if (c && !c.completedAt) cb(c); else create();
+          }).catch(create);
+        } else { create(); }
       },
-
-      // Fetch variants for this product
       getVariants: function(cb) {
-        client.product.fetch('gid://shopify/Product/' + PRODUCT_ID).then(function(product) {
-          if (product) cb(product.variants);
+        client.product.fetch('gid://shopify/Product/' + PID).then(function(p) {
+          if (p && p.variants) cb(p.variants);
         });
       },
-
-      // Add to cart and redirect to checkout
       addToCart: function() {
-        var sizeEl = document.getElementById('sizeVal');
-        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
-        
+        var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
         var toast = document.getElementById('toast');
-        if (toast) {
-          toast.textContent = 'Chargement...';
-          toast.classList.add('show');
-        }
-
+        if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
         window.SKShopify.getVariants(function(variants) {
-          // Find variant matching selected size
-          var variant = variants.find(function(v) {
-            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
-          }) || variants[0];
-
-          if (!variant) {
-            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/products/' + PRODUCT_ID;
-            return;
-          }
-
+          var v = variants.find(function(x) { return x.title === size || x.title.indexOf(size) !== -1; }) || variants[0];
           window.SKShopify.getCheckout(function(checkout) {
-            var lineItems = [{ variantId: variant.id, quantity: 1 }];
-            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
-              if (toast) {
-                toast.textContent = 'Taille ' + selectedSize + ' — Ajouté !';
-              }
-              setTimeout(function() {
-                if (toast) toast.classList.remove('show');
-                window.location.href = c.webUrl;
-              }, 1000);
+            client.checkout.addLineItems(checkout.id, [{variantId: v.id, quantity: 1}]).then(function(c) {
+              if (toast) { toast.textContent = 'Taille ' + size + ' — Ajouté !'; }
+              setTimeout(function() { if (toast) toast.classList.remove('show'); window.location.href = c.webUrl; }, 900);
             });
           });
         });
       },
-
-      // Buy now - direct checkout
       buyNow: function() {
-        var sizeEl = document.getElementById('sizeVal');
-        var selectedSize = sizeEl ? sizeEl.textContent.trim() : 'M';
-
+        var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
         window.SKShopify.getVariants(function(variants) {
-          var variant = variants.find(function(v) {
-            return v.title === selectedSize || v.title.indexOf(selectedSize) !== -1;
-          }) || variants[0];
-
-          if (!variant) {
-            window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart';
-            return;
-          }
-
+          var v = variants.find(function(x) { return x.title === size || x.title.indexOf(size) !== -1; }) || variants[0];
           window.SKShopify.getCheckout(function(checkout) {
-            var lineItems = [{ variantId: variant.id, quantity: 1 }];
-            client.checkout.addLineItems(checkout.id, lineItems).then(function(c) {
+            client.checkout.addLineItems(checkout.id, [{variantId: v.id, quantity: 1}]).then(function(c) {
               window.location.href = c.webUrl;
             });
           });
@@ -858,15 +794,12 @@ function cartGo(productUrl) {
     };
   }
 
-  // Load SDK then init
-  if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-    initShopify();
-  } else {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    script.onload = initShopify;
-    document.head.appendChild(script);
+  if (window.ShopifyBuy && window.ShopifyBuy.UI) { initShopify(); }
+  else {
+    var s = document.createElement('script');
+    s.async = true; s.src = SDK;
+    s.onload = initShopify;
+    document.head.appendChild(s);
   }
 })();
 </script>
