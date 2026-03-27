@@ -124,7 +124,35 @@ nav {
 .sq-btn-reset:hover { background:rgba(0,0,0,0.12); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; height: auto; }
-  .gallery { position: relative; top: 0; height: 80vw; grid-template-columns: 60px 1fr; }
+
+  /* ── Galerie mobile : photo plein écran + thumbs en dessous ── */
+  .gallery {
+    position: relative; top: 0;
+    display: flex; flex-direction: column;
+    height: auto;
+  }
+  .main-view {
+    width: 100%; aspect-ratio: 1 / 1;
+    order: 1;
+  }
+  .main-view img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .thumbs-col {
+    order: 2;
+    flex-direction: row;
+    gap: 6px;
+    padding: 8px 8px;
+    overflow-x: auto; overflow-y: visible;
+    width: 100%;
+    scrollbar-width: none;
+  }
+  .thumbs-col::-webkit-scrollbar { display: none; }
+  .thumb {
+    flex-shrink: 0;
+    width: 64px; height: 64px;
+  }
+
   .product-panel { padding: 2rem 1.5rem; }
   .detail-row { grid-template-columns: 1fr; }
   .detail-row.reverse { direction: ltr; }
