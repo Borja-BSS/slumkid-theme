@@ -127,10 +127,7 @@ nav.scrolled {
 .btn-ghost:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); transform: scale(0.98); }
 
 /* Flèches nav */
-.hero-arrows {
-  position: absolute; top: 1.8rem; right: 1.8rem;
-  display: flex; gap: 2px; pointer-events: none; z-index: 10;
-}
+.hero-arrows { display: none; }
 .hero-arrow {
   pointer-events: all; width: 44px; height: 44px; border-radius: 0;
   background: rgba(0,0,0,0.25);
@@ -572,10 +569,6 @@ a.btn-cart { text-decoration:none; display:inline-flex; align-items:center; just
       </div>
     </div>
 
-  </div>
-  <div class="hero-arrows">
-    <button class="hero-arrow" id="hPrev">←</button>
-    <button class="hero-arrow" id="hNext">→</button>
   </div>
   <div class="hero-dots">
     <button class="hero-dot active" data-i="0"></button>
