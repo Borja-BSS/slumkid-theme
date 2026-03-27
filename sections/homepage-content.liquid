@@ -532,6 +532,23 @@ a.btn-cart { text-decoration:none; display:inline-flex; align-items:center; just
 
 a.btn-cart,a.nav-icon-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 
+
+.sold-out-overlay {
+  position: absolute; inset: 0; z-index: 6;
+  background: rgba(0,0,0,0.52);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.sold-out-label {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #ffffff;
+  font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em;
+  text-transform: uppercase; padding: 0.5rem 1.3rem;
+  border-radius: 980px;
+}
+
 </style>
 
 <!-- NAV -->
