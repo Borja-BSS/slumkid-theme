@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541179771585823605": {
+      "settings": {
+        "checksum": "d5985b0b0e8669b59da6db376c89aca1e74a1f3e35d8b3223946e6d3d93c68d5_1_1_0_0__1",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541179771585823605"
+    },
+    "gp_section_541180424034976698": {
+      "settings": {
+        "checksum": "2de2fe9f3b3e6699ae34ca58b237f6e688e94b22acabdb4d53bce91982155eb4_1_1_0_0__1",
+        "ggCafmPXSO0_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support-product-order\"><u>Products &amp; Order</u></a>",
+        "ggNyllivuu2_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/exchange-return-refund\"><u>Exchange, Refund &amp; Returns</u></a>",
+        "ggTUl03rdmO_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support-problems-receiving-email\"><u>Problems with emails</u></a>",
+        "ggUQ9uAyWAx_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support-contact\"><u>Contact</u></a>",
+        "ggsCx-xkYmt_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support-payment-shipping\"><u>Payment &amp; Shipping</u></a>"
+      },
+      "type": "gp-section-541180424034976698"
+    },
+    "gp_section_541196758651241402": {
+      "settings": {
+        "checksum": "26e34f13544474ea711b091def1a68a6d50507f0e82ba15faeddb28e604979fb_1_1_0_0__1",
+        "ggPJDQNMXck_text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>"
+      },
+      "type": "gp-section-541196758651241402"
+    },
+    "gp_section_541203751612974256": {
+      "settings": {
+        "checksum": "c3a4eb9000c5f2cfedd84a9395ac516ac8feb078f6f781fdf0539daf56d1050d_1_1_0_0__1"
+      },
+      "type": "gp-section-541203751612974256"
+    }
+  },
+  "order": [
+    "gp_section_541179771585823605",
+    "gp_section_541180424034976698",
+    "gp_section_541203751612974256",
+    "gp_section_541196758651241402"
+  ],
+  "layout": "theme.gempages.header"
+}

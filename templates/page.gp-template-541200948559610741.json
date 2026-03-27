@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541200999595901882": {
+      "settings": {
+        "checksum": "178f234274c2af0ecb25e3aa150d109c374302a9785b7d01b0791656a29ffaa8_1_1_0_0__1",
+        "gg4kL_z8Zwm_text": "<strong>Legal notice</strong>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541200999595901882"
+    },
+    "gp_section_541201019476903024": {
+      "settings": {
+        "checksum": "1ac236782a2793c2c2f8ecd25458cca5f8c4bf8e346f94b4df06effea5faa1f0_1_1_0_0__1",
+        "ggfOCpd-jlh_text": "<strong>Legal notice</strong><br>&nbsp;<br>Slum Kid SNC<br>c/o Diogo Ferreira<br>Chemin Daniel-IHLY 9<br>1213 Petit-Lancy<br>CHE-207.214.678<br><br>&nbsp;<br><strong>Contact:</strong><br><a href=\"mailto:contact@slumkid.store\">contact@slumkid.store</a><br>&nbsp;<br><strong>Website Hosting:</strong><br>Host: Shopify Inc.<br>Address: 150 Elgin Street, Ottawa, ON K2P 1L4, Canada.<br>Website: <a href=\"http://www.shopify.com\">www.shopify.com</a><br><br><strong>VAT:</strong><br>As a small business, Slum Kid is not subject to VAT according to Swiss legislation.<br><br><strong>Applicable Law:</strong><br>These legal notices are governed by Swiss law. In case of a dispute, the competent courts will be those of Geneva.<br><br><strong>Intellectual Property:</strong><br>All elements of the website are protected by copyright. Any reproduction is prohibited without prior authorization.<br>&nbsp;"
+      },
+      "type": "gp-section-541201019476903024"
+    }
+  },
+  "order": [
+    "gp_section_541200999595901882",
+    "gp_section_541201019476903024"
+  ]
+}

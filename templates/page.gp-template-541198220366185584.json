@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541198297994363834": {
+      "settings": {
+        "checksum": "5332018d9db9383631843c308a93e4a45f39dc120ddd755b68149b21e144f920_1_1_0_0__1",
+        "ggkJXkvefiy_text": "<strong>&nbsp;Shipping policy</strong>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541198297994363834"
+    },
+    "gp_section_541198499522282426": {
+      "settings": {
+        "checksum": "b8fcb83079b246706ef5fac14344f434c383add902e29e8752ac90366ace9a6d_1_1_0_0__1",
+        "gg1QHMT_-3Z_text": "Shipping Policy<br>&nbsp;<br><strong>Shipping Areas</strong><br>We ship our products worldwide.<br>&nbsp;<br><strong>Pre-orders</strong><br>All our products are available for pre-order. Due to the nature of pre-orders, delivery times may be longer.<br><br><strong>Delivery Times</strong><br>The delivery time for pre-orders is generally <strong>4 to 6 weeks</strong> from the order date, depending on production and shipping conditions.<br>Delivery times may vary based on production and transport conditions.<br><br><strong>Shipping Costs</strong><ul><li><strong>Switzerland:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>European Union:</strong> 14.95 €</li><li><strong>Outside the European Union:</strong> 35.90 € to 70.80 €</li></ul>Shipping costs for pre-orders are automatically calculated at checkout based on the destination.<br><br><strong>Order Tracking</strong><br>Once your pre-order has been shipped, you will receive an email containing a tracking number to monitor the progress of your delivery.<br><br><strong>Taxes and Customs Duties</strong><br>For orders outside the European Union, DROM, and COM, import duties (including taxes, VAT, or customs fees) may apply. These charges are determined by the destination country and calculated based on the origin of the goods and product classification.<br>These additional fees are collected upon the parcel's arrival in your country. <strong>Slum Kid does not collect these fees at checkout and cannot&nbsp;</strong><br><strong>predict their amount.</strong> Should such fees be incurred, they must be paid for the parcel to clear customs. The customer is responsible for covering these charges.<br><br>For more information, contact your local customs office to understand your country's regulations.<br><br>Orders to Switzerland are exempt from additional customs fees as we do not collect VAT.<br><br><strong>Returns of Undelivered Packages</strong><br>If a package is returned to us due to an incorrect address or refusal of delivery, reshipping costs will be charged to the customer.<br>It is your responsibility to ensure delivery information is accurate at the time of ordering.<br><br><strong>Contact for Delivery Issues</strong><br>If you have any questions regarding the shipment of your pre-order, please contact us at:<br><strong>contact@slumkid.store</strong><br><br>We are committed to responding promptly to resolve any delivery-related issues.<br>&nbsp;<br>&nbsp;"
+      },
+      "type": "gp-section-541198499522282426"
+    }
+  },
+  "order": [
+    "gp_section_541198297994363834",
+    "gp_section_541198499522282426"
+  ]
+}
