@@ -176,31 +176,27 @@ nav {
 .sq-btn-apply:hover { opacity:0.82; }
 .sq-btn-reset { width:100%;padding:0.82rem;background:rgba(0,0,0,0.06);color:var(--black);border:none;border-radius:var(--radius-btn);font-family:var(--font);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer; }
 .sq-btn-reset:hover { background:rgba(0,0,0,0.12); }
-
-
 </style>
 
 <nav>
   <a class="nav-back" href="/">&#8592; Retour</a>
   <a class="nav-logo" href="/">KID</a>
-  <a href="/cart" style="text-decoration:none;display:flex;"><button class="nav-icon-btn" aria-label="Panier">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-  </button></a>
+  <div style="width:40px;"></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="gallery">
     <div class="thumbs-col">
-      <div class="thumb active" data-src="p1"><img id="t1" alt="Pink Puffer"></div>
-      <div class="thumb" data-src="p2"><img id="t2" alt="Pink Puffer"></div>
-      <div class="thumb" data-src="p3"><img id="t3" alt="Pink Puffer"></div>
-      <div class="thumb" data-src="p4"><img id="t4" alt="Pink Puffer"></div>
-      <div class="thumb" data-src="p5"><img id="t5" alt="Pink Puffer"></div>
+      <div class="thumb active" data-src="p1"><img id="t1" src="{{ 'pink-puffer-img-00.jpg' | asset_url }}" alt="Pink Puffer"></div>
+      <div class="thumb" data-src="p2"><img id="t2" src="{{ 'pink-puffer-img-01.jpg' | asset_url }}" alt="Pink Puffer"></div>
+      <div class="thumb" data-src="p3"><img id="t3" src="{{ 'pink-puffer-img-02.jpg' | asset_url }}" alt="Pink Puffer"></div>
+      <div class="thumb" data-src="p4"><img id="t4" src="{{ 'pink-puffer-img-03.jpg' | asset_url }}" alt="Pink Puffer"></div>
+      <div class="thumb" data-src="p5"><img id="t5" src="{{ 'pink-puffer-img-04.jpg' | asset_url }}" alt="Pink Puffer"></div>
     </div>
     <div class="main-view">
       <span class="hero-badge">Collection</span>
-      <img id="mainImg" alt="Pink Puffer">
+      <img id="mainImg" src="{{ 'pink-puffer-img-00.jpg' | asset_url }}" alt="Pink Puffer">
     </div>
   </div>
 
@@ -215,7 +211,7 @@ nav {
     </div>
 
     <div class="size-row">
-      <span class="size-label">Taille — <span id="sizeVal">S</span></span>
+      <span class="size-label">Taille — <span id="sizeVal">XS</span></span>
       <span class="size-guide" onclick="sqOpen()">Guide des tailles</span>
     </div>
     <div class="size-grid">
@@ -236,7 +232,6 @@ nav {
       En stock · Suisse 4.90 CHF · France 9.90 € · UE 14.50 €
     </div>
 
-    <!-- Accordions -->
     <div class="accordion">
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc('details')">
@@ -273,7 +268,7 @@ nav {
         </div>
       </div>
 
-      <div class="acc-item" id="size-guide-acc-item">
+      <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc('size-guide-acc')">
           Guide des tailles <span class="icon">+</span>
         </button>
@@ -314,9 +309,9 @@ nav {
   </div>
 </section>
 
-<!-- DETAIL 1 — img gauche, texte droite -->
+<!-- DETAIL 1 -->
 <section class="detail-row">
-  <div class="detail-img"><img id="d1" alt="Pink Puffer Details"></div>
+  <div class="detail-img"><img id="d1" src="{{ 'pink-puffer-img-02.jpg' | asset_url }}" alt="Pink Puffer Details"></div>
   <div class="detail-body">
     <p class="detail-eyebrow">Pink Puffer — Slum Kid Collection</p>
     <h2 class="detail-title">PINK<br>PUFFER</h2>
@@ -333,19 +328,19 @@ nav {
 
 <!-- FULL BANNER -->
 <div class="full-banner">
-  <img id="banner1" alt="Pink Puffer — Slum Kid">
+  <img id="banner1" src="{{ 'pink-puffer-img-01.jpg' | asset_url }}" alt="Pink Puffer — Slum Kid">
   <div class="banner-overlay">
     <div class="banner-glass-card">
       <p class="banner-card-eyebrow">Slum Kid Collection</p>
       <h3 class="banner-card-title">BUILT<br>FOR THE<br>COLD</h3>
-      <button class="btn-dark" onclick="cartGo('/pink-puffer')">Shop Now</button>
+      <button class="btn-dark" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Shop Now</button>
     </div>
   </div>
 </div>
 
-<!-- DETAIL 2 — texte gauche, img droite -->
+<!-- DETAIL 2 -->
 <section class="detail-row reverse">
-  <div class="detail-img"><img id="d2" alt="Pink Puffer Back"></div>
+  <div class="detail-img"><img id="d2" src="{{ 'pink-puffer-img-03.jpg' | asset_url }}" alt="Pink Puffer Back"></div>
   <div class="detail-body">
     <p class="detail-eyebrow">Détails</p>
     <h2 class="detail-title">EVERY<br>DETAIL<br>COUNTS</h2>
@@ -361,90 +356,24 @@ nav {
 
 <!-- CLOSING BANNER -->
 <div class="full-banner" style="height:55vh;">
-  <img id="banner2" alt="Pink Puffer" style="object-position:center 20%;">
+  <img id="banner2" src="{{ 'pink-puffer-img-04.jpg' | asset_url }}" alt="Pink Puffer" style="object-position:center 20%;">
   <div class="banner-overlay" style="background:linear-gradient(to bottom,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.8) 100%);align-items:center;padding:0 5rem;">
     <div>
       <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Pink Puffer — 160.00 CHF</p>
       <h2 style="font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;color:#fff;margin-bottom:1.8rem;">PINK<br>PUFFER</h2>
-      <button class="btn-glass" style="width:auto;padding:.75rem 1.8rem;font-size:0.75rem;" onclick="cartGo('/pink-puffer')">Ajouter au panier</button>
+      <button class="btn-glass" style="width:auto;padding:.75rem 1.8rem;font-size:0.75rem;" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Ajouter au panier</button>
     </div>
   </div>
 </div>
 
 <div class="page-footer">
   <span class="foot-logo">Slum Kid</span>
-  <span class="foot-copy">© 2026 Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+  <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
 </div>
 
 <div class="toast" id="toast">Ajouté au panier</div>
 
-<script>
-var IMGS = {
-  p1: "",
-  p2: "",
-  p3: "",
-  p4: "",
-  p5: ""
-};
-
-function loadImgs() {
-  document.getElementById('t1').src = IMGS.p1;
-  document.getElementById('t2').src = IMGS.p2;
-  document.getElementById('t3').src = IMGS.p3;
-  document.getElementById('t4').src = IMGS.p4;
-  document.getElementById('t5').src = IMGS.p5;
-  document.getElementById('mainImg').src = IMGS.p1;
-  document.getElementById('d1').src = IMGS.p5;
-  document.getElementById('banner1').src = IMGS.p2;
-  document.getElementById('d2').src = IMGS.p4;
-  document.getElementById('banner2').src = IMGS.p3;
-}
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadImgs);
-else loadImgs();
-
-// Gallery clicks
-document.querySelectorAll('.thumb').forEach(function(th) {
-  th.addEventListener('click', function() {
-    document.querySelectorAll('.thumb').forEach(function(t){ t.classList.remove('active'); });
-    th.classList.add('active');
-    document.getElementById('mainImg').src = IMGS[th.dataset.src];
-  });
-});
-
-// Size picker
-function pick(btn) {
-  document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.getElementById('sizeVal').textContent = btn.textContent;
-}
-
-// Accordions
-function toggleAcc(id) {
-  var body = document.getElementById(id);
-  var trigger = body.previousElementSibling;
-  var isOpen = body.classList.contains('open');
-  body.classList.toggle('open');
-  trigger.classList.toggle('open');
-}
-
-// Cart
-
-function cartGo() {
-  if (window.SKShopify) {
-    window.SKShopify.addToCart();
-  } else {
-    // Fallback
-    var t = document.getElementById('toast');
-    if (t) { t.textContent = 'Ajout...'; t.classList.add('show'); }
-    setTimeout(function() {
-      if (t) t.classList.remove('show');
-      window.location.href = '/cart';
-    }, 1000);
-  }
-}, 1400);
-}
-</script>
-
+<!-- SIZE QUIZ -->
 <div class="sq-overlay" id="sqOverlay" onclick="sqCloseOutside(event)">
   <div class="sq-card">
     <div class="sq-header">
@@ -502,184 +431,58 @@ function cartGo() {
 </div>
 
 <script>
-(function() {
-  var SIZES = ['XS','S','M','L','XL'];
-  var ans = []; var finalSize = 'M';
-  var SD = {
-  cols: ['Taille','Longueur','Poitrine','Manche raglan'],
-  rows: [['XS','109 cm','56 cm','77 cm'],['S','114 cm','58.5 cm','79 cm'],['M','119 cm','61 cm','81 cm'],['L','124 cm','63.5 cm','83 cm'],['XL','129 cm','66 cm','85 cm']]
+/* ── IMAGES — même pattern que Storm Set ── */
+var IMGS = {
+  p1: "{{ 'pink-puffer-img-00.jpg' | asset_url }}",
+  p2: "{{ 'pink-puffer-img-01.jpg' | asset_url }}",
+  p3: "{{ 'pink-puffer-img-02.jpg' | asset_url }}",
+  p4: "{{ 'pink-puffer-img-03.jpg' | asset_url }}",
+  p5: "{{ 'pink-puffer-img-04.jpg' | asset_url }}"
 };
-  window.sqOpen = function() { sqReset(); document.getElementById('sqOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
-  window.sqClose = function() { document.getElementById('sqOverlay').classList.remove('open'); document.body.style.overflow=''; };
-  window.sqCloseOutside = function(e) { if(e.target===document.getElementById('sqOverlay')) window.sqClose(); };
-  window.sqAnswer = function(step, val) {
-    ans[step-1]=val;
-    event.currentTarget.parentElement.querySelectorAll('.sq-opt').forEach(function(o){o.classList.remove('selected');});
-    event.currentTarget.classList.add('selected');
-    setTimeout(function() {
-      if(step<3) {
-        document.getElementById('sqStep'+step).style.display='none';
-        document.getElementById('sqStep'+(step+1)).style.display='block';
-        upProg(step+1);
-      } else { compute(); }
-    }, 280);
-  };
-  function upProg(a) {
-    ['sqp1','sqp2','sqp3'].forEach(function(id,i) {
-      document.getElementById(id).className='sq-step'+(i+1<a?' done':i+1===a?' active':'');
-    });
-  }
-  function compute() {
-    var score=(ans[0]||0)+(ans[1]||0)+(ans[2]||0);
-    var idx=Math.round(Math.min(Math.max(score/2,0),4));
-    finalSize=SIZES[idx];
-    document.getElementById('sqFinalSize').textContent=finalSize;
-    var fl=ans[2]<0?'un fit fitted':ans[2]>0?'un fit oversized':'un fit regular';
-    document.getElementById('sqDesc').textContent='La taille '+finalSize+' est idéale pour '+fl+'.';
-    var h='<table class="sq-table"><thead><tr>';
-    SD.cols.forEach(function(c){h+='<th>'+c+'</th>';});
-    h+='</tr></thead><tbody>';
-    SD.rows.forEach(function(row){
-      var hl=row[0]===finalSize?' class="hl"':'';
-      h+='<tr'+hl+'>';row.forEach(function(c){h+='<td>'+c+'</td>';});h+='</tr>';
-    });
-    h+='</tbody></table>';
-    document.getElementById('sqTableWrap').innerHTML=h;
-    ['sqStep1','sqStep2','sqStep3'].forEach(function(id){document.getElementById(id).style.display='none';});
-    document.getElementById('sqResult').style.display='block';
-    upProg(4);
-  }
-  window.sqApply=function(){
-    document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');});
-    var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize;
-    window.sqClose();
-  };
-  window.sqReset=function(){
-    ans=[];
-    ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});});
-    document.getElementById('sqResult').style.display='none';upProg(1);
-  };
-})();
-</script>
+window.IMGS = IMGS;
 
-
-<script>
-(function() {
-  var img00 = "{{ 'pink-puffer-img-00.jpg' | asset_url }}";
-  var img01 = "{{ 'pink-puffer-img-01.jpg' | asset_url }}";
-  var img02 = "{{ 'pink-puffer-img-02.jpg' | asset_url }}";
-  var img03 = "{{ 'pink-puffer-img-03.jpg' | asset_url }}";
-  var img04 = "{{ 'pink-puffer-img-04.jpg' | asset_url }}";
-  var IMGS = [img00, img01, img02, img03, img04];
-  
-  function applyProductImages() {
-    // Thumbnails
-    IMGS.forEach(function(src, i) {
-      var t = document.getElementById('t' + (i+1));
-      if (t) t.src = src;
-    });
-    // Main image
-    var main = document.getElementById('mainImg');
-    if (main && IMGS[0]) main.src = IMGS[0];
-    // Detail sections
-    var d1 = document.getElementById('d1');
-    if (d1 && IMGS[IMGS.length > 2 ? 2 : 0]) d1.src = IMGS[IMGS.length > 2 ? 2 : 0];
-    var b1 = document.getElementById('banner1');
-    if (b1 && IMGS[1]) b1.src = IMGS[1];
-    var d2 = document.getElementById('d2');
-    if (d2 && IMGS[IMGS.length > 3 ? 3 : 0]) d2.src = IMGS[IMGS.length > 3 ? 3 : 0];
-    var b2 = document.getElementById('banner2');
-    if (b2 && IMGS[IMGS.length > 4 ? 4 : 1]) b2.src = IMGS[IMGS.length > 4 ? 4 : 1];
-    // Gallery: update IMGS global for thumb click handler
-    window.IMGS = {};
-    IMGS.forEach(function(src, i) {
-      window.IMGS['p' + (i+1)] = src;
-    });
-    // Hero bg (story page)
-    var heroBg = document.getElementById('heroBg');
-    if (heroBg && IMGS[0]) heroBg.style.backgroundImage = 'url(' + IMGS[0] + ')';
-    var ctaBg = document.getElementById('ctaBg');
-    if (ctaBg && IMGS[2]) ctaBg.style.backgroundImage = 'url(' + IMGS[2] + ')';
-    // Story images
-    ['img1','img2','img3','img4','img5'].forEach(function(id, i) {
-      var el = document.getElementById(id);
-      if (el && IMGS[i+1]) el.src = IMGS[i+1];
-    });
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyProductImages);
-  } else {
-    applyProductImages();
-  }
-  setTimeout(applyProductImages, 500);
-})();
-</script>
-
-<script>
-
-var IMGS = {};;
-
-function loadImgs() {
-  document.getElementById('t1').src = IMGS.p1;
-  document.getElementById('t2').src = IMGS.p2;
-  document.getElementById('t3').src = IMGS.p3;
-  document.getElementById('t4').src = IMGS.p4;
-  document.getElementById('t5').src = IMGS.p5;
-  document.getElementById('mainImg').src = IMGS.p1;
-  document.getElementById('d1').src = IMGS.p5;
-  document.getElementById('banner1').src = IMGS.p2;
-  document.getElementById('d2').src = IMGS.p4;
-  document.getElementById('banner2').src = IMGS.p3;
-}
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadImgs);
-else loadImgs();
-
-// Gallery clicks
+/* Galerie — clic sur thumbnail */
 document.querySelectorAll('.thumb').forEach(function(th) {
   th.addEventListener('click', function() {
-    document.querySelectorAll('.thumb').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
     th.classList.add('active');
     document.getElementById('mainImg').src = IMGS[th.dataset.src];
   });
 });
 
-// Size picker
+/* Taille */
 function pick(btn) {
-  document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.size-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
   document.getElementById('sizeVal').textContent = btn.textContent;
 }
 
-// Accordions
+/* Accordions */
 function toggleAcc(id) {
   var body = document.getElementById(id);
   var trigger = body.previousElementSibling;
-  var isOpen = body.classList.contains('open');
   body.classList.toggle('open');
   trigger.classList.toggle('open');
 }
 
-// Cart
-function cartGo(productUrl) {
+/* Cart fallback */
+function cartGo() {
+  if (window.SKShopify) { window.SKShopify.addToCart(); return; }
   var t = document.getElementById('toast');
-  t.classList.add('show');
-  var size = document.getElementById('sizeVal') ? document.getElementById('sizeVal').textContent : '';
-  t.textContent = size ? 'Taille ' + size + ' — Ajouté au panier' : 'Ajouté au panier';
-  setTimeout(function(){
-    t.classList.remove('show');
-    window.location.href = productUrl || '/cart';
-  }, 1400);
+  if (t) { t.textContent = 'Ajout...'; t.classList.add('show'); }
+  setTimeout(function() { if (t) t.classList.remove('show'); window.location.href = '/cart'; }, 1000);
 }
+</script>
 
-
+<script>
+/* Size Quiz */
 (function() {
   var SIZES = ['XS','S','M','L','XL'];
   var ans = []; var finalSize = 'M';
   var SD = {
-  cols: ['Taille','Longueur','Poitrine','Manche raglan'],
-  rows: [['XS','109 cm','56 cm','77 cm'],['S','114 cm','58.5 cm','79 cm'],['M','119 cm','61 cm','81 cm'],['L','124 cm','63.5 cm','83 cm'],['XL','129 cm','66 cm','85 cm']]
-};
+    cols: ['Taille','Longueur','Poitrine','Manche raglan'],
+    rows: [['XS','109 cm','56 cm','77 cm'],['S','114 cm','58.5 cm','79 cm'],['M','119 cm','61 cm','81 cm'],['L','124 cm','63.5 cm','83 cm'],['XL','129 cm','66 cm','85 cm']]
+  };
   window.sqOpen = function() { sqReset(); document.getElementById('sqOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
   window.sqClose = function() { document.getElementById('sqOverlay').classList.remove('open'); document.body.style.overflow=''; };
   window.sqCloseOutside = function(e) { if(e.target===document.getElementById('sqOverlay')) window.sqClose(); };
@@ -688,18 +491,11 @@ function cartGo(productUrl) {
     event.currentTarget.parentElement.querySelectorAll('.sq-opt').forEach(function(o){o.classList.remove('selected');});
     event.currentTarget.classList.add('selected');
     setTimeout(function() {
-      if(step<3) {
-        document.getElementById('sqStep'+step).style.display='none';
-        document.getElementById('sqStep'+(step+1)).style.display='block';
-        upProg(step+1);
-      } else { compute(); }
+      if(step<3) { document.getElementById('sqStep'+step).style.display='none'; document.getElementById('sqStep'+(step+1)).style.display='block'; upProg(step+1); }
+      else { compute(); }
     }, 280);
   };
-  function upProg(a) {
-    ['sqp1','sqp2','sqp3'].forEach(function(id,i) {
-      document.getElementById(id).className='sq-step'+(i+1<a?' done':i+1===a?' active':'');
-    });
-  }
+  function upProg(a) { ['sqp1','sqp2','sqp3'].forEach(function(id,i) { document.getElementById(id).className='sq-step'+(i+1<a?' done':i+1===a?' active':''); }); }
   function compute() {
     var score=(ans[0]||0)+(ans[1]||0)+(ans[2]||0);
     var idx=Math.round(Math.min(Math.max(score/2,0),4));
@@ -707,37 +503,19 @@ function cartGo(productUrl) {
     document.getElementById('sqFinalSize').textContent=finalSize;
     var fl=ans[2]<0?'un fit fitted':ans[2]>0?'un fit oversized':'un fit regular';
     document.getElementById('sqDesc').textContent='La taille '+finalSize+' est idéale pour '+fl+'.';
-    var h='<table class="sq-table"><thead><tr>';
-    SD.cols.forEach(function(c){h+='<th>'+c+'</th>';});
-    h+='</tr></thead><tbody>';
-    SD.rows.forEach(function(row){
-      var hl=row[0]===finalSize?' class="hl"':'';
-      h+='<tr'+hl+'>';row.forEach(function(c){h+='<td>'+c+'</td>';});h+='</tr>';
-    });
-    h+='</tbody></table>';
-    document.getElementById('sqTableWrap').innerHTML=h;
+    var h='<table class="sq-table"><thead><tr>'; SD.cols.forEach(function(c){h+='<th>'+c+'</th>';}); h+='</tr></thead><tbody>';
+    SD.rows.forEach(function(row){var hl=row[0]===finalSize?' class="hl"':'';h+='<tr'+hl+'>';row.forEach(function(c){h+='<td>'+c+'</td>';});h+='</tr>';});
+    h+='</tbody></table>'; document.getElementById('sqTableWrap').innerHTML=h;
     ['sqStep1','sqStep2','sqStep3'].forEach(function(id){document.getElementById(id).style.display='none';});
-    document.getElementById('sqResult').style.display='block';
-    upProg(4);
+    document.getElementById('sqResult').style.display='block'; upProg(4);
   }
-  window.sqApply=function(){
-    document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');});
-    var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize;
-    window.sqClose();
-  };
-  window.sqReset=function(){
-    ans=[];
-    ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});});
-    document.getElementById('sqResult').style.display='none';upProg(1);
-  };
+  window.sqApply=function(){ document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');}); var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize; window.sqClose(); };
+  window.sqReset=function(){ ans=[]; ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});}); document.getElementById('sqResult').style.display='none';upProg(1); };
 })();
-
 </script>
 
-
-
-<!-- ═══ SHOPIFY BUY BUTTON ═══ -->
 <script type="text/javascript">
+/* Shopify Buy SDK */
 (function() {
   var DOMAIN = 'b1i9bd-14.myshopify.com';
   var TOKEN  = 'dee105ca8f9997a702cfbc013fd5e30f';
@@ -750,24 +528,16 @@ function cartGo(productUrl) {
       getCheckout: function(cb) {
         var id = localStorage.getItem('sk_checkout_id');
         var create = function() {
-          client.checkout.create().then(function(c) {
-            localStorage.setItem('sk_checkout_id', c.id);
-            cb(c);
-          });
+          client.checkout.create().then(function(c) { localStorage.setItem('sk_checkout_id', c.id); cb(c); });
         };
-        if (id) {
-          client.checkout.fetch(id).then(function(c) {
-            if (c && !c.completedAt) cb(c); else create();
-          }).catch(create);
-        } else { create(); }
+        if (id) { client.checkout.fetch(id).then(function(c) { if (c && !c.completedAt) cb(c); else create(); }).catch(create); }
+        else { create(); }
       },
       getVariants: function(cb) {
-        client.product.fetch('gid://shopify/Product/' + PID).then(function(p) {
-          if (p && p.variants) cb(p.variants);
-        });
+        client.product.fetch('gid://shopify/Product/' + PID).then(function(p) { if (p && p.variants) cb(p.variants); });
       },
       addToCart: function() {
-        var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
+        var size = (document.getElementById('sizeVal') || {}).textContent || 'XS';
         var toast = document.getElementById('toast');
         if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
         window.SKShopify.getVariants(function(variants) {
@@ -781,13 +551,11 @@ function cartGo(productUrl) {
         });
       },
       buyNow: function() {
-        var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
+        var size = (document.getElementById('sizeVal') || {}).textContent || 'XS';
         window.SKShopify.getVariants(function(variants) {
           var v = variants.find(function(x) { return x.title === size || x.title.indexOf(size) !== -1; }) || variants[0];
           window.SKShopify.getCheckout(function(checkout) {
-            client.checkout.addLineItems(checkout.id, [{variantId: v.id, quantity: 1}]).then(function(c) {
-              window.location.href = c.webUrl;
-            });
+            client.checkout.addLineItems(checkout.id, [{variantId: v.id, quantity: 1}]).then(function(c) { window.location.href = c.webUrl; });
           });
         });
       }
@@ -795,12 +563,7 @@ function cartGo(productUrl) {
   }
 
   if (window.ShopifyBuy && window.ShopifyBuy.UI) { initShopify(); }
-  else {
-    var s = document.createElement('script');
-    s.async = true; s.src = SDK;
-    s.onload = initShopify;
-    document.head.appendChild(s);
-  }
+  else { var s = document.createElement('script'); s.async = true; s.src = SDK; s.onload = initShopify; document.head.appendChild(s); }
 })();
 </script>
 
