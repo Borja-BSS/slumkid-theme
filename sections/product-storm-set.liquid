@@ -137,32 +137,28 @@ nav {
 }
 </style>
 
-<!-- NAV -->
+<!-- NAV — bouton panier supprimé -->
 <nav>
   <a class="nav-back" href="/">&#8592; Retour</a>
   <a class="nav-logo" href="/">KID</a>
-  <a href="/cart" style="text-decoration:none;display:flex;">
-    <button class="nav-icon-btn" aria-label="Panier">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-    </button>
-  </a>
+  <div style="width:40px;"></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="gallery">
     <div class="thumbs-col">
-      <div class="thumb active" data-src="p1"><img id="t1" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p2"><img id="t2" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p3"><img id="t3" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p4"><img id="t4" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p5"><img id="t5" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p6"><img id="t6" src="" alt="Storm Set"></div>
-      <div class="thumb" data-src="p7"><img id="t7" src="" alt="Storm Set"></div>
+      <div class="thumb active" data-src="p1"><img id="t1" src="{{ 'storm-set-img-00.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p2"><img id="t2" src="{{ 'storm-set-img-01.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p3"><img id="t3" src="{{ 'storm-set-img-02.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p4"><img id="t4" src="{{ 'storm-set-img-03.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p5"><img id="t5" src="{{ 'storm-set-img-04.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p6"><img id="t6" src="{{ 'storm-set-img-05.jpg' | asset_url }}" alt="Storm Set"></div>
+      <div class="thumb" data-src="p7"><img id="t7" src="{{ 'storm-set-img-06.jpg' | asset_url }}" alt="Storm Set"></div>
     </div>
     <div class="main-view">
       <span class="hero-badge">New In — Season 26</span>
-      <img id="mainImg" src="" alt="Storm Set">
+      <img id="mainImg" src="{{ 'storm-set-img-00.jpg' | asset_url }}" alt="Storm Set">
     </div>
   </div>
 
@@ -207,7 +203,7 @@ nav {
 
 <!-- JACKET DETAILS -->
 <section class="detail-row">
-  <div class="detail-img"><img id="d1" src="" alt="Storm Jacket"></div>
+  <div class="detail-img"><img id="d1" src="{{ 'storm-set-img-02.jpg' | asset_url }}" alt="Storm Jacket"></div>
   <div class="detail-body">
     <p class="detail-eyebrow">Storm Set — Season 26</p>
     <h2 class="detail-title">STORM<br>JACKET</h2>
@@ -227,7 +223,7 @@ nav {
 
 <!-- FULL BANNER -->
 <div class="full-banner">
-  <img id="banner1" src="" alt="Storm Hood Detail">
+  <img id="banner1" src="{{ 'storm-set-img-01.jpg' | asset_url }}" alt="Storm Hood Detail">
   <div class="banner-overlay">
     <div class="banner-glass-card">
       <p class="banner-card-eyebrow">Built from the slum</p>
@@ -240,7 +236,7 @@ nav {
 
 <!-- JOGGER DETAILS -->
 <section class="detail-row reverse">
-  <div class="detail-img"><img id="d2" src="" alt="Storm Jogger"></div>
+  <div class="detail-img"><img id="d2" src="{{ 'storm-set-img-03.jpg' | asset_url }}" alt="Storm Jogger"></div>
   <div class="detail-body">
     <p class="detail-eyebrow">Storm Set — Season 26</p>
     <h2 class="detail-title">STORM<br>JOGGER</h2>
@@ -257,13 +253,13 @@ nav {
 
 <!-- DUAL STRIP -->
 <div class="dual-strip">
-  <img id="dual1" src="" alt="Storm Jacket Back">
-  <img id="dual2" src="" alt="Storm Jogger Leg">
+  <img id="dual1" src="{{ 'storm-set-img-04.jpg' | asset_url }}" alt="Storm Jacket Back">
+  <img id="dual2" src="{{ 'storm-set-img-05.jpg' | asset_url }}" alt="Storm Jogger Leg">
 </div>
 
 <!-- CLOSING BANNER -->
 <div class="full-banner" style="height:60vh;overflow:hidden;">
-  <img id="banner2" src="" alt="Storm Set" style="object-position:center 30%;">
+  <img id="banner2" src="{{ 'storm-set-img-06.jpg' | asset_url }}" alt="Storm Set" style="object-position:center 30%;">
   <div class="banner-overlay" style="background:rgba(0,0,0,0.55);align-items:center;">
     <div>
       <p class="detail-eyebrow" style="color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Storm Set — 129.90 CHF</p>
@@ -276,7 +272,7 @@ nav {
 <div style="height:4px;background:#0a0a0a;"></div>
 <div class="page-footer">
   <span class="foot-logo">Slum Kid</span>
-  <span class="foot-copy">© 2026 Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+  <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
 </div>
 
 <div class="toast" id="toast">Ajouté au panier</div>
@@ -339,16 +335,27 @@ nav {
 </div>
 
 <script>
-/* Galerie — thumb click */
+/* Galerie — images injectées via asset_url, plus besoin du bloc JS applyImgs */
+var IMGS = {
+  p1: "{{ 'storm-set-img-00.jpg' | asset_url }}",
+  p2: "{{ 'storm-set-img-01.jpg' | asset_url }}",
+  p3: "{{ 'storm-set-img-02.jpg' | asset_url }}",
+  p4: "{{ 'storm-set-img-03.jpg' | asset_url }}",
+  p5: "{{ 'storm-set-img-04.jpg' | asset_url }}",
+  p6: "{{ 'storm-set-img-05.jpg' | asset_url }}",
+  p7: "{{ 'storm-set-img-06.jpg' | asset_url }}"
+};
+window.IMGS = IMGS;
+
 document.querySelectorAll('.thumb').forEach(function(th) {
   th.addEventListener('click', function() {
     document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
     th.classList.add('active');
-    document.getElementById('mainImg').src = window.IMGS ? window.IMGS[th.dataset.src] : th.dataset.src;
+    document.getElementById('mainImg').src = IMGS[th.dataset.src];
   });
 });
 
-/* Tabs — IDs séparés par produit */
+/* Tabs */
 var PRODUCT_IDS = { jacket: '9983380390216', jogger: '9983421808968' };
 var prices = { jacket: ['129.90 CHF','Storm Jacket'], jogger: ['84.90 CHF','Storm Jogger'] };
 var currentTab = 'jacket';
@@ -412,34 +419,6 @@ function cartGo() {
   }
   window.sqApply=function(){ document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');}); var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize; window.sqClose(); };
   window.sqReset=function(){ ans=[]; ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});}); document.getElementById('sqResult').style.display='none';upProg(1); };
-})();
-</script>
-
-<script>
-/* Images — asset_url injection */
-(function() {
-  var img00 = "{{ 'storm-set-img-00.jpg' | asset_url }}";
-  var img01 = "{{ 'storm-set-img-01.jpg' | asset_url }}";
-  var img02 = "{{ 'storm-set-img-02.jpg' | asset_url }}";
-  var img03 = "{{ 'storm-set-img-03.jpg' | asset_url }}";
-  var img04 = "{{ 'storm-set-img-04.jpg' | asset_url }}";
-  var img05 = "{{ 'storm-set-img-05.jpg' | asset_url }}";
-  var img06 = "{{ 'storm-set-img-06.jpg' | asset_url }}";
-  var IMGS = [img00, img01, img02, img03, img04, img05, img06];
-  function apply() {
-    IMGS.forEach(function(src, i) { var t = document.getElementById('t' + (i+1)); if (t) t.src = src; });
-    var main = document.getElementById('mainImg'); if (main) main.src = IMGS[0];
-    var d1 = document.getElementById('d1'); if (d1) d1.src = IMGS[2];
-    var b1 = document.getElementById('banner1'); if (b1) b1.src = IMGS[1];
-    var d2 = document.getElementById('d2'); if (d2) d2.src = IMGS[3];
-    var du1 = document.getElementById('dual1'); if (du1) du1.src = IMGS[4];
-    var du2 = document.getElementById('dual2'); if (du2) du2.src = IMGS[5];
-    var b2 = document.getElementById('banner2'); if (b2) b2.src = IMGS[6];
-    window.IMGS = { p1:IMGS[0], p2:IMGS[1], p3:IMGS[2], p4:IMGS[3], p5:IMGS[4], p6:IMGS[5], p7:IMGS[6] };
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
-  else apply();
-  setTimeout(apply, 500);
 })();
 </script>
 
