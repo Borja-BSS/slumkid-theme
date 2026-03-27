@@ -48,9 +48,9 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
 .thumbs-col::-webkit-scrollbar { display: none; }
 .thumb { flex-shrink: 0; width: 66px; height: 82px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; border-radius: 2px; }
 .thumb.active { border-color: var(--black); }
-.thumb img { width: 100%; height: 100%; object-fit: contain; background: var(--light); display: block; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .main-view { position: relative; overflow: hidden; }
-.main-view img { width: 100%; height: 100%; object-fit: contain; object-position: center center; background: var(--light); display: block; transition: opacity 0.35s var(--ease); cursor: zoom-in; }
+.main-view img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: opacity 0.35s var(--ease); cursor: zoom-in; }
 .hero-badge { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(10,10,10,0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.45rem 0.9rem; border-radius: var(--radius-btn); }
 .product-panel { display: flex; flex-direction: column; justify-content: center; padding: 3.5rem 3rem; overflow-y: auto; background: var(--white); }
 .product-season { font-size: 0.6rem; letter-spacing: 0.22em; font-weight: 600; color: var(--gray); text-transform: uppercase; margin-bottom: 0.7rem; }
@@ -157,7 +157,7 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
   .main-view {
     order: 1;
     width: 100vw !important;
-    height: 70vw !important;
+    height: 120vw !important;
     aspect-ratio: unset !important;
     overflow: hidden;
     background: var(--light);
@@ -165,10 +165,9 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
   .main-view img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain !important;
-    object-position: center center;
+    object-fit: cover !important;
+    object-position: center top;
     display: block;
-    background: var(--light);
   }
   .thumbs-col {
     order: 2;
