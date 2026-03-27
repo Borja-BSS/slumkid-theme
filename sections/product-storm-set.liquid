@@ -1,0 +1,1194 @@
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --gray:  #86868b;
+  --light: #f5f5f7;
+  --mid:   #e0e0e0;
+  --glass-bg: rgba(255,255,255,0.72);
+  --glass-border: rgba(255,255,255,0.55);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 1.5px 0 rgba(255,255,255,0.7) inset;
+  --radius-btn: 980px;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+  --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 2.4rem;
+}
+.nav-logo { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.18em; color: var(--black); text-decoration: none; text-transform: uppercase; }
+.nav-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(0,0,0,0.45); text-decoration: none; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+.nav-back:hover { color: var(--black); }
+.nav-icon-btn { background: none; border: none; cursor: pointer; color: rgba(0,0,0,0.65); padding: 0.3rem; display: flex; transition: color 0.2s; }
+.nav-icon-btn:hover { color: var(--black); }
+
+/* ════════════ HERO SPLIT ════════════ */
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  height: 100vh; padding-top: 52px;
+}
+
+/* Galerie sticky */
+.gallery {
+  position: sticky; top: 52px; height: calc(100vh - 52px);
+  display: grid; grid-template-columns: 72px 1fr; gap: 6px;
+  background: var(--light);
+}
+.thumbs-col {
+  display: flex; flex-direction: column; gap: 6px; padding: 6px 0 6px 6px; overflow-y: auto;
+  scrollbar-width: none;
+}
+.thumbs-col::-webkit-scrollbar { display: none; }
+.thumb {
+  flex-shrink: 0; width: 66px; height: 82px; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: border-color 0.2s; border-radius: 2px;
+}
+.thumb.active { border-color: var(--black); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.main-view {
+  position: relative; overflow: hidden;
+}
+.main-view img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: opacity 0.35s var(--ease);
+  cursor: zoom-in;
+}
+.hero-badge {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: rgba(10,10,10,0.75);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white); font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.45rem 0.9rem; border-radius: var(--radius-btn);
+}
+
+/* Panneau produit */
+.product-panel {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 3.5rem 3rem 3.5rem 3rem;
+  overflow-y: auto; background: var(--white);
+}
+.product-season {
+  font-size: 0.6rem; letter-spacing: 0.22em; font-weight: 600;
+  color: var(--gray); text-transform: uppercase; margin-bottom: 0.7rem;
+}
+.product-name {
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 0.9;
+  text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.product-tagline {
+  font-size: 0.72rem; color: var(--gray); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 2rem; font-weight: 500;
+}
+
+/* Tabs — glass style */
+.type-tabs {
+  display: flex; gap: 6px; margin-bottom: 2rem;
+}
+.type-tab {
+  flex: 1; padding: 0.65rem 0.5rem;
+  font-family: var(--font); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  border-radius: var(--radius-btn);
+  background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.45);
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all 0.25s var(--ease);
+}
+.type-tab.active {
+  background: var(--black); color: var(--white);
+  border-color: var(--black);
+}
+.type-tab:not(.active):hover {
+  background: rgba(0,0,0,0.1); color: var(--black);
+}
+
+/* Prix */
+.price-block { margin-bottom: 1.6rem; }
+.price-main {
+  font-size: 1.9rem; font-weight: 800; letter-spacing: -0.03em; display: block;
+}
+.price-label {
+  font-size: 0.62rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem;
+}
+
+/* Taille */
+.size-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+.size-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray);
+}
+.size-guide {
+  font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gray); text-decoration: underline; cursor: pointer;
+}
+.size-grid { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.8rem; }
+.size-btn {
+  min-width: 46px; height: 46px; padding: 0 0.5rem;
+  border: 1px solid var(--mid); background: transparent;
+  font-family: var(--font); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em;
+  cursor: pointer; border-radius: var(--radius-btn); color: var(--black);
+  transition: all 0.2s;
+}
+.size-btn:hover { border-color: var(--black); }
+.size-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.size-btn.sold { color: var(--mid); cursor: not-allowed; text-decoration: line-through; }
+
+/* Boutons — glass Apple style */
+.buy-stack { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.6rem; }
+
+.btn-primary {
+  width: 100%; padding: 0.9rem;
+  background: var(--black); color: var(--white);
+  border: none; border-radius: var(--radius-btn);
+  font-family: var(--font); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover { opacity: 0.84; transform: scale(0.99); }
+
+.btn-glass {
+  width: 100%; padding: 0.9rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: var(--glass-shadow);
+  color: var(--black); border-radius: var(--radius-btn);
+  font-family: var(--font); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.btn-glass:hover {
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+  transform: scale(0.99);
+}
+
+/* Livraison */
+.delivery {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.7rem; color: var(--gray); letter-spacing: 0.02em;
+  padding-top: 1.2rem; border-top: 1px solid var(--mid);
+}
+.dot-green { width: 7px; height: 7px; border-radius: 50%; background: #34c759; flex-shrink: 0; }
+
+/* ════════════ SECTIONS DETAILS ════════════ */
+/* Layout: img-left + text-right */
+.detail-row {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.detail-row.reverse { direction: rtl; }
+.detail-row.reverse > * { direction: ltr; }
+
+.detail-img {
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow: hidden;
+}
+.detail-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.detail-body {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4rem;
+}
+.detail-eyebrow {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 0.8rem;
+}
+.detail-title {
+  font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 900;
+  letter-spacing: -0.04em; line-height: 0.92; text-transform: uppercase;
+  margin-bottom: 2.8rem;
+}
+
+.feat-list { list-style: none; counter-reset: feat; }
+.feat-list li {
+  counter-increment: feat;
+  display: flex; align-items: flex-start; gap: 1.4rem;
+  padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+  font-size: 0.8rem; letter-spacing: 0.01em; color: rgba(0,0,0,0.7); line-height: 1.55;
+  opacity: 0; transform: translateY(12px);
+  animation: fadeUp 0.5s var(--ease) forwards;
+}
+.feat-list li:last-child { border-bottom: none; }
+.feat-list li::before {
+  content: counter(feat, decimal-leading-zero);
+  font-size: 0.56rem; font-weight: 800; letter-spacing: 0.1em;
+  color: rgba(0,0,0,0.18); padding-top: 0.2rem; flex-shrink: 0; min-width: 22px;
+}
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ════════════ FULL BANNER ════════════ */
+.full-banner {
+  height: 75vh; position: relative; overflow: hidden;
+}
+.full-banner img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  object-position: center 25%;
+}
+.banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+  display: flex; align-items: flex-end; padding: 4rem 5rem;
+}
+.banner-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 18px;
+  padding: 2rem 2.4rem;
+  max-width: 420px;
+}
+.banner-card-eyebrow {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(0,0,0,0.45); margin-bottom: 0.5rem;
+}
+.banner-card-title {
+  font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900;
+  letter-spacing: -0.04em; line-height: 0.95; text-transform: uppercase;
+  color: var(--black); margin-bottom: 1.2rem;
+}
+.banner-card-sub {
+  font-size: 0.78rem; color: rgba(0,0,0,0.5); line-height: 1.55; margin-bottom: 1.4rem;
+}
+
+/* ════════════ DUAL PHOTO STRIP ════════════ */
+.dual-strip { display: grid; grid-template-columns: 1fr 1fr; height: 70vh; gap: 4px; }
+.dual-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ════════════ FOOTER ════════════ */
+.page-footer {
+  background: var(--black); color: var(--white);
+  padding: 2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.foot-logo { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+.foot-copy { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: rgba(10,10,10,0.88); color: var(--white);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.85rem 2rem; border-radius: var(--radius-btn);
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  z-index: 999; transition: transform 0.4s var(--ease); white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+
+/* ════════ SIZE QUIZ MODAL ════════ */
+.quiz-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.quiz-overlay.open { opacity: 1; pointer-events: all; }
+
+.quiz-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 1.5px 0 rgba(255,255,255,0.7) inset;
+  border-radius: 22px;
+  padding: 2.4rem 2.2rem;
+  width: min(480px, 90vw);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.4s var(--ease);
+}
+.quiz-overlay.open .quiz-card { transform: translateY(0) scale(1); }
+
+.quiz-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 1.8rem;
+}
+.quiz-title {
+  font-size: 1.1rem; font-weight: 800; letter-spacing: -0.03em; color: var(--black);
+  text-transform: uppercase;
+}
+.quiz-sub {
+  font-size: 0.68rem; color: var(--gray); letter-spacing: 0.04em; margin-top: 0.25rem;
+}
+.quiz-close {
+  background: rgba(0,0,0,0.07); border: none; width: 30px; height: 30px;
+  border-radius: 50%; cursor: pointer; font-size: 1rem; color: var(--black);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.quiz-close:hover { background: rgba(0,0,0,0.14); }
+
+/* Progress bar */
+.quiz-progress { display: flex; gap: 4px; margin-bottom: 2rem; }
+.quiz-progress-step {
+  flex: 1; height: 3px; border-radius: 2px; background: rgba(0,0,0,0.1);
+  transition: background 0.4s;
+}
+.quiz-progress-step.done { background: var(--black); }
+.quiz-progress-step.active { background: rgba(0,0,0,0.4); }
+
+/* Steps */
+.quiz-step { display: none; }
+.quiz-step.active { display: block; animation: quizIn 0.35s var(--ease); }
+@keyframes quizIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+
+.quiz-q {
+  font-size: 0.85rem; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--black); margin-bottom: 1.2rem; line-height: 1.4;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 0.85rem 1.2rem;
+  background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.1);
+  border-radius: var(--radius-btn); font-family: var(--font);
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--black); cursor: pointer; text-align: left;
+  transition: all 0.2s var(--ease);
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.quiz-opt:hover { background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.25); }
+.quiz-opt.selected { background: var(--black); color: var(--white); border-color: var(--black); }
+
+
+/* Résultat */
+.quiz-result { text-align: center; padding: 1rem 0 0.5rem; }
+.result-size-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 0.5rem; display: block;
+}
+.result-size {
+  font-size: 4rem; font-weight: 900; letter-spacing: -0.06em; line-height: 1;
+  color: var(--black); margin-bottom: 0.4rem; display: block;
+}
+.result-desc {
+  font-size: 0.75rem; color: var(--gray); line-height: 1.5; margin-bottom: 1.6rem;
+}
+.size-table-mini {
+  width: 100%; border-collapse: collapse; margin-bottom: 1.6rem;
+  font-size: 0.72rem;
+}
+.size-table-mini th {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); padding: 0.5rem 0.6rem; border-bottom: 1px solid rgba(0,0,0,0.1);
+  text-align: center;
+}
+.size-table-mini td {
+  padding: 0.55rem 0.6rem; text-align: center; color: var(--black);
+  border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 500;
+}
+.size-table-mini tr.highlight td { background: rgba(0,0,0,0.05); font-weight: 700; }
+.size-table-mini tr:last-child td { border-bottom: none; }
+.quiz-result-btns { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .gallery { position: relative; top: 0; height: 80vw; grid-template-columns: 60px 1fr; }
+  .product-panel { padding: 2rem 1.5rem; }
+  .detail-row { grid-template-columns: 1fr; }
+  .detail-row.reverse { direction: ltr; }
+  .detail-img { position: relative; height: 60vw; top: 0; }
+  .detail-body { padding: 3rem 1.5rem; }
+  .full-banner { height: 60vw; }
+  .banner-overlay { padding: 2rem; }
+  .dual-strip { height: 50vw; }
+  nav { padding: 0 1.2rem; }
+}
+
+/* ════ SIZE QUIZ ════ */
+.sq-overlay { position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s; }
+.sq-overlay.open { opacity:1;pointer-events:all; }
+.sq-card { background:rgba(255,255,255,0.82);backdrop-filter:blur(32px) saturate(180%);border:1px solid rgba(255,255,255,0.55);box-shadow:0 8px 40px rgba(0,0,0,0.12);border-radius:22px;padding:2.2rem 2rem;width:min(520px,92vw);transform:translateY(20px) scale(0.97);transition:transform 0.4s; }
+.sq-overlay.open .sq-card { transform:translateY(0) scale(1); }
+.sq-header { display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.6rem; }
+.sq-title { font-size:1rem;font-weight:800;letter-spacing:-0.02em;text-transform:uppercase; }
+.sq-sub { font-size:0.65rem;color:var(--gray);margin-top:0.2rem; }
+.sq-close { background:rgba(0,0,0,0.07);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center; }
+.sq-close:hover { background:rgba(0,0,0,0.14); }
+.sq-progress { display:flex;gap:4px;margin-bottom:1.8rem; }
+.sq-step { flex:1;height:3px;border-radius:2px;background:rgba(0,0,0,0.1);transition:background 0.35s; }
+.sq-step.done { background:var(--black); } .sq-step.active { background:rgba(0,0,0,0.4); }
+.sq-q { font-size:0.85rem;font-weight:700;color:var(--black);margin-bottom:1.1rem; }
+.sq-options { display:flex;flex-direction:column;gap:7px; }
+.sq-opt { padding:0.78rem 1.1rem;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-btn);font-family:var(--font);font-size:0.78rem;font-weight:500;color:var(--black);cursor:pointer;text-align:left;transition:all 0.2s; }
+.sq-opt:hover { background:rgba(0,0,0,0.07);border-color:rgba(0,0,0,0.25); }
+.sq-opt.selected { background:var(--black);color:var(--white);border-color:var(--black); }
+.sq-result { text-align:center; }
+.sq-result-label { font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:0.4rem; }
+.sq-result-size { font-size:4.5rem;font-weight:900;letter-spacing:-0.06em;color:var(--black);display:block;line-height:1;margin-bottom:0.4rem; }
+.sq-result-desc { font-size:0.75rem;color:var(--gray);line-height:1.5;margin-bottom:1.2rem; }
+.sq-table { width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:0.72rem; }
+.sq-table th { font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.1);text-align:center; }
+.sq-table td { padding:0.5rem;text-align:center;border-bottom:1px solid rgba(0,0,0,0.06);font-weight:500; }
+.sq-table tr.hl td { background:rgba(0,0,0,0.05);font-weight:800; }
+.sq-table tr:last-child td { border-bottom:none; }
+.sq-btns { display:flex;flex-direction:column;gap:7px; }
+.sq-btn-apply { width:100%;padding:0.88rem;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-btn);font-family:var(--font);font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s; }
+.sq-btn-apply:hover { opacity:0.82; }
+.sq-btn-reset { width:100%;padding:0.82rem;background:rgba(0,0,0,0.06);color:var(--black);border:none;border-radius:var(--radius-btn);font-family:var(--font);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer; }
+.sq-btn-reset:hover { background:rgba(0,0,0,0.12); }
+
+
+</style>
+<!-- NAV -->
+<nav>
+  <a class="nav-back" href="/">&#8592; Retour</a>
+  <a class="nav-logo" href="#">Slum Kid</a>
+  <div>
+    <button class="nav-icon-btn" aria-label="Panier">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+
+  <!-- Galerie photos -->
+  <div class="gallery">
+    <div class="thumbs-col">
+      <div class="thumb active" data-src=""><img src="" alt="Storm"></div>
+      <div class="thumb" data-src=""><img src="" alt="Storm"></div>
+      <div class="thumb" data-src=""><img src="" alt="Storm"></div>
+      <div class="thumb" data-src=""><img src="" alt="Storm"></div>
+      <div class="thumb" data-src=""><img src="" alt="Storm"></div>
+      <div class="thumb" data-src=""><img src="" alt="Storm"></div>
+    </div>
+    <div class="main-view">
+      <span class="hero-badge">New In — Season 26</span>
+      <img id="mainImg" src="" alt="Storm Set">
+    </div>
+  </div>
+
+  <!-- Infos produit -->
+  <div class="product-panel">
+    <p class="product-season">Slum Kid — Season 26</p>
+    <h1 class="product-name">STORM<br>SET</h1>
+    <p class="product-tagline">Imperméable · Réflectif · Technical</p>
+
+    <div class="type-tabs">
+      <button class="type-tab active" onclick="switchTab(this,'jacket')">Jacket</button>
+      <button class="type-tab" onclick="switchTab(this,'jogger')">Jogger</button>
+      <button class="type-tab" onclick="switchTab(this,'set')">Set Complet</button>
+    </div>
+
+    <div class="price-block">
+      <span class="price-main" id="priceMain">129.90 CHF</span>
+      <span class="price-label" id="priceLabel">Storm Jacket</span>
+    </div>
+
+    <div class="size-row">
+      <span class="size-label">Taille — <span id="sizeVal">M</span></span>
+      <span class="size-guide">Guide des tailles</span>
+    </div>
+    <div class="size-grid">
+      <button class="size-btn" onclick="pick(this)">XS</button>
+      <button class="size-btn" onclick="pick(this)">S</button>
+      <button class="size-btn active" onclick="pick(this)">M</button>
+      <button class="size-btn" onclick="pick(this)">L</button>
+      <button class="size-btn" onclick="pick(this)">XL</button>
+      <button class="size-btn sold">XXL</button>
+    </div>
+
+    <div class="buy-stack">
+      <button class="btn-primary" onclick="cartAndRedirect('https://slumkid.myshopify.com/checkout')">Ajouter au panier</button>
+      <a href="/cart?product=storm-set" class="btn-glass" style="text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;">Acheter maintenant</a>
+      <button class="btn-glass" onclick="openSizeQuiz()" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Find My Size
+      </button>
+    </div>
+
+    <div class="delivery">
+      <div class="dot-green"></div>
+      En stock · Livraison offerte dès 80 CHF · Expédition 24–48 h
+    </div>
+  </div>
+
+</section>
+
+<!-- ════ JACKET DETAILS — img gauche, texte droite ════ -->
+<section class="detail-row">
+  <div class="detail-img"><img src="" alt="Storm Jacket — SK Logo"></div>
+  <div class="detail-body">
+    <p class="detail-eyebrow">Storm Set — Season 26</p>
+    <h2 class="detail-title">STORM<br>JACKET</h2>
+    <ul class="feat-list">
+      <li style="animation-delay:.05s">Capuche réglable avec cagoule intégrée</li>
+      <li style="animation-delay:.10s">Zip diagonal signature SK</li>
+      <li style="animation-delay:.15s">2 poches extérieures à fermeture éclair</li>
+      <li style="animation-delay:.20s">1 poche intérieure</li>
+      <li style="animation-delay:.25s">Imperméable — matière technique haute performance</li>
+      <li style="animation-delay:.30s">Logo réflectif SK sur la capuche</li>
+      <li style="animation-delay:.35s">Logo SK brodé sur la poitrine</li>
+      <li style="animation-delay:.40s">Taille réglable en bas de veste</li>
+      <li style="animation-delay:.45s">Scratch aux poignets pour un maintien parfait</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════ FULL BANNER ════ -->
+<div class="full-banner">
+  <img src="" alt="Storm Hood Detail">
+  <div class="banner-overlay">
+    <div class="banner-glass-card">
+      <p class="banner-card-eyebrow">Built from the slum</p>
+      <h3 class="banner-card-title">WEAR<br>WHAT<br>YOU ARE</h3>
+      <p class="banner-card-sub">Chaque logo réflectif, chaque zip, chaque scratch — rien n'est laissé au hasard.</p>
+      <button class="btn-primary" style="width:auto;padding:.75rem 1.8rem;" onclick="window.location='https://slumkid.myshopify.com/checkout'">Shop Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ JOGGER DETAILS — texte gauche, img droite ════ -->
+<section class="detail-row reverse">
+  <div class="detail-img"><img src="" alt="Storm Jogger"></div>
+  <div class="detail-body">
+    <p class="detail-eyebrow">Storm Set — Season 26</p>
+    <h2 class="detail-title">STORM<br>JOGGER</h2>
+    <ul class="feat-list">
+      <li style="animation-delay:.05s">2 poches extérieures à fermeture éclair</li>
+      <li style="animation-delay:.10s">Logo SK brodé</li>
+      <li style="animation-delay:.15s">Poche arrière cachée</li>
+      <li style="animation-delay:.20s">Logo réflectif — visible de nuit</li>
+      <li style="animation-delay:.25s">Logo Slum Kid brodé sur la jambe</li>
+      <li style="animation-delay:.30s">Imperméable — même matière technique que la veste</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════ DUAL STRIP — 2 photos côte à côte ════ -->
+<div class="dual-strip">
+  <img src="" alt="Storm Jacket Back">
+  <img src="" alt="Storm Jogger Leg">
+</div>
+
+<!-- ════ CLOSING BANNER ════ -->
+<div class="full-banner" style="height:60vh;">
+  <img src="" alt="Storm Set — Slum Kid" style="object-position:center 30%;">
+  <div class="banner-overlay" style="background:linear-gradient(to right,rgba(0,0,0,0.75) 0%,transparent 65%);align-items:center;">
+    <div>
+      <p class="detail-eyebrow" style="color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Storm Set — 129.90 CHF</p>
+      <h2 style="font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;color:#fff;margin-bottom:1.8rem;">STORM<br>SET</h2>
+      <button class="btn-glass" style="width:auto;padding:.75rem 1.8rem;font-size:0.75rem;" onclick="cartAndRedirect('https://slumkid.myshopify.com/checkout')">Ajouter au panier</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <span class="foot-logo">Slum Kid</span>
+  <span class="foot-copy">© 2026 Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+</div>
+
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<script>
+/* Galerie */
+document.querySelectorAll('.thumb').forEach(th => {
+  th.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    th.classList.add('active');
+    document.getElementById('mainImg').src = th.dataset.src;
+  });
+});
+
+/* Tabs */
+const prices = {
+  jacket: ['129.90 CHF', 'Storm Jacket'],
+  jogger: ['84.90 CHF',  'Storm Jogger'],
+  set:    ['199.90 CHF', 'Set Complet']
+};
+function switchTab(el, key) {
+  document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('priceMain').textContent = prices[key][0];
+  document.getElementById('priceLabel').textContent = prices[key][1];
+}
+
+/* Taille */
+function pick(btn) {
+  if (btn.classList.contains('sold')) return;
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sizeVal').textContent = btn.textContent;
+}
+
+/* Cart */
+function cart() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+function cartAndRedirect(url) {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => {
+    t.classList.remove('show');
+    window.location.href = url;
+  }, 1200);
+}
+</script>
+
+<!-- ════ SIZE QUIZ MODAL ════ -->
+<div class="quiz-overlay" id="quizOverlay" onclick="closeQuizOutside(event)">
+  <div class="quiz-card" id="quizCard">
+
+    <div class="quiz-header">
+      <div>
+        <div class="quiz-title">Find My Size</div>
+        <div class="quiz-sub">3 questions — résultat immédiat</div>
+      </div>
+      <button class="quiz-close" onclick="closeQuiz()">✕</button>
+    </div>
+
+    <!-- Progress -->
+    <div class="quiz-progress">
+      <div class="quiz-progress-step active" id="ps1"></div>
+      <div class="quiz-progress-step" id="ps2"></div>
+      <div class="quiz-progress-step" id="ps3"></div>
+    </div>
+
+    <!-- STEP 1 — Taille -->
+    <div class="quiz-step active" id="step1">
+      <p class="quiz-q">Quelle est ta taille ?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(1,'XS','< 165 cm')">
+          Moins de 165 cm
+        </button>
+        <button class="quiz-opt" onclick="answer(1,'S','165–170 cm')">
+          165 – 170 cm
+        </button>
+        <button class="quiz-opt" onclick="answer(1,'M','171–178 cm')">
+          171 – 178 cm
+        </button>
+        <button class="quiz-opt" onclick="answer(1,'L','179–185 cm')">
+          179 – 185 cm
+        </button>
+        <button class="quiz-opt" onclick="answer(1,'XL','> 185 cm')">
+          Plus de 185 cm
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2 — Poids -->
+    <div class="quiz-step" id="step2">
+      <p class="quiz-q">Quel est ton poids ?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(2,'XS','< 55 kg')">
+          Moins de 55 kg
+        </button>
+        <button class="quiz-opt" onclick="answer(2,'S','55–70 kg')">
+          55 – 70 kg
+        </button>
+        <button class="quiz-opt" onclick="answer(2,'M','70–85 kg')">
+          70 – 85 kg
+        </button>
+        <button class="quiz-opt" onclick="answer(2,'L','85–100 kg')">
+          85 – 100 kg
+        </button>
+        <button class="quiz-opt" onclick="answer(2,'XL','> 100 kg')">
+          Plus de 100 kg
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3 — Fit préféré -->
+    <div class="quiz-step" id="step3">
+      <p class="quiz-q">Comment tu préfères porter tes vêtements ?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(3,'down','Fitted — moulant, proche du corps')">
+          Fitted — moulant, proche du corps
+        </button>
+        <button class="quiz-opt" onclick="answer(3,'same','Regular — ni trop large, ni trop serré')">
+          Regular — ni trop large, ni trop serré
+        </button>
+        <button class="quiz-opt" onclick="answer(3,'up','Oversized — large, comme porté sur la marque')">
+          Oversized — large, comme porté sur la marque
+        </button>
+      </div>
+    </div>
+
+    <!-- RÉSULTAT -->
+    <div class="quiz-step" id="stepResult">
+      <div class="quiz-result">
+        <span class="result-size-label">Ta taille recommandée</span>
+        <span class="result-size" id="resultSize">M</span>
+        <p class="result-desc" id="resultDesc">Basé sur tes réponses, la taille M correspond à ton morphotype pour un fit oversize.</p>
+
+        <table class="size-table-mini">
+          <thead>
+            <tr>
+              <th>Taille</th>
+              <th>A — Largeur</th>
+              <th>B — Longueur</th>
+              <th>C — Manche</th>
+            </tr>
+          </thead>
+          <tbody id="sizeTableBody">
+            <tr><td>XS</td><td>52.0 cm</td><td>66.0 cm</td><td>60.0 cm</td></tr>
+            <tr><td>S</td><td>54.0 cm</td><td>67.0 cm</td><td>61.0 cm</td></tr>
+            <tr class="highlight"><td>M</td><td>56.0 cm</td><td>68.0 cm</td><td>62.0 cm</td></tr>
+            <tr><td>L</td><td>58.0 cm</td><td>69.0 cm</td><td>63.0 cm</td></tr>
+            <tr><td>XL</td><td>60.0 cm</td><td>70.0 cm</td><td>64.0 cm</td></tr>
+          </tbody>
+        </table>
+
+        <div class="quiz-result-btns">
+          <button class="btn-primary" onclick="applySize(); closeQuiz();">Sélectionner cette taille</button>
+          <button class="btn-glass" onclick="resetQuiz()">Recommencer</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+/* ════ SIZE QUIZ ════ */
+const sizeOrder = ['XS','S','M','L','XL'];
+let quizAnswers = [];
+let finalSize = 'M';
+
+function openSizeQuiz() {
+  resetQuiz();
+  document.getElementById('quizOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQuiz() {
+  document.getElementById('quizOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeQuizOutside(e) {
+  if (e.target === document.getElementById('quizOverlay')) closeQuiz();
+}
+
+function answer(step, sizeHint, label) {
+  // Highlight selected
+  const opts = document.querySelectorAll('#step' + step + ' .quiz-opt');
+  opts.forEach(o => o.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  quizAnswers[step - 1] = sizeHint;
+
+  setTimeout(() => {
+    if (step < 3) {
+      goStep(step + 1);
+    } else {
+      computeResult();
+      goStep('Result');
+    }
+  }, 300);
+}
+
+function goStep(n) {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  // Progress
+  ['ps1','ps2','ps3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    const stepN = typeof n === 'number' ? n : 4;
+    el.className = 'quiz-progress-step' + (i + 1 < stepN ? ' done' : i + 1 === stepN ? ' active' : '');
+  });
+  if (n === 'Result') {
+    document.getElementById('ps1').className = 'quiz-progress-step done';
+    document.getElementById('ps2').className = 'quiz-progress-step done';
+    document.getElementById('ps3').className = 'quiz-progress-step done';
+  }
+}
+
+function computeResult() {
+  // Score each size
+  const scores = {XS:0, S:0, M:0, L:0, XL:0};
+  // Q1 height, Q2 weight → direct size vote
+  [quizAnswers[0], quizAnswers[1]].forEach(a => {
+    if (sizeOrder.includes(a)) scores[a] += 2;
+  });
+  // Q3 fit preference
+  const fit = quizAnswers[2];
+  const baseIdx = sizeOrder.indexOf(Object.keys(scores).reduce((a,b) => scores[a]>=scores[b]?a:b));
+  let resultIdx = baseIdx;
+  if (fit === 'down') resultIdx = Math.max(0, baseIdx - 1);
+  if (fit === 'up')   resultIdx = Math.min(4, baseIdx + 1);
+  finalSize = sizeOrder[resultIdx];
+
+  document.getElementById('resultSize').textContent = finalSize;
+
+  const fitLabels = {
+    down: 'un fit fitted, proche du corps',
+    same: 'un fit regular',
+    up:   'un fit oversized, comme porté sur la marque'
+  };
+  document.getElementById('resultDesc').textContent =
+    `Basé sur tes réponses, la taille ${finalSize} est idéale pour ${fitLabels[fit] || 'ton morphotype'}.`;
+
+  // Highlight correct row in table
+  document.querySelectorAll('#sizeTableBody tr').forEach(tr => {
+    tr.className = tr.cells[0].textContent.trim() === finalSize ? 'highlight' : '';
+  });
+}
+
+function applySize() {
+  document.querySelectorAll('.size-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.textContent.trim() === finalSize) b.classList.add('active');
+  });
+  document.getElementById('sizeVal').textContent = finalSize;
+}
+
+function resetQuiz() {
+  quizAnswers = [];
+  document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+  goStep(1);
+}
+
+</script>
+
+<div class="sq-overlay" id="sqOverlay" onclick="sqCloseOutside(event)">
+  <div class="sq-card">
+    <div class="sq-header">
+      <div><div class="sq-title">Find My Size</div><div class="sq-sub">3 questions — résultat immédiat</div></div>
+      <button class="sq-close" onclick="sqClose()">✕</button>
+    </div>
+    <div class="sq-progress">
+      <div class="sq-step active" id="sqp1"></div>
+      <div class="sq-step" id="sqp2"></div>
+      <div class="sq-step" id="sqp3"></div>
+    </div>
+    <div id="sqStep1">
+      <p class="sq-q">Quelle est ta taille ?</p>
+      <div class="sq-options">
+        <button class="sq-opt" onclick="sqAnswer(1,0)">Moins de 160 cm</button>
+        <button class="sq-opt" onclick="sqAnswer(1,0.5)">160 – 165 cm</button>
+        <button class="sq-opt" onclick="sqAnswer(1,1)">166 – 172 cm</button>
+        <button class="sq-opt" onclick="sqAnswer(1,2)">173 – 179 cm</button>
+        <button class="sq-opt" onclick="sqAnswer(1,3)">180 – 186 cm</button>
+        <button class="sq-opt" onclick="sqAnswer(1,4)">Plus de 186 cm</button>
+      </div>
+    </div>
+    <div id="sqStep2" style="display:none">
+      <p class="sq-q">Quel est ton poids ?</p>
+      <div class="sq-options">
+        <button class="sq-opt" onclick="sqAnswer(2,0)">Moins de 50 kg</button>
+        <button class="sq-opt" onclick="sqAnswer(2,0.5)">50 – 60 kg</button>
+        <button class="sq-opt" onclick="sqAnswer(2,1)">61 – 72 kg</button>
+        <button class="sq-opt" onclick="sqAnswer(2,2)">73 – 84 kg</button>
+        <button class="sq-opt" onclick="sqAnswer(2,3)">85 – 99 kg</button>
+        <button class="sq-opt" onclick="sqAnswer(2,4)">Plus de 100 kg</button>
+      </div>
+    </div>
+    <div id="sqStep3" style="display:none">
+      <p class="sq-q">Comment tu préfères porter tes vêtements ?</p>
+      <div class="sq-options">
+        <button class="sq-opt" onclick="sqAnswer(3,-0.5)">Fitted — proche du corps</button>
+        <button class="sq-opt" onclick="sqAnswer(3,0)">Regular — ni trop large ni trop serré</button>
+        <button class="sq-opt" onclick="sqAnswer(3,0.5)">Oversized — comme porté sur la marque</button>
+      </div>
+    </div>
+    <div id="sqResult" style="display:none">
+      <div class="sq-result">
+        <span class="sq-result-label">Ta taille recommandée</span>
+        <span class="sq-result-size" id="sqFinalSize">M</span>
+        <p class="sq-result-desc" id="sqDesc"></p>
+        <div id="sqTableWrap"></div>
+        <div class="sq-btns">
+          <button class="sq-btn-apply" onclick="sqApply()">Sélectionner cette taille</button>
+          <button class="sq-btn-reset" onclick="sqReset()">Recommencer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var SIZES = ['XS','S','M','L','XL'];
+  var ans = []; var finalSize = 'M';
+  var SD = {
+  cols: ['Taille','A — Largeur','B — Longueur','C — Manche'],
+  rows: [['XS','52 cm','66 cm','60 cm'],['S','54 cm','67 cm','61 cm'],['M','56 cm','68 cm','62 cm'],['L','58 cm','69 cm','63 cm'],['XL','60 cm','70 cm','64 cm']]
+};
+  window.sqOpen = function() { sqReset(); document.getElementById('sqOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
+  window.sqClose = function() { document.getElementById('sqOverlay').classList.remove('open'); document.body.style.overflow=''; };
+  window.sqCloseOutside = function(e) { if(e.target===document.getElementById('sqOverlay')) window.sqClose(); };
+  window.sqAnswer = function(step, val) {
+    ans[step-1]=val;
+    event.currentTarget.parentElement.querySelectorAll('.sq-opt').forEach(function(o){o.classList.remove('selected');});
+    event.currentTarget.classList.add('selected');
+    setTimeout(function() {
+      if(step<3) {
+        document.getElementById('sqStep'+step).style.display='none';
+        document.getElementById('sqStep'+(step+1)).style.display='block';
+        upProg(step+1);
+      } else { compute(); }
+    }, 280);
+  };
+  function upProg(a) {
+    ['sqp1','sqp2','sqp3'].forEach(function(id,i) {
+      document.getElementById(id).className='sq-step'+(i+1<a?' done':i+1===a?' active':'');
+    });
+  }
+  function compute() {
+    var score=(ans[0]||0)+(ans[1]||0)+(ans[2]||0);
+    var idx=Math.round(Math.min(Math.max(score/2,0),4));
+    finalSize=SIZES[idx];
+    document.getElementById('sqFinalSize').textContent=finalSize;
+    var fl=ans[2]<0?'un fit fitted':ans[2]>0?'un fit oversized':'un fit regular';
+    document.getElementById('sqDesc').textContent='La taille '+finalSize+' est idéale pour '+fl+'.';
+    var h='<table class="sq-table"><thead><tr>';
+    SD.cols.forEach(function(c){h+='<th>'+c+'</th>';});
+    h+='</tr></thead><tbody>';
+    SD.rows.forEach(function(row){
+      var hl=row[0]===finalSize?' class="hl"':'';
+      h+='<tr'+hl+'>';row.forEach(function(c){h+='<td>'+c+'</td>';});h+='</tr>';
+    });
+    h+='</tbody></table>';
+    document.getElementById('sqTableWrap').innerHTML=h;
+    ['sqStep1','sqStep2','sqStep3'].forEach(function(id){document.getElementById(id).style.display='none';});
+    document.getElementById('sqResult').style.display='block';
+    upProg(4);
+  }
+  window.sqApply=function(){
+    document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');});
+    var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize;
+    window.sqClose();
+  };
+  window.sqReset=function(){
+    ans=[];
+    ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});});
+    document.getElementById('sqResult').style.display='none';upProg(1);
+  };
+})();
+</script>
+<script>
+
+/* Galerie */
+document.querySelectorAll('.thumb').forEach(th => {
+  th.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    th.classList.add('active');
+    document.getElementById('mainImg').src = th.dataset.src;
+  });
+});
+
+/* Tabs */
+const prices = {
+  jacket: ['129.90 CHF', 'Storm Jacket'],
+  jogger: ['84.90 CHF',  'Storm Jogger'],
+  set:    ['199.90 CHF', 'Set Complet']
+};
+function switchTab(el, key) {
+  document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('priceMain').textContent = prices[key][0];
+  document.getElementById('priceLabel').textContent = prices[key][1];
+}
+
+/* Taille */
+function pick(btn) {
+  if (btn.classList.contains('sold')) return;
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sizeVal').textContent = btn.textContent;
+}
+
+/* Cart */
+function cart() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+function cartAndRedirect(url) {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => {
+    t.classList.remove('show');
+    window.location.href = url;
+  }, 1200);
+}
+
+
+
+/* ════ SIZE QUIZ ════ */
+const sizeOrder = ['XS','S','M','L','XL'];
+let quizAnswers = [];
+let finalSize = 'M';
+
+function openSizeQuiz() {
+  resetQuiz();
+  document.getElementById('quizOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQuiz() {
+  document.getElementById('quizOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeQuizOutside(e) {
+  if (e.target === document.getElementById('quizOverlay')) closeQuiz();
+}
+
+function answer(step, sizeHint, label) {
+  // Highlight selected
+  const opts = document.querySelectorAll('#step' + step + ' .quiz-opt');
+  opts.forEach(o => o.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  quizAnswers[step - 1] = sizeHint;
+
+  setTimeout(() => {
+    if (step < 3) {
+      goStep(step + 1);
+    } else {
+      computeResult();
+      goStep('Result');
+    }
+  }, 300);
+}
+
+function goStep(n) {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  // Progress
+  ['ps1','ps2','ps3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    const stepN = typeof n === 'number' ? n : 4;
+    el.className = 'quiz-progress-step' + (i + 1 < stepN ? ' done' : i + 1 === stepN ? ' active' : '');
+  });
+  if (n === 'Result') {
+    document.getElementById('ps1').className = 'quiz-progress-step done';
+    document.getElementById('ps2').className = 'quiz-progress-step done';
+    document.getElementById('ps3').className = 'quiz-progress-step done';
+  }
+}
+
+function computeResult() {
+  // Score each size
+  const scores = {XS:0, S:0, M:0, L:0, XL:0};
+  // Q1 height, Q2 weight → direct size vote
+  [quizAnswers[0], quizAnswers[1]].forEach(a => {
+    if (sizeOrder.includes(a)) scores[a] += 2;
+  });
+  // Q3 fit preference
+  const fit = quizAnswers[2];
+  const baseIdx = sizeOrder.indexOf(Object.keys(scores).reduce((a,b) => scores[a]>=scores[b]?a:b));
+  let resultIdx = baseIdx;
+  if (fit === 'down') resultIdx = Math.max(0, baseIdx - 1);
+  if (fit === 'up')   resultIdx = Math.min(4, baseIdx + 1);
+  finalSize = sizeOrder[resultIdx];
+
+  document.getElementById('resultSize').textContent = finalSize;
+
+  const fitLabels = {
+    down: 'un fit fitted, proche du corps',
+    same: 'un fit regular',
+    up:   'un fit oversized, comme porté sur la marque'
+  };
+  document.getElementById('resultDesc').textContent =
+    `Basé sur tes réponses, la taille ${finalSize} est idéale pour ${fitLabels[fit] || 'ton morphotype'}.`;
+
+  // Highlight correct row in table
+  document.querySelectorAll('#sizeTableBody tr').forEach(tr => {
+    tr.className = tr.cells[0].textContent.trim() === finalSize ? 'highlight' : '';
+  });
+}
+
+function applySize() {
+  document.querySelectorAll('.size-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.textContent.trim() === finalSize) b.classList.add('active');
+  });
+  document.getElementById('sizeVal').textContent = finalSize;
+}
+
+function resetQuiz() {
+  quizAnswers = [];
+  document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+  goStep(1);
+}
+
+
+
+(function() {
+  var SIZES = ['XS','S','M','L','XL'];
+  var ans = []; var finalSize = 'M';
+  var SD = {
+  cols: ['Taille','A — Largeur','B — Longueur','C — Manche'],
+  rows: [['XS','52 cm','66 cm','60 cm'],['S','54 cm','67 cm','61 cm'],['M','56 cm','68 cm','62 cm'],['L','58 cm','69 cm','63 cm'],['XL','60 cm','70 cm','64 cm']]
+};
+  window.sqOpen = function() { sqReset(); document.getElementById('sqOverlay').classList.add('open'); document.body.style.overflow='hidden'; };
+  window.sqClose = function() { document.getElementById('sqOverlay').classList.remove('open'); document.body.style.overflow=''; };
+  window.sqCloseOutside = function(e) { if(e.target===document.getElementById('sqOverlay')) window.sqClose(); };
+  window.sqAnswer = function(step, val) {
+    ans[step-1]=val;
+    event.currentTarget.parentElement.querySelectorAll('.sq-opt').forEach(function(o){o.classList.remove('selected');});
+    event.currentTarget.classList.add('selected');
+    setTimeout(function() {
+      if(step<3) {
+        document.getElementById('sqStep'+step).style.display='none';
+        document.getElementById('sqStep'+(step+1)).style.display='block';
+        upProg(step+1);
+      } else { compute(); }
+    }, 280);
+  };
+  function upProg(a) {
+    ['sqp1','sqp2','sqp3'].forEach(function(id,i) {
+      document.getElementById(id).className='sq-step'+(i+1<a?' done':i+1===a?' active':'');
+    });
+  }
+  function compute() {
+    var score=(ans[0]||0)+(ans[1]||0)+(ans[2]||0);
+    var idx=Math.round(Math.min(Math.max(score/2,0),4));
+    finalSize=SIZES[idx];
+    document.getElementById('sqFinalSize').textContent=finalSize;
+    var fl=ans[2]<0?'un fit fitted':ans[2]>0?'un fit oversized':'un fit regular';
+    document.getElementById('sqDesc').textContent='La taille '+finalSize+' est idéale pour '+fl+'.';
+    var h='<table class="sq-table"><thead><tr>';
+    SD.cols.forEach(function(c){h+='<th>'+c+'</th>';});
+    h+='</tr></thead><tbody>';
+    SD.rows.forEach(function(row){
+      var hl=row[0]===finalSize?' class="hl"':'';
+      h+='<tr'+hl+'>';row.forEach(function(c){h+='<td>'+c+'</td>';});h+='</tr>';
+    });
+    h+='</tbody></table>';
+    document.getElementById('sqTableWrap').innerHTML=h;
+    ['sqStep1','sqStep2','sqStep3'].forEach(function(id){document.getElementById(id).style.display='none';});
+    document.getElementById('sqResult').style.display='block';
+    upProg(4);
+  }
+  window.sqApply=function(){
+    document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active');if(b.textContent.trim()===finalSize&&!b.classList.contains('sold'))b.classList.add('active');});
+    var sv=document.getElementById('sizeVal');if(sv)sv.textContent=finalSize;
+    window.sqClose();
+  };
+  window.sqReset=function(){
+    ans=[];
+    ['sqStep1','sqStep2','sqStep3'].forEach(function(id,i){document.getElementById(id).style.display=i===0?'block':'none';document.querySelectorAll('#'+id+' .sq-opt').forEach(function(o){o.classList.remove('selected');});});
+    document.getElementById('sqResult').style.display='none';upProg(1);
+  };
+})();
+
+</script>
+{% schema %}
+{
+  "name": "Storm Set",
+  "settings": []
+}
+{% endschema %}
