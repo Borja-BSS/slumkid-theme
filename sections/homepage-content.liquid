@@ -16,7 +16,7 @@
   --ease: cubic-bezier(0.4,0,0.2,1);
   --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { font-family: var(--font); background: #ffffff; color: #0a0a0a; overflow-x: hidden; }
 
 /* ── NAV ── */
@@ -287,6 +287,8 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
   .nav-links { display: none; }
+  /* Anti-zoom iOS — font-size minimum 16px sur tous les éléments cliquables */
+  a, button, .btn-primary, .btn-cart, .btn-ghost, .c-arrow, .hero-dot, .c-dot { font-size: 16px !important; }
   .slide-content { padding: 0 1.5rem 5.5rem; }
   .slide-title { font-size: clamp(3rem, 14vw, 5rem); }
   .carousel-scene { height: 480px; }
