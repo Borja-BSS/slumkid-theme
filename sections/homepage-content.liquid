@@ -371,8 +371,9 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      {% comment %} ✅ PUFFER — disponible {% endcomment %}
+      {% comment %} ❌ PUFFER — sold out, pas de bouton ni lien {% endcomment %}
       <div class="p-card" data-ci="1">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-pink.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
         <div class="p-card-vtitle"><span>PUFFER</span></div>
@@ -380,9 +381,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
           <span class="p-badge">Collection</span>
           <div class="p-name">Puffer<br>Pink</div>
           <div class="p-desc">Doudoune matelassée<br>Édition hivernale</div>
-          <div class="p-card-footer">
-            <a href="{{ routes.root_url }}products/pink-puffer" class="btn-cart">View</a>
-          </div>
+          <div class="p-card-footer"></div>
         </div>
       </div>
 
