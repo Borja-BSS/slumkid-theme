@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_579820156738339412": {
+      "settings": {
+        "checksum": "068ad56c80586b6de4c51165912683285c1a4525783c49cf4333ea6392a6ec6e_1_1_0_0__1",
+        "ggR4VG34NxY_text": "ASSORTI AVEC",
+        "ggRo6BUUAsy_text": "<strong>Details du produit</strong><ul><li>Coupe ample</li><li>Slum kid logo imprimé en puffer print</li><li>Toucher doux</li><li>Etiquette tissée Slum kid</li><li>100% cotton</li><li>&nbsp;Le model mesure 175 cm et porte du S&nbsp;<br><br>Instructions de lavage:<br>&nbsp;</li><li>Laver à 30 degrés&nbsp;</li><li>Ne pas mettre au sèche linge</li><li>Laver avec des couleurs similaires.</li></ul>",
+        "ggajjnPhBPD_label": "AJOUTER AU PANIER",
+        "ggajjnPhBPD_outOfStockLabel": "Out of stock",
+        "ggajjnPhBPD_unavailableLabel": "Unavailable",
+        "ggmw1LFnEmH_childItem_0": "<p>DETAILS DU PRODUIT</p>",
+        "ggmw1LFnEmH_childItem_1": "<p>GUIDE DES TAILLES</p>",
+        "ggmw1LFnEmH_childItem_2": "<p>LIVRAISON ET RETOUR</p>",
+        "ggorpzclQq2_text": "<p><br><strong>Temps de livraison:</strong><br>Le délai de livraison est généralement de 7 à 14 jours à compter de la date de commande.</p><p>Les délais de livraison peuvent varier en fonction des conditions de production et de transport.<br><br><strong>Frais de livraison:</strong></p><ul><li><strong>Suisse:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>UE:</strong> 14.50 €</li><li><strong>Hors de l'UE:</strong> 35.90 € to 70.80 €</li></ul><p>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/shipping-policy\"><u>Conditions de livraisons</u></a></p><p>&nbsp;</p><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:16px;\"><strong>Retour</strong></span></p><p>Nous n'acceptons pas les retours. Toutes les ventes sont finales.<br><br>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/exchange-return-refund\"><u>Echange, Remboursement &amp; Ret</u></a><u>our</u></p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-579820156738339412"
+    }
+  },
+  "order": [
+    "gp_section_579820156738339412"
+  ]
+}

@@ -1,0 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541251937807369392": {
+      "settings": {
+        "checksum": "5341a8350c74046544535d5c57a94ddf18c660fc70f1c0e42e9a957c06883390_1_1_0_0__1",
+        "gg5D570X-SP_text": "Payment &amp; Shipping/Delivery",
+        "gg934QZVccx_childItem_0": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">Payment methods</span></p>",
+        "gg934QZVccx_childItem_1": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">With which shipping service providers does Slum Kid ship?</span></p>",
+        "gg934QZVccx_childItem_2": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:21.6064px;\">When will my order arrive?</span></p>",
+        "gg934QZVccx_childItem_3": "<p><span style=\"font-size:21px;\">Shipping</span><span style=\"font-size:20px;\"> costs and conditions</span></p>",
+        "gg9FQtAvLI9_text": "<p>&nbsp;</p><p>- With pre order drops you will receive your order within 4 to 6 weeks after receipt of order.</p><p>&nbsp;</p><p>- As soon as your order is on its way to you, you will receive a separate shipping confirmation by email.</p>",
+        "ggZiqz0Jr2O_text": "<p>&nbsp;</p><p><strong>Shipping Areas</strong><br>We ship our products worldwide.</p><p>&nbsp;</p><p><strong>Pre-orders</strong><br>All our products are available for pre-order. Due to the nature of pre-orders, delivery times may be longer.</p><p>&nbsp;</p><p><strong>Delivery Times</strong><br>The delivery time for pre-orders is generally <strong>4 to 6 weeks</strong> from the order date, depending on production and shipping conditions.<br>Delivery times may vary based on production and transport conditions.</p><p>&nbsp;</p><p><strong>Shipping Costs</strong></p><ul><li><strong>Switzerland:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>European Union:</strong> 14.95 €</li><li><strong>Outside the European Union:</strong> 35.90 € to 70.80 €</li></ul><p>Shipping costs for pre-orders are automatically calculated at checkout based on the destination.</p><p>&nbsp;</p><p><strong>Order Tracking</strong><br>Once your pre-order has been shipped, you will receive an email containing a tracking number to monitor the progress of your delivery.</p><p>&nbsp;</p><p><strong>Taxes and Customs Duties</strong><br>For orders outside the European Union, DROM, and COM, import duties (including taxes, VAT, or customs fees) may apply. These charges are determined by the destination country and calculated based on the origin of the goods and product classification.</p><p>These additional fees are collected upon the parcel's arrival in your country. <strong>Slum Kid does not collect these fees at checkout and cannot predict their amount.</strong> Should such fees be incurred, they must be paid for the parcel to clear customs. The customer is responsible for covering these charges.</p><p>For more information, contact your local customs office to understand your country's regulations.</p><p>&nbsp;</p><p>Orders to Switzerland are exempt from additional customs fees as we do not collect VAT.</p><p>&nbsp;</p><p><strong>Returns of Undelivered Packages</strong><br>If a package is returned to us due to an incorrect address or refusal of delivery, reshipping costs will be charged to the customer.<br>It is your responsibility to ensure delivery information is accurate at the time of ordering.</p><p>&nbsp;</p><p><strong>Contact for Delivery Issues</strong><br>If you have any questions regarding the shipment of your pre-order, please contact us at:</p><p><strong>contact@slumkid.store</strong></p><p>&nbsp;</p><p>We are committed to responding promptly to resolve any delivery-related issues.</p>",
+        "ggxL78NKZr4_text": "<p><strong>Credit card</strong></p><p>&nbsp;</p><p>As soon as you click the button \"Buy\" on the order overview page, your credit card will be charged. If you cancel or return your order, your credit card will be discharged as soon as the goods arrive at our premises.</p>",
+        "ggydTGzXi62_text": "<p>All the orders are shipped with La Poste.</p>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541251937807369392"
+    },
+    "gp_section_541252672733316208": {
+      "settings": {
+        "checksum": "3d95d90f158fd2c4e387ddef3d2c5c5761a63170cfa783d59285dca8492f56e7_1_1_0_0__1",
+        "gg0y0TcaULA_text": "<a href=\"https://b1i9bd-14.myshopify.com/collections/shop\"><u>Back To Shop</u></a>",
+        "ggaPO5e0x71_text": "<a href=\"https://b1i9bd-14.myshopify.com/pages/support\"><u>Slum Kid Support</u></a>"
+      },
+      "type": "gp-section-541252672733316208"
+    }
+  },
+  "order": [
+    "gp_section_541251937807369392",
+    "gp_section_541252672733316208"
+  ]
+}
