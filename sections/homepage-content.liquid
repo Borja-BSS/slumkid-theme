@@ -59,6 +59,8 @@ nav.scrolled {
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 22px; width: auto; display: block; }
 @media (min-width: 769px) { .nav-logo img { height: 28px; } }
+.nav-story { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(0,0,0,0.65); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.nav-story:hover { color: #0a0a0a; }
 .nav-links { display: flex; gap: 2.2rem; list-style: none; }
 .nav-links a { font-size: 0.72rem; letter-spacing: 0.14em; font-weight: 500; color: rgba(0,0,0,0.65); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
 .nav-links a:hover { color: var(--black); }
@@ -157,6 +159,71 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .slogan-cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--black); margin-left: 4px; vertical-align: middle; animation: blink 0.75s step-end infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+
+/* ══ STORM BANNER HORIZONTAL ══ */
+.storm-banner {
+  position: relative; width: 100%; height: 70vh; overflow: hidden;
+  display: flex; align-items: center;
+}
+.storm-banner-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 30%;
+  background-image: url('{{ "slide-banner-clean.jpg" | asset_url }}');
+}
+.storm-banner-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.15) 100%);
+}
+.storm-banner-content {
+  position: relative; z-index: 2;
+  padding: 0 5rem;
+  max-width: 700px;
+}
+.storm-banner-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.3em; font-weight: 600;
+  color: rgba(255,255,255,0.45); text-transform: uppercase;
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
+}
+.storm-banner-eyebrow::before {
+  content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.3);
+}
+.storm-banner-title {
+  font-size: clamp(3rem, 7vw, 7rem); font-weight: 900;
+  letter-spacing: -0.04em; line-height: 0.88;
+  text-transform: uppercase; color: #ffffff;
+  margin-bottom: 1.4rem;
+}
+.storm-banner-sub {
+  font-size: 0.85rem; color: rgba(255,255,255,0.55);
+  line-height: 1.6; margin-bottom: 2.4rem; max-width: 380px;
+}
+.storm-banner-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn-storm-primary {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: #ffffff; color: #0a0a0a; border: none;
+  border-radius: 980px; padding: 0.82rem 2rem;
+  font-family: var(--font); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.15s;
+}
+.btn-storm-primary:hover { opacity: 0.88; transform: scale(0.98); }
+.btn-storm-ghost {
+  display: inline-flex; align-items: center;
+  background: transparent; color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 980px; padding: 0.82rem 2rem;
+  font-family: var(--font); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.btn-storm-ghost:hover { background: rgba(255,255,255,0.1); border-color: #ffffff; }
+
+@media (max-width: 768px) {
+  .storm-banner { height: auto; min-height: 75vw; padding: 4rem 0; }
+  .storm-banner-content { padding: 0 1.5rem; }
+  .storm-banner-title { font-size: clamp(2.8rem, 12vw, 4rem); }
+}
 /* ── SOLD OUT ── */
 .sold-out-overlay { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,0.52); display: flex; align-items: center; justify-content: center; pointer-events: none; }
 .sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; }
@@ -182,6 +249,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 <!-- ═══ NAV ═══ -->
 <nav id="mainNav">
   <a class="nav-logo" href="{{ routes.root_url }}"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:30px;width:auto;filter:brightness(0);max-width:160px;object-fit:contain;"></a>
+  <a class="nav-story" href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
 </nav>
 
 <!-- ═══ S1 : HERO SLIDER ═══ -->
@@ -189,13 +257,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   <div class="hero-track" id="heroTrack">
 
     <div class="hero-slide active">
-      <div class="hero-bg" style="background-image: url('{{ 'slide-1.jpg' | asset_url }}');"></div>
+      <div class="hero-bg" style="background-image: url('{{ 'slide-3.jpg' | asset_url }}');"></div>
       <div class="slide-content">
-        <span class="slide-eyebrow">Season 26</span>
-        <h1 class="slide-title">NEW<br>IN</h1>
-        <p class="slide-body">Storm Set</p>
+        <span class="slide-eyebrow">Find Your Favorite Design</span>
+        <h1 class="slide-title">BEST<br>SELLER</h1>
+        <p class="slide-body">Be part of it</p>
         <div class="slide-cta-row">
-          <a href="{{ routes.root_url }}products/storm-set" class="btn-primary">Shop Now</a>
+          <a href="#catalogue" class="btn-primary">Availability</a>
         </div>
       </div>
     </div>
@@ -213,13 +281,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     </div>
 
     <div class="hero-slide">
-      <div class="hero-bg" style="background-image: url('{{ 'slide-3.jpg' | asset_url }}');"></div>
+      <div class="hero-bg" style="background-image: url('{{ 'slide-1.jpg' | asset_url }}');"></div>
       <div class="slide-content">
-        <span class="slide-eyebrow">Find Your Favorite Design</span>
-        <h1 class="slide-title">BEST<br>SELLER</h1>
-        <p class="slide-body">Be part of it</p>
+        <span class="slide-eyebrow">Season 26</span>
+        <h1 class="slide-title">NEW<br>IN</h1>
+        <p class="slide-body">Storm Set</p>
         <div class="slide-cta-row">
-          <a href="#catalogue" class="btn-primary">Availability</a>
+          <a href="{{ routes.root_url }}products/storm-set" class="btn-primary">Shop Now</a>
         </div>
       </div>
     </div>
@@ -231,6 +299,21 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <button class="hero-dot" data-i="2"></button>
   </div>
   <div class="hero-progress" id="heroProgress"></div>
+</section>
+
+
+<!-- ═══ STORM BANNER ═══ -->
+<section class="storm-banner">
+  <div class="storm-banner-bg"></div>
+  <div class="storm-banner-content">
+    <p class="storm-banner-eyebrow">W26 Collection — Now Available</p>
+    <h2 class="storm-banner-title">STORM<br>SET</h2>
+    <p class="storm-banner-sub">Imperméable. Réflectif. Technique. Le Storm Set est disponible maintenant.</p>
+    <div class="storm-banner-actions">
+      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-primary">Buy Now →</a>
+      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-ghost">En savoir plus</a>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ S2 : CAROUSEL ═══ -->
@@ -383,6 +466,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   <div class="foot-legal">
     <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
     <div class="foot-legal-links">
+      <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
       <a href="{{ routes.root_url }}pages/support">Support</a>
       <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
       <a href="{{ routes.root_url }}policies/terms-of-service">Terms of service</a>
