@@ -520,22 +520,45 @@ function cartGo() {
 </script>
 
 <script>
-/* ── Shopify Cart — ajout au panier via URL directe ── */
+/* ── Shopify Cart — variant IDs directs, panier modifiable ── */
 (function() {
-
-  /* Product IDs */
-  var PRODUCT_IDS = {
-    jacket: '9983380390216',
-    jogger: '9983421808968'
-  };
 
   var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
   var DOMAIN = 'b1i9bd-14.myshopify.com';
 
-  /* Récupère les variants via Storefront API GraphQL */
-  function fetchVariants(productId, cb) {
-    var query = JSON.stringify({
-      query: '{ product(id: "gid://shopify/Product/' + productId + '") { variants(first: 10) { edges { node { id title availableForSale } } } } }'
+  /* Tous les variant IDs par produit et taille */
+  var VARIANTS = {
+    jacket: {
+      'XS': 'gid://shopify/ProductVariant/52767401509192',
+      'S':  'gid://shopify/ProductVariant/52767401541960',
+      'M':  'gid://shopify/ProductVariant/52767401574728',
+      'L':  'gid://shopify/ProductVariant/52767401607496',
+      'XL': 'gid://shopify/ProductVariant/52767401640264'
+    },
+    jogger: {
+      'XS': 'gid://shopify/ProductVariant/52767437750600',
+      'S':  'gid://shopify/ProductVariant/52767437783368',
+      'M':  'gid://shopify/ProductVariant/52767437816136',
+      'L':  'gid://shopify/ProductVariant/52767437848904',
+      'XL': 'gid://shopify/ProductVariant/52767437881672'
+    }
+  };
+
+  function addAndRedirect(tab, size, goCheckout) {
+    var toast = document.getElementById('toast');
+    var variantId = VARIANTS[tab] && VARIANTS[tab][size];
+
+    if (!variantId) {
+      if (toast) { toast.textContent = 'Taille non disponible'; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
+      return;
+    }
+
+    if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
+
+    /* Créer un checkout Shopify avec ce variant */
+    var mutation = JSON.stringify({
+      query: 'mutation checkoutCreate($input: CheckoutCreateInput!) { checkoutCreate(input: $input) { checkout { id webUrl } checkoutUserErrors { message } } }',
+      variables: { input: { lineItems: [{ variantId: variantId, quantity: 1 }] } }
     });
 
     fetch('https://' + DOMAIN + '/api/2023-10/graphql.json', {
@@ -544,73 +567,35 @@ function cartGo() {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
       },
-      body: query
+      body: mutation
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      var variants = data.data.product.variants.edges.map(function(e) { return e.node; });
-      cb(null, variants);
-    })
-    .catch(function(err) { cb(err, null); });
-  }
+      var checkout = data.data.checkoutCreate.checkout;
+      var errors = data.data.checkoutCreate.checkoutUserErrors;
 
-  /* Ajoute au panier via Storefront API checkout */
-  function addAndGoToCart(productId, size, goCheckout) {
-    var toast = document.getElementById('toast');
-    if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
-
-    fetchVariants(productId, function(err, variants) {
-      if (err || !variants) {
-        if (toast) { toast.textContent = 'Erreur — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
+      if (errors && errors.length > 0) {
+        if (toast) { toast.textContent = 'Erreur: ' + errors[0].message; setTimeout(function(){ toast.classList.remove('show'); }, 3000); }
         return;
       }
 
-      /* Trouver le variant correspondant à la taille */
-      var variant = null;
-      for (var i = 0; i < variants.length; i++) {
-        if (variants[i].title === size || variants[i].title.indexOf(size) !== -1) {
-          variant = variants[i];
-          break;
+      if (toast) toast.textContent = 'Taille ' + size + ' — Ajouté !';
+      setTimeout(function() {
+        if (toast) toast.classList.remove('show');
+        if (goCheckout) {
+          /* Acheter maintenant → checkout Shopify direct */
+          window.location.href = checkout.webUrl;
+        } else {
+          /* Ajouter au panier → panier Shopify natif modifiable
+             On stocke l'URL pour que le panier soit accessible */
+          localStorage.setItem('sk_cart_url', checkout.webUrl);
+          window.location.href = checkout.webUrl.replace('/checkouts/', '/cart/');
         }
-      }
-      if (!variant) variant = variants[0];
-
-      /* Créer ou récupérer le checkout */
-      var checkoutId = localStorage.getItem('sk_checkout_id_v2');
-      var createCheckoutQuery = JSON.stringify({
-        query: 'mutation { checkoutCreate(input: { lineItems: [{ variantId: "' + variant.id + '", quantity: 1 }] }) { checkout { id webUrl } } }'
-      });
-      var addLineQuery = JSON.stringify({
-        query: 'mutation { checkoutLineItemsAdd(checkoutId: "' + checkoutId + '", lineItems: [{ variantId: "' + variant.id + '", quantity: 1 }]) { checkout { id webUrl } } }'
-      });
-
-      var gqlBody = checkoutId ? addLineQuery : createCheckoutQuery;
-      var mutationKey = checkoutId ? 'checkoutLineItemsAdd' : 'checkoutCreate';
-
-      fetch('https://' + DOMAIN + '/api/2023-10/graphql.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
-        },
-        body: gqlBody
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        var checkout = data.data[mutationKey].checkout;
-        if (!checkoutId) localStorage.setItem('sk_checkout_id_v2', checkout.id);
-
-        if (toast) toast.textContent = 'Taille ' + size + ' — Ajouté !';
-        setTimeout(function() {
-          if (toast) toast.classList.remove('show');
-          /* "Ajouter au panier" → page panier Shopify modifiable */
-          /* "Acheter maintenant" → checkout direct */
-          window.location.href = goCheckout ? checkout.webUrl : '/cart';
-        }, 900);
-      })
-      .catch(function() {
-        if (toast) { toast.textContent = 'Erreur — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
-      });
+      }, 900);
+    })
+    .catch(function(err) {
+      console.error('Cart error:', err);
+      if (toast) { toast.textContent = 'Erreur réseau — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
     });
   }
 
@@ -618,15 +603,14 @@ function cartGo() {
     currentTab: 'jacket',
     addToCart: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
-      addAndGoToCart(PRODUCT_IDS[window.SKShopify.currentTab], size.trim(), false);
+      addAndRedirect(window.SKShopify.currentTab, size.trim(), false);
     },
     buyNow: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
-      addAndGoToCart(PRODUCT_IDS[window.SKShopify.currentTab], size.trim(), true);
+      addAndRedirect(window.SKShopify.currentTab, size.trim(), true);
     }
   };
 
-  /* Sync onglet Jacket/Jogger */
   var _orig = window.switchTab;
   window.switchTab = function(el, key) {
     if (_orig) _orig(el, key);
