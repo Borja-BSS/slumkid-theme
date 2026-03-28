@@ -520,115 +520,119 @@ function cartGo() {
 </script>
 
 <script>
-/* ── Shopify Buy SDK — variant IDs directs, panier modifiable ── */
+/* ── Shopify Cart — ajout au panier via URL directe ── */
 (function() {
-  var SHOPIFY_DOMAIN = 'b1i9bd-14.myshopify.com';
-  var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
 
-  /* Variant IDs exacts par produit et taille */
-  var VARIANTS = {
-    jacket: {
-      'XS': '52767401509192',
-      'S':  '52767401541960',
-      'M':  '52767401574728',
-      'L':  '52767401607496',
-      'XL': '52767401640264'
+  /* Product IDs */
+  var PRODUCT_IDS = {
+    jacket: '9983380390216',
+    jogger: '9983421808968'
+  };
+
+  var STOREFRONT_TOKEN = 'dee105ca8f9997a702cfbc013fd5e30f';
+  var DOMAIN = 'b1i9bd-14.myshopify.com';
+
+  /* Récupère les variants via Storefront API GraphQL */
+  function fetchVariants(productId, cb) {
+    var query = JSON.stringify({
+      query: '{ product(id: "gid://shopify/Product/' + productId + '") { variants(first: 10) { edges { node { id title availableForSale } } } } }'
+    });
+
+    fetch('https://' + DOMAIN + '/api/2023-10/graphql.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
+      },
+      body: query
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var variants = data.data.product.variants.edges.map(function(e) { return e.node; });
+      cb(null, variants);
+    })
+    .catch(function(err) { cb(err, null); });
+  }
+
+  /* Ajoute au panier via Storefront API checkout */
+  function addAndGoToCart(productId, size, goCheckout) {
+    var toast = document.getElementById('toast');
+    if (toast) { toast.textContent = 'Chargement...'; toast.classList.add('show'); }
+
+    fetchVariants(productId, function(err, variants) {
+      if (err || !variants) {
+        if (toast) { toast.textContent = 'Erreur — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
+        return;
+      }
+
+      /* Trouver le variant correspondant à la taille */
+      var variant = null;
+      for (var i = 0; i < variants.length; i++) {
+        if (variants[i].title === size || variants[i].title.indexOf(size) !== -1) {
+          variant = variants[i];
+          break;
+        }
+      }
+      if (!variant) variant = variants[0];
+
+      /* Créer ou récupérer le checkout */
+      var checkoutId = localStorage.getItem('sk_checkout_id_v2');
+      var createCheckoutQuery = JSON.stringify({
+        query: 'mutation { checkoutCreate(input: { lineItems: [{ variantId: "' + variant.id + '", quantity: 1 }] }) { checkout { id webUrl } } }'
+      });
+      var addLineQuery = JSON.stringify({
+        query: 'mutation { checkoutLineItemsAdd(checkoutId: "' + checkoutId + '", lineItems: [{ variantId: "' + variant.id + '", quantity: 1 }]) { checkout { id webUrl } } }'
+      });
+
+      var gqlBody = checkoutId ? addLineQuery : createCheckoutQuery;
+      var mutationKey = checkoutId ? 'checkoutLineItemsAdd' : 'checkoutCreate';
+
+      fetch('https://' + DOMAIN + '/api/2023-10/graphql.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
+        },
+        body: gqlBody
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var checkout = data.data[mutationKey].checkout;
+        if (!checkoutId) localStorage.setItem('sk_checkout_id_v2', checkout.id);
+
+        if (toast) toast.textContent = 'Taille ' + size + ' — Ajouté !';
+        setTimeout(function() {
+          if (toast) toast.classList.remove('show');
+          /* "Ajouter au panier" → page panier Shopify modifiable */
+          /* "Acheter maintenant" → checkout direct */
+          window.location.href = goCheckout ? checkout.webUrl : '/cart';
+        }, 900);
+      })
+      .catch(function() {
+        if (toast) { toast.textContent = 'Erreur — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
+      });
+    });
+  }
+
+  window.SKShopify = {
+    currentTab: 'jacket',
+    addToCart: function() {
+      var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
+      addAndGoToCart(PRODUCT_IDS[window.SKShopify.currentTab], size.trim(), false);
     },
-    jogger: {
-      'XS': '', 'S': '', 'M': '', 'L': '', 'XL': ''
+    buyNow: function() {
+      var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
+      addAndGoToCart(PRODUCT_IDS[window.SKShopify.currentTab], size.trim(), true);
     }
   };
 
-  function getVariantId(tab, size) {
-    return VARIANTS[tab] && VARIANTS[tab][size] ? VARIANTS[tab][size] : null;
-  }
-
-  function initShopify() {
-    var client = ShopifyBuy.buildClient({ domain: SHOPIFY_DOMAIN, storefrontAccessToken: STOREFRONT_TOKEN });
-
-    window.SKShopify = {
-      client: client,
-      currentTab: 'jacket',
-
-      getCheckout: function(cb) {
-        var saved = localStorage.getItem('sk_checkout_id');
-        if (saved) {
-          client.checkout.fetch(saved).then(function(c) {
-            if (c && !c.completedAt) { cb(c); }
-            else { client.checkout.create().then(function(c2) { localStorage.setItem('sk_checkout_id', c2.id); cb(c2); }); }
-          }).catch(function() {
-            client.checkout.create().then(function(c) { localStorage.setItem('sk_checkout_id', c.id); cb(c); });
-          });
-        } else {
-          client.checkout.create().then(function(c) { localStorage.setItem('sk_checkout_id', c.id); cb(c); });
-        }
-      },
-
-      addToCart: function() {
-        var size = document.getElementById('sizeVal') ? document.getElementById('sizeVal').textContent.trim() : 'M';
-        var tab = window.SKShopify.currentTab;
-        var variantId = getVariantId(tab, size);
-        var toast = document.getElementById('toast');
-
-        if (!variantId) {
-          if (toast) { toast.textContent = 'Taille non disponible'; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
-          return;
-        }
-
-        if (toast) { toast.textContent = 'Ajout en cours...'; toast.classList.add('show'); }
-
-        /* Utilise le format GID Shopify pour le variant */
-        var gid = 'gid://shopify/ProductVariant/' + variantId;
-
-        window.SKShopify.getCheckout(function(checkout) {
-          client.checkout.addLineItems(checkout.id, [{ variantId: gid, quantity: 1 }])
-            .then(function(c) {
-              if (toast) toast.textContent = 'Taille ' + size + ' — Ajouté !';
-              setTimeout(function() {
-                if (toast) toast.classList.remove('show');
-                /* Redirige vers le panier Shopify modifiable */
-                window.location.href = '/cart';
-              }, 900);
-            })
-            .catch(function() {
-              if (toast) { toast.textContent = 'Erreur — réessaie'; setTimeout(function(){ toast.classList.remove('show'); }, 2000); }
-            });
-        });
-      },
-
-      buyNow: function() {
-        var size = document.getElementById('sizeVal') ? document.getElementById('sizeVal').textContent.trim() : 'M';
-        var tab = window.SKShopify.currentTab;
-        var variantId = getVariantId(tab, size);
-
-        if (!variantId) { alert('Taille non disponible.'); return; }
-
-        var gid = 'gid://shopify/ProductVariant/' + variantId;
-
-        window.SKShopify.getCheckout(function(checkout) {
-          client.checkout.addLineItems(checkout.id, [{ variantId: gid, quantity: 1 }])
-            .then(function(c) { window.location.href = c.webUrl; })
-            .catch(function() { window.location.href = '/cart'; });
-        });
-      }
-    };
-  }
-
-  /* Sync currentTab avec les boutons Jacket/Jogger */
-  var origSwitchTab = window.switchTab;
+  /* Sync onglet Jacket/Jogger */
+  var _orig = window.switchTab;
   window.switchTab = function(el, key) {
-    if (origSwitchTab) origSwitchTab(el, key);
-    if (window.SKShopify) window.SKShopify.currentTab = key;
+    if (_orig) _orig(el, key);
+    window.SKShopify.currentTab = key;
   };
 
-  if (window.ShopifyBuy && window.ShopifyBuy.UI) { initShopify(); }
-  else {
-    var s = document.createElement('script');
-    s.async = true; s.src = scriptURL;
-    s.onload = initShopify;
-    document.head.appendChild(s);
-  }
 })();
 </script>
 
