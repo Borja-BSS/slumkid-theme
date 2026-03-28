@@ -520,37 +520,13 @@ function cartGo() {
 </script>
 
 <script>
-/* ── Shopify Cart — POST natif vers /cart/add puis redirect /cart ── */
+/* ── Shopify Cart — checkout URL direct (seule méthode fiable hors page produit) ── */
 (function() {
 
   var VARIANTS = {
     jacket: { 'XS': '52767401509192', 'S': '52767401541960', 'M': '52767401574728', 'L': '52767401607496', 'XL': '52767401640264' },
     jogger: { 'XS': '52767437750600', 'S': '52767437783368', 'M': '52767437816136', 'L': '52767437848904', 'XL': '52767437881672' }
   };
-
-  function submitToCart(variantId, redirectTo) {
-    /* Crée un formulaire HTML natif Shopify et le soumet — contourne les restrictions CORS */
-    var form = document.createElement('form');
-    form.method = 'POST';
-    form.action = redirectTo === 'checkout'
-      ? '/cart/add?return_to=/checkout'
-      : '/cart/add?return_to=/cart';
-
-    var inputId = document.createElement('input');
-    inputId.type = 'hidden';
-    inputId.name = 'id';
-    inputId.value = variantId;
-
-    var inputQty = document.createElement('input');
-    inputQty.type = 'hidden';
-    inputQty.name = 'quantity';
-    inputQty.value = '1';
-
-    form.appendChild(inputId);
-    form.appendChild(inputQty);
-    document.body.appendChild(form);
-    form.submit();
-  }
 
   window.SKShopify = {
     currentTab: 'jacket',
@@ -561,8 +537,12 @@ function cartGo() {
       var variantId = VARIANTS[window.SKShopify.currentTab][size];
       if (!variantId) { alert('Taille non disponible.'); return; }
       var t = document.getElementById('toast');
-      if (t) { t.textContent = 'Ajout...'; t.classList.add('show'); }
-      setTimeout(function() { submitToCart(variantId, 'cart'); }, 400);
+      if (t) { t.textContent = 'Taille ' + size + ' — Ajouté !'; t.classList.add('show'); }
+      setTimeout(function() {
+        if (t) t.classList.remove('show');
+        /* Checkout Shopify avec le variant — fonctionne depuis n'importe quelle page */
+        window.location.href = 'https://slumkid.store/cart/' + variantId + ':1';
+      }, 700);
     },
 
     buyNow: function() {
@@ -570,7 +550,7 @@ function cartGo() {
       size = size.trim();
       var variantId = VARIANTS[window.SKShopify.currentTab][size];
       if (!variantId) { alert('Taille non disponible.'); return; }
-      submitToCart(variantId, 'checkout');
+      window.location.href = 'https://slumkid.store/cart/' + variantId + ':1?checkout=true';
     }
   };
 
