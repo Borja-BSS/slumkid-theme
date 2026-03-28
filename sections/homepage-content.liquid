@@ -178,8 +178,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .storm-banner-content {
   position: absolute; z-index: 2;
   bottom: 2.5rem; left: 0; right: 0;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
+  text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end;
 }
+.storm-banner-eyebrow { justify-content: flex-end; flex-direction: row-reverse; }
+.storm-banner-sub { text-align: right; }
+.storm-banner-actions { justify-content: flex-end; }
 .storm-banner-eyebrow {
   font-size: 0.6rem; letter-spacing: 0.3em; font-weight: 600;
   color: rgba(255,255,255,0.45); text-transform: uppercase;
@@ -250,7 +255,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 <!-- ═══ NAV ═══ -->
 <nav id="mainNav">
   <a class="nav-logo" href="{{ routes.root_url }}"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:30px;width:auto;filter:brightness(0);max-width:160px;object-fit:contain;"></a>
-  <a class="nav-story" href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
+  <div style="width:40px;"></div>
 </nav>
 
 <!-- ═══ S1 : HERO SLIDER ═══ -->
