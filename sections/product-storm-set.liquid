@@ -447,12 +447,13 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
       <span class="size-label">Taille — <span id="sizeVal">M</span></span>
       <span class="size-guide" onclick="sqOpen()">Guide des tailles</span>
     </div>
-    <div class="size-grid">
+    <div class="size-grid" id="sizeGrid">
+      <!-- Tailles mises à jour dynamiquement selon l'onglet Jacket/Jogger -->
       <button class="size-btn" onclick="pick(this)">XS</button>
       <button class="size-btn" onclick="pick(this)">S</button>
       <button class="size-btn active" onclick="pick(this)">M</button>
-      <button class="size-btn" onclick="pick(this)">L</button>
-      <button class="size-btn" onclick="pick(this)">XL</button>
+      <button class="size-btn sold">L</button>
+      <button class="size-btn sold">XL</button>
       <button class="size-btn sold">XXL</button>
     </div>
     <div class="buy-stack">
@@ -638,14 +639,43 @@ document.querySelectorAll('.thumb').forEach(function(th) {
 var PRODUCT_IDS = { jacket: '9983380390216', jogger: '9983421808968' };
 var prices = { jacket: ['129.90 CHF','Storm Jacket'], jogger: ['84.90 CHF','Storm Jogger'] };
 var currentTab = 'jacket';
+
+/* Stock réel par taille */
+var STOCK = {
+  jacket: { 'XS': 1, 'S': 4, 'M': 6, 'L': 0, 'XL': 0, 'XXL': 0 },
+  jogger: { 'XS': 2, 'S': 4, 'M': 6, 'L': 1, 'XL': 1, 'XXL': 0 }
+};
+
+function updateSizeButtons(key) {
+  var grid = document.getElementById('sizeGrid');
+  if (!grid) return;
+  var btns = grid.querySelectorAll('.size-btn');
+  btns.forEach(function(btn) {
+    var size = btn.textContent.trim();
+    var stock = (STOCK[key] && STOCK[key][size] !== undefined) ? STOCK[key][size] : 0;
+    btn.classList.remove('active', 'sold');
+    if (stock === 0) btn.classList.add('sold');
+  });
+  /* Sélectionner la première taille disponible */
+  var first = Array.from(btns).find(function(b) { return !b.classList.contains('sold'); });
+  if (first) {
+    first.classList.add('active');
+    var sv = document.getElementById('sizeVal');
+    if (sv) sv.textContent = first.textContent.trim();
+  }
+}
+
 function switchTab(el, key) {
   document.querySelectorAll('.type-tab').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
   document.getElementById('priceMain').textContent = prices[key][0];
   document.getElementById('priceLabel').textContent = prices[key][1];
   currentTab = key;
-  if (window.SKShopify) window.SKShopify.productId = PRODUCT_IDS[key];
+  if (window.SKShopify) window.SKShopify.currentTab = key;
+  updateSizeButtons(key);
 }
+
+document.addEventListener('DOMContentLoaded', function() { updateSizeButtons('jacket'); });
 
 function pick(btn) {
   if (btn.classList.contains('sold')) return;
@@ -702,20 +732,21 @@ function cartGo() {
 /* ══ PANIER CUSTOM SLUM KID ══ */
 (function() {
 
+  /* Stock mis à jour le 28/03/2026 */
   var VARIANTS = {
     jacket: {
-      'XS': { id: '52767401509192', price: 129.90, name: 'Storm Jacket' },
-      'S':  { id: '52767401541960', price: 129.90, name: 'Storm Jacket' },
-      'M':  { id: '52767401574728', price: 129.90, name: 'Storm Jacket' },
-      'L':  { id: '52767401607496', price: 129.90, name: 'Storm Jacket' },
-      'XL': { id: '52767401640264', price: 129.90, name: 'Storm Jacket' }
+      'XS': { id: '52767401509192', price: 129.90, name: 'Storm Jacket', stock: 1 },
+      'S':  { id: '52767401541960', price: 129.90, name: 'Storm Jacket', stock: 4 },
+      'M':  { id: '52767401574728', price: 129.90, name: 'Storm Jacket', stock: 6 },
+      'L':  { id: '52767401607496', price: 129.90, name: 'Storm Jacket', stock: 0 },
+      'XL': { id: '52767401640264', price: 129.90, name: 'Storm Jacket', stock: 0 }
     },
     jogger: {
-      'XS': { id: '52767437750600', price: 84.90, name: 'Storm Jogger' },
-      'S':  { id: '52767437783368', price: 84.90, name: 'Storm Jogger' },
-      'M':  { id: '52767437816136', price: 84.90, name: 'Storm Jogger' },
-      'L':  { id: '52767437848904', price: 84.90, name: 'Storm Jogger' },
-      'XL': { id: '52767437881672', price: 84.90, name: 'Storm Jogger' }
+      'XS': { id: '52767437750600', price: 84.90, name: 'Storm Jogger', stock: 2 },
+      'S':  { id: '52767437783368', price: 84.90, name: 'Storm Jogger', stock: 4 },
+      'M':  { id: '52767437816136', price: 84.90, name: 'Storm Jogger', stock: 6 },
+      'L':  { id: '52767437848904', price: 84.90, name: 'Storm Jogger', stock: 1 },
+      'XL': { id: '52767437881672', price: 84.90, name: 'Storm Jogger', stock: 1 }
     }
   };
 
@@ -833,7 +864,11 @@ function cartGo() {
       size = size.trim();
       var tab = window.SKShopify.currentTab;
       var variant = VARIANTS[tab] && VARIANTS[tab][size];
-      if (!variant) { alert('Taille non disponible.'); return; }
+      if (!variant || variant.stock === 0) {
+        var t = document.getElementById('toast');
+        if (t) { t.textContent = 'Taille ' + size + ' — Épuisé'; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2000); }
+        return;
+      }
 
       /* Image principale actuelle */
       var img = document.getElementById('mainImg') ? document.getElementById('mainImg').src : '';
