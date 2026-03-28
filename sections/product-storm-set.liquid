@@ -220,13 +220,192 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
   .dual-strip img { width: 100% !important; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; height: auto !important; display: block; }
   nav { padding: 0 1.2rem; }
 }
+
+/* ══ PANIER COULISSANT ══ */
+.sk-cart-overlay {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.sk-cart-overlay.open { opacity: 1; pointer-events: all; }
+
+.sk-cart-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 900;
+  width: min(420px, 100vw);
+  background: var(--white);
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+}
+.sk-cart-drawer.open { transform: translateX(0); }
+
+.sk-cart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 1.6rem;
+  border-bottom: 1px solid var(--mid);
+}
+.sk-cart-title {
+  font-size: 0.78rem; font-weight: 800; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--black);
+}
+.sk-cart-count {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+  color: var(--gray); margin-left: 0.5rem;
+}
+.sk-cart-close {
+  background: rgba(0,0,0,0.07); border: none; width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.sk-cart-close:hover { background: rgba(0,0,0,0.14); }
+
+.sk-cart-items {
+  flex: 1; overflow-y: auto; padding: 1rem 1.6rem;
+}
+.sk-cart-empty {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 100%; gap: 1rem;
+  color: var(--gray); font-size: 0.8rem; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.sk-cart-empty svg { opacity: 0.3; }
+
+.sk-cart-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--mid);
+}
+.sk-cart-item:last-child { border-bottom: none; }
+.sk-cart-item-img {
+  width: 72px; height: 88px; object-fit: cover;
+  border-radius: 4px; background: var(--light); flex-shrink: 0;
+}
+.sk-cart-item-info { flex: 1; }
+.sk-cart-item-name {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--black); margin-bottom: 0.3rem;
+}
+.sk-cart-item-variant {
+  font-size: 0.65rem; color: var(--gray); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 0.7rem;
+}
+.sk-cart-item-price {
+  font-size: 0.85rem; font-weight: 800; color: var(--black);
+}
+.sk-cart-item-actions {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem;
+}
+.sk-cart-qty {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.sk-cart-qty-btn {
+  width: 26px; height: 26px; border: 1px solid var(--mid);
+  background: transparent; border-radius: 50%; cursor: pointer;
+  font-size: 0.9rem; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.sk-cart-qty-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+.sk-cart-qty-val {
+  font-size: 0.78rem; font-weight: 700; min-width: 20px; text-align: center;
+}
+.sk-cart-remove {
+  font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); cursor: pointer; border: none; background: none;
+  text-decoration: underline; transition: color 0.2s;
+}
+.sk-cart-remove:hover { color: var(--black); }
+
+.sk-cart-footer {
+  padding: 1.4rem 1.6rem;
+  border-top: 1px solid var(--mid);
+  background: var(--white);
+}
+.sk-cart-subtotal {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem;
+}
+.sk-cart-subtotal-label {
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  font-weight: 600; color: var(--gray);
+}
+.sk-cart-subtotal-amount {
+  font-size: 1.2rem; font-weight: 900; letter-spacing: -0.02em;
+  color: var(--black);
+}
+.sk-cart-checkout-btn {
+  width: 100%; padding: 1rem; background: var(--black); color: var(--white);
+  border: none; border-radius: var(--radius-btn);
+  font-family: var(--font); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  transition: opacity 0.2s; margin-bottom: 0.6rem;
+}
+.sk-cart-checkout-btn:hover { opacity: 0.85; }
+.sk-cart-continue {
+  width: 100%; padding: 0.85rem; background: transparent;
+  border: 1px solid var(--mid); border-radius: var(--radius-btn);
+  font-family: var(--font); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  color: var(--black); transition: border-color 0.2s;
+}
+.sk-cart-continue:hover { border-color: var(--black); }
+
+/* Icône panier dans la nav */
+.sk-cart-nav-btn {
+  position: relative; background: none; border: none; cursor: pointer;
+  color: var(--black); display: flex; align-items: center;
+  padding: 0.3rem; transition: opacity 0.2s;
+}
+.sk-cart-nav-btn:hover { opacity: 0.6; }
+.sk-cart-badge {
+  position: absolute; top: -2px; right: -4px;
+  background: var(--black); color: var(--white);
+  font-size: 0.5rem; font-weight: 800; width: 16px; height: 16px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  display: none;
+}
+.sk-cart-badge.visible { display: flex; }
 </style>
 
 <!-- NAV -->
+
+<!-- ══ PANIER COULISSANT ══ -->
+<div class="sk-cart-overlay" id="skCartOverlay" onclick="skCartClose()"></div>
+<div class="sk-cart-drawer" id="skCartDrawer">
+  <div class="sk-cart-header">
+    <div>
+      <span class="sk-cart-title">Mon Panier</span>
+      <span class="sk-cart-count" id="skCartCount"></span>
+    </div>
+    <button class="sk-cart-close" onclick="skCartClose()">✕</button>
+  </div>
+  <div class="sk-cart-items" id="skCartItems">
+    <div class="sk-cart-empty" id="skCartEmpty">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Ton panier est vide</span>
+    </div>
+  </div>
+  <div class="sk-cart-footer" id="skCartFooter" style="display:none">
+    <div class="sk-cart-subtotal">
+      <span class="sk-cart-subtotal-label">Sous-total</span>
+      <span class="sk-cart-subtotal-amount" id="skCartTotal">0 CHF</span>
+    </div>
+    <button class="sk-cart-checkout-btn" onclick="skCartCheckout()">Commander →</button>
+    <button class="sk-cart-continue" onclick="skCartClose()">Continuer mes achats</button>
+  </div>
+</div>
+
 <nav>
   <a class="nav-back" href="/">&#8592; Retour</a>
   <a class="nav-logo" href="/"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:30px;width:auto;filter:brightness(0);max-width:160px;object-fit:contain;"></a>
-  <div style="width:40px;"></div>
+  <button class="sk-cart-nav-btn" onclick="skCartOpen()" aria-label="Panier">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+    <span class="sk-cart-badge" id="skCartBadge">0</span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -520,37 +699,168 @@ function cartGo() {
 </script>
 
 <script>
-/* ── Shopify Cart — checkout URL direct (seule méthode fiable hors page produit) ── */
+/* ══ PANIER CUSTOM SLUM KID ══ */
 (function() {
 
   var VARIANTS = {
-    jacket: { 'XS': '52767401509192', 'S': '52767401541960', 'M': '52767401574728', 'L': '52767401607496', 'XL': '52767401640264' },
-    jogger: { 'XS': '52767437750600', 'S': '52767437783368', 'M': '52767437816136', 'L': '52767437848904', 'XL': '52767437881672' }
+    jacket: {
+      'XS': { id: '52767401509192', price: 129.90, name: 'Storm Jacket' },
+      'S':  { id: '52767401541960', price: 129.90, name: 'Storm Jacket' },
+      'M':  { id: '52767401574728', price: 129.90, name: 'Storm Jacket' },
+      'L':  { id: '52767401607496', price: 129.90, name: 'Storm Jacket' },
+      'XL': { id: '52767401640264', price: 129.90, name: 'Storm Jacket' }
+    },
+    jogger: {
+      'XS': { id: '52767437750600', price: 84.90, name: 'Storm Jogger' },
+      'S':  { id: '52767437783368', price: 84.90, name: 'Storm Jogger' },
+      'M':  { id: '52767437816136', price: 84.90, name: 'Storm Jogger' },
+      'L':  { id: '52767437848904', price: 84.90, name: 'Storm Jogger' },
+      'XL': { id: '52767437881672', price: 84.90, name: 'Storm Jogger' }
+    }
   };
 
+  /* ── Stockage panier en localStorage ── */
+  function getCart() {
+    try { return JSON.parse(localStorage.getItem('sk_cart') || '[]'); } catch(e) { return []; }
+  }
+  function saveCart(cart) {
+    localStorage.setItem('sk_cart', JSON.stringify(cart));
+  }
+
+  /* ── Rendu du panier ── */
+  function renderCart() {
+    var cart = getCart();
+    var itemsEl = document.getElementById('skCartItems');
+    var emptyEl = document.getElementById('skCartEmpty');
+    var footerEl = document.getElementById('skCartFooter');
+    var countEl = document.getElementById('skCartCount');
+    var badgeEl = document.getElementById('skCartBadge');
+    var totalEl = document.getElementById('skCartTotal');
+
+    if (!itemsEl) return;
+
+    var totalItems = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+    var totalPrice = cart.reduce(function(s, i) { return s + i.price * i.qty; }, 0);
+
+    /* Badge nav */
+    if (badgeEl) {
+      badgeEl.textContent = totalItems;
+      badgeEl.classList.toggle('visible', totalItems > 0);
+    }
+    if (countEl) countEl.textContent = totalItems > 0 ? '(' + totalItems + ')' : '';
+    if (totalEl) totalEl.textContent = totalPrice.toFixed(2) + ' CHF';
+
+    if (cart.length === 0) {
+      if (emptyEl) emptyEl.style.display = 'flex';
+      if (footerEl) footerEl.style.display = 'none';
+      /* Vider les items mais garder l'empty */
+      var existing = itemsEl.querySelectorAll('.sk-cart-item');
+      existing.forEach(function(el) { el.remove(); });
+      return;
+    }
+
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (footerEl) footerEl.style.display = 'block';
+
+    /* Reconstruire les items */
+    var existing = itemsEl.querySelectorAll('.sk-cart-item');
+    existing.forEach(function(el) { el.remove(); });
+
+    cart.forEach(function(item, idx) {
+      var div = document.createElement('div');
+      div.className = 'sk-cart-item';
+      div.innerHTML =
+        '<img class="sk-cart-item-img" src="' + (item.img || '') + '" alt="' + item.name + '">' +
+        '<div class="sk-cart-item-info">' +
+          '<div class="sk-cart-item-name">' + item.name + '</div>' +
+          '<div class="sk-cart-item-variant">Taille ' + item.size + '</div>' +
+          '<div class="sk-cart-item-price">' + item.price.toFixed(2) + ' CHF</div>' +
+        '</div>' +
+        '<div class="sk-cart-item-actions">' +
+          '<div class="sk-cart-qty">' +
+            '<button class="sk-cart-qty-btn" onclick="skCartQty(' + idx + ',-1)">−</button>' +
+            '<span class="sk-cart-qty-val">' + item.qty + '</span>' +
+            '<button class="sk-cart-qty-btn" onclick="skCartQty(' + idx + ',1)">+</button>' +
+          '</div>' +
+          '<button class="sk-cart-remove" onclick="skCartRemove(' + idx + ')">Supprimer</button>' +
+        '</div>';
+      itemsEl.appendChild(div);
+    });
+  }
+
+  /* ── Actions panier ── */
+  window.skCartOpen = function() {
+    renderCart();
+    document.getElementById('skCartOverlay').classList.add('open');
+    document.getElementById('skCartDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.skCartClose = function() {
+    document.getElementById('skCartOverlay').classList.remove('open');
+    document.getElementById('skCartDrawer').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.skCartQty = function(idx, delta) {
+    var cart = getCart();
+    cart[idx].qty = Math.max(1, cart[idx].qty + delta);
+    saveCart(cart);
+    renderCart();
+  };
+
+  window.skCartRemove = function(idx) {
+    var cart = getCart();
+    cart.splice(idx, 1);
+    saveCart(cart);
+    renderCart();
+  };
+
+  window.skCartCheckout = function() {
+    var cart = getCart();
+    if (cart.length === 0) return;
+    /* Génère l'URL checkout Shopify avec tous les articles */
+    var items = cart.map(function(i) { return i.variantId + ':' + i.qty; }).join(',');
+    window.location.href = 'https://slumkid.store/cart/' + items;
+  };
+
+  /* ── Ajouter au panier ── */
   window.SKShopify = {
     currentTab: 'jacket',
 
     addToCart: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
       size = size.trim();
-      var variantId = VARIANTS[window.SKShopify.currentTab][size];
-      if (!variantId) { alert('Taille non disponible.'); return; }
+      var tab = window.SKShopify.currentTab;
+      var variant = VARIANTS[tab] && VARIANTS[tab][size];
+      if (!variant) { alert('Taille non disponible.'); return; }
+
+      /* Image principale actuelle */
+      var img = document.getElementById('mainImg') ? document.getElementById('mainImg').src : '';
+
+      var cart = getCart();
+      /* Vérifier si déjà dans le panier (même variant + même taille) */
+      var existing = cart.find(function(i) { return i.variantId === variant.id && i.size === size; });
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ variantId: variant.id, name: variant.name, size: size, price: variant.price, qty: 1, img: img });
+      }
+      saveCart(cart);
+
+      /* Toast + ouvrir le panier */
       var t = document.getElementById('toast');
-      if (t) { t.textContent = 'Taille ' + size + ' — Ajouté !'; t.classList.add('show'); }
-      setTimeout(function() {
-        if (t) t.classList.remove('show');
-        /* Checkout Shopify avec le variant — fonctionne depuis n'importe quelle page */
-        window.location.href = 'https://slumkid.store/cart/' + variantId + ':1';
-      }, 700);
+      if (t) { t.textContent = variant.name + ' — Taille ' + size + ' ajouté !'; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 1800); }
+      setTimeout(function() { window.skCartOpen(); }, 300);
     },
 
     buyNow: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
       size = size.trim();
-      var variantId = VARIANTS[window.SKShopify.currentTab][size];
-      if (!variantId) { alert('Taille non disponible.'); return; }
-      window.location.href = 'https://slumkid.store/cart/' + variantId + ':1?checkout=true';
+      var tab = window.SKShopify.currentTab;
+      var variant = VARIANTS[tab] && VARIANTS[tab][size];
+      if (!variant) { alert('Taille non disponible.'); return; }
+      window.location.href = 'https://slumkid.store/cart/' + variant.id + ':1';
     }
   };
 
@@ -559,6 +869,10 @@ function cartGo() {
     if (_orig) _orig(el, key);
     window.SKShopify.currentTab = key;
   };
+
+  /* Initialiser le badge au chargement */
+  document.addEventListener('DOMContentLoaded', renderCart);
+  renderCart();
 
 })();
 </script>
