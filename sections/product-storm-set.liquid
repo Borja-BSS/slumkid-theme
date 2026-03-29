@@ -863,7 +863,10 @@ function cartGo() {
     addToCart: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
       size = size.trim();
-      var tab = window.SKShopify.currentTab;
+      /* Lire le tab actif directement depuis le bouton pour fiabilité */
+      var activeTab = document.querySelector('.type-tab.active');
+      var tab = activeTab ? (activeTab.textContent.trim().toLowerCase() === 'jogger' ? 'jogger' : 'jacket') : 'jacket';
+      window.SKShopify.currentTab = tab;
       var variant = VARIANTS[tab] && VARIANTS[tab][size];
       if (!variant || variant.stock === 0) {
         var t = document.getElementById('toast');
@@ -893,17 +896,25 @@ function cartGo() {
     buyNow: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
       size = size.trim();
-      var tab = window.SKShopify.currentTab;
+      /* Lire le tab actif directement depuis le bouton actif pour éviter tout décalage */
+      var activeTab = document.querySelector('.type-tab.active');
+      var tab = activeTab ? (activeTab.textContent.trim().toLowerCase() === 'jogger' ? 'jogger' : 'jacket') : 'jacket';
+      window.SKShopify.currentTab = tab;
       var variant = VARIANTS[tab] && VARIANTS[tab][size];
       if (!variant) { alert('Taille non disponible.'); return; }
+      console.log('BuyNow — tab:', tab, 'size:', size, 'variantId:', variant.id);
       window.location.href = '/cart/' + variant.id + ':1';
     }
   };
 
-  var _orig = window.switchTab;
+  /* switchTab est défini plus haut dans le code — on le patch ici */
+  var _skOrigSwitchTab = window.switchTab;
   window.switchTab = function(el, key) {
-    if (_orig) _orig(el, key);
+    /* Appel de l'original */
+    if (_skOrigSwitchTab) _skOrigSwitchTab(el, key);
+    /* Sync du currentTab */
     window.SKShopify.currentTab = key;
+    console.log('Tab changé vers:', key, '| currentTab:', window.SKShopify.currentTab);
   };
 
   /* Initialiser le badge au chargement */
