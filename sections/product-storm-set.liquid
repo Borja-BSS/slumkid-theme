@@ -850,10 +850,9 @@ function cartGo() {
   window.skCartCheckout = function() {
     var cart = getCart();
     if (cart.length === 0) return;
-    /* Génère l'URL checkout Shopify avec tous les articles */
+    /* Génère l'URL checkout Shopify avec tous les articles — format officiel */
     var items = cart.map(function(i) { return i.variantId + ':' + i.qty; }).join(',');
-    /* Utilise le domaine myshopify pour éviter les redirections */
-    window.location.href = '/cart/' + items;
+    window.location.href = 'https://slumkid.store/cart/' + items + '?storefront=true';
   };
 
   /* ── Ajouter au panier ── */
@@ -896,14 +895,14 @@ function cartGo() {
     buyNow: function() {
       var size = (document.getElementById('sizeVal') || {}).textContent || 'M';
       size = size.trim();
-      /* Lire le tab actif directement depuis le bouton actif pour éviter tout décalage */
+      /* Lire le tab actif directement depuis le bouton */
       var activeTab = document.querySelector('.type-tab.active');
       var tab = activeTab ? (activeTab.textContent.trim().toLowerCase() === 'jogger' ? 'jogger' : 'jacket') : 'jacket';
       window.SKShopify.currentTab = tab;
       var variant = VARIANTS[tab] && VARIANTS[tab][size];
       if (!variant) { alert('Taille non disponible.'); return; }
-      console.log('BuyNow — tab:', tab, 'size:', size, 'variantId:', variant.id);
-      window.location.href = '/cart/' + variant.id + ':1';
+      /* URL checkout Shopify direct avec le variant ID */
+      window.location.href = 'https://slumkid.store/cart/' + variant.id + ':1?storefront=true';
     }
   };
 
