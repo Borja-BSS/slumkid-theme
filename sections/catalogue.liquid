@@ -1,0 +1,73 @@
+{% comment %}
+   Section  : Catalogue Slum Kid
+     Fichier  : sections/catalogue.liquid
+     {% endcomment %}
+     
+     <script>nt.querySelector('meta[name="viewport"]');
+       if (vp) { vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
+         else { var m = document.createElement('meta'); m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; document.head.appendChild(m); }
+           document.documentElement.style.overflowX = 'hidden';
+             document.documentElement.style.maxWidth = '100%';
+               document.body && (document.body.style.overflowX = 'hidden');
+                 document.body && (document.body.style.maxWidth = '100%');
+                 })();
+                 </script>
+
+                 <style>ext-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; }
+                 body { overflow-x: hidden; max-width: 100%; }
+                 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                 :root {
+                   --white: #ffffff; --black: #0a0a0a; --gray: #86868b;
+                     --light: #f5f5f7; --mid: #e0e0e0;
+                       --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                         --ease: cubic-bezier(0.4,0,0.2,1); --radius-btn: 980px;
+                         }
+                         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+                         body { font-family: var(--font); background: var(--white); color: var(--black); }
+
+                         nav {
+                           position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
+                             background: rgba(10,10,10,0.95);
+                               backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+                                 display: flex; align-items: center; justify-content: space-between;
+                                   padding: 0 2.4rem; transition: background 0.4s;
+                                   }
+                                   nav.scrolled { background: rgba(10,10,10,0.75); }
+                                   .nav-logo { display: flex; align-items: center; text-decoration: none; }
+                                   .nav-logo img { height: 24px; width: auto; display: block; filter: brightness(0) invert(1); }
+                                   .nav-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+                                   .nav-back:hover { color: #fff; }
+
+                                   .page-header { padding: 7rem 2.4rem 3rem; background: var(--black); color: var(--white); }
+                                   .page-header-eyebrow { font-size: 0.62rem; letter-spacing: 0.35em; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 1rem; }
+                                   .page-header-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; }
+
+                                   .catalogue-section { padding: 4rem 2.4rem 6rem; background: var(--white); }
+                                   .catalogue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+                                   .prod-card { display: block; text-decoration: none; color: var(--black); border-radius: 2px; overflow: hidden; background: var(--light); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+                                   .prod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+                                   .prod-card-img-wrap { position: relative; width: 100%; padding-top: 120%; overflow: hidden; background: var(--mid); }
+                                   .prod-card-img-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.5s var(--ease); }
+                                   .prod-card:hover .prod-card-img-wrap img { transform: scale(1.04); }
+                                   .sold-out-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.55); display: flex; align-items: center; justify-content: center; z-index: 1; }
+                                   .sold-out-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; border: 1px solid rgba(255,255,255,0.5); padding: 0.4em 1em; border-radius: var(--radius-btn); }
+                                   .prod-card-info { padding: 1rem 1.2rem 1.2rem; }
+                                   .prod-card-name { font-size: 0.88rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                                   .prod-card-price { font-size: 0.82rem; color: var(--gray); font-weight: 500; }
+                                   .no-products { grid-column: 1 / -1; text-align: center; font-size: 1rem; color: var(--gray); padding: 4rem 0; }
+
+                                   .page-footer { background: var(--black); color: rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding: 1.4rem 2.4rem; font-size: 0.62rem; letter-spacing: 0.08em; }
+                                   .foot-logo { color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+
+                                   @media (max-width: 700px) {
+                                  .catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+                                  .catalogue-section { padding: 3rem 1rem 4rem; }
+                                  .page-header { padding: 6rem 1.2rem 2.5rem; }
+                                  nav { padding: 0 1.2rem; }
+                                    .page-footer { padding: 1.2rem; flex-direction: column; text-align: center; }
+                                  input, button, select, textarea { font-size: 16px !important; }
+                                }
+                            </style>}
+                 html { -webkit-t
+     (function() {
+       var vp = docume %}
