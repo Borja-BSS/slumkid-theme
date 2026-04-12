@@ -1,0 +1,182 @@
+{% comment %}
+  Section  : Contact Slum Kid
+  Fichier  : sections/contact.liquid
+{% endcomment %}
+
+<script>
+(function() {
+  var vp = document.querySelector('meta[name="viewport"]');
+  if (vp) { vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
+  else { var m = document.createElement('meta'); m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; document.head.appendChild(m); }
+  document.documentElement.style.overflowX = 'hidden';
+  document.documentElement.style.maxWidth = '100%';
+})();
+</script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --gray: #888888;
+    --light: #f4f4f4;
+    --mid: #e0e0e0;
+    --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --radius-btn: 2px;
+  }
+  body { font-family: var(--font); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  .sk-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 56px;
+    background: var(--white); border-bottom: 1px solid var(--mid);
+  }
+  .sk-nav__logo { font-size: 18px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--black); }
+  .sk-nav__links { display: flex; gap: 24px; list-style: none; }
+  .sk-nav__links a { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--black); transition: color .2s var(--ease); }
+  .sk-nav__links a:hover, .sk-nav__links a.active { color: var(--gray); }
+  .sk-nav__hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .sk-nav__hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all .3s var(--ease); }
+
+  /* MOBILE NAV */
+  @media (max-width: 767px) {
+    .sk-nav__links { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 16px 24px; gap: 0; border-bottom: 1px solid var(--mid); }
+    .sk-nav__links.open { display: flex; }
+    .sk-nav__links li { border-bottom: 1px solid var(--light); }
+    .sk-nav__links a { display: block; padding: 14px 0; font-size: 13px; }
+    .sk-nav__hamburger { display: flex; }
+  }
+
+  /* LAYOUT */
+  .contact-wrap { max-width: 640px; margin: 0 auto; padding: 96px 24px 80px; }
+
+  /* PAGE HEADER */
+  .page-header { text-align: center; margin-bottom: 48px; }
+  .page-header h1 { font-size: clamp(28px, 6vw, 48px); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+  .page-header p { margin-top: 12px; font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--black); }
+  .form-group input,
+  .form-group textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--mid); border-radius: var(--radius-btn);
+    background: var(--white); color: var(--black);
+    font-family: var(--font); font-size: 14px;
+    transition: border-color .2s var(--ease);
+    outline: none; resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--black); }
+  .form-group textarea { min-height: 120px; }
+  .form-submit {
+    display: inline-block; padding: 14px 32px;
+    background: var(--black); color: var(--white);
+    font-family: var(--font); font-size: 12px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border: none; border-radius: var(--radius-btn);
+    cursor: pointer; transition: background .2s var(--ease);
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--gray); }
+  .contact-success { text-align: center; padding: 48px 0; }
+  .contact-success p { font-size: 15px; color: var(--gray); }
+
+  /* FOOTER */
+  .page-footer {
+    border-top: 1px solid var(--mid); padding: 32px 24px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .page-footer__copy { font-size: 11px; color: var(--gray); letter-spacing: .05em; }
+  .page-footer__links { display: flex; gap: 20px; }
+  .page-footer__links a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: .05em; transition: color .2s; }
+  .page-footer__links a:hover { color: var(--black); }
+</style>
+
+<nav class="sk-nav" id="mainNav">
+  <a class="sk-nav__logo" href="/">Slum Kid</a>
+  <ul class="sk-nav__links" id="navLinks">
+    <li><a href="/collections/all">Shop</a></li>
+    <li><a href="/pages/catalogue">Catalogue</a></li>
+    <li><a href="/pages/contact" class="active">Contact</a></li>
+  </ul>
+  <button class="sk-nav__hamburger" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="contact-wrap">
+  <div class="page-header">
+    <h1>{{ section.settings.title | default: 'Contact' }}</h1>
+    {% if section.settings.subtitle != blank %}
+      <p>{{ section.settings.subtitle }}</p>
+    {% endif %}
+  </div>
+
+  {%- if form.posted_successfully? -%}
+    <div class="contact-success">
+      <p>{{ section.settings.success_message | default: 'Message sent — we will get back to you shortly.' }}</p>
+    </div>
+  {%- else -%}
+    {% form 'contact' %}
+      <div class="contact-form">
+        <div class="form-group">
+          <label for="ContactName">{{ 'contact.form.name' | t | default: 'Name' }}</label>
+          <input type="text" id="ContactName" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" autocomplete="name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="ContactEmail">{{ 'contact.form.email' | t | default: 'Email' }} <span aria-hidden="true">*</span></label>
+          <input type="email" id="ContactEmail" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required autocomplete="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="ContactPhone">{{ 'contact.form.phone' | t | default: 'Phone' }}</label>
+          <input type="tel" id="ContactPhone" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel" placeholder="+1 (000) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label for="ContactMessage">{{ 'contact.form.message' | t | default: 'Message' }} <span aria-hidden="true">*</span></label>
+          <textarea id="ContactMessage" name="contact[body]" required placeholder="Your message...">{{ form.body }}</textarea>
+        </div>
+        <button type="submit" class="form-submit">{{ section.settings.submit_label | default: 'Send Message' }}</button>
+      </div>
+    {% endform %}
+  {%- endif -%}
+</div>
+
+<footer class="page-footer">
+  <span class="page-footer__copy">&copy; {{ 'now' | date: '%Y' }} Slum Kid</span>
+  <nav class="page-footer__links">
+    <a href="/policies/privacy-policy">Privacy</a>
+    <a href="/policies/terms-of-service">Terms</a>
+    <a href="/pages/contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+(function() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Page Title", "default": "Contact" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Get in touch with us." },
+    { "type": "text", "id": "submit_label", "label": "Submit Button Label", "default": "Send Message" },
+    { "type": "text", "id": "success_message", "label": "Success Message", "default": "Message sent — we will get back to you shortly." }
+  ],
+  "presets": [{ "name": "Contact" }]
+}
+{% endschema %}
