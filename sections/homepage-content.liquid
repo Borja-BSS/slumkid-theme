@@ -23,6 +23,20 @@
   document.body && (document.body.style.maxWidth = '100%');
 })();
 </script>
+<script>
+function skMenuOpen() {
+  document.getElementById('skMenuOverlay').classList.add('open');
+  document.getElementById('skMenuDrawer').classList.add('open');
+  document.getElementById('skMenuBtn').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function skMenuClose() {
+  document.getElementById('skMenuOverlay').classList.remove('open');
+  document.getElementById('skMenuDrawer').classList.remove('open');
+  document.getElementById('skMenuBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
 
 <style>
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; }
