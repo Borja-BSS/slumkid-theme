@@ -80,15 +80,17 @@ nav {
 /* ── HERO ── */
 .cat-hero {
   background: var(--black); color: var(--white);
-  padding: 3rem 2rem 2.5rem;
+  padding: 4rem 2rem 3rem;
+  min-height: 40vh;
   display: flex; align-items: flex-end; justify-content: space-between;
 }
-.cat-hero-left .eyebrow { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
-.cat-hero-title { font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; }
-.cat-hero-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.8rem; }
+.cat-hero-left .eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+.cat-hero-left .eyebrow::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.25); }
+.cat-hero-title { font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.88; text-transform: uppercase; }
+.cat-hero-sub { font-size: 0.65rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1rem; }
 .cat-hero-count { text-align: right; }
-.cat-hero-count-num { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); line-height: 1; }
-.cat-hero-count-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; text-transform: uppercase; }
+.cat-hero-count-num { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; letter-spacing: -0.04em; color: var(--white); line-height: 1; }
+.cat-hero-count-label { font-size: 0.62rem; color: rgba(255,255,255,0.3); letter-spacing: 0.15em; text-transform: uppercase; }
 
 /* ── FILTER BAR ── */
 .filter-bar {
@@ -113,7 +115,7 @@ nav {
 .divider-label {
   grid-column: 1 / -1;
   background: var(--light); padding: 10px 14px;
-  font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
   text-transform: uppercase; color: rgba(0,0,0,0.4);
   border-top: 1px solid rgba(0,0,0,0.07);
 }
@@ -127,49 +129,76 @@ nav {
   .product-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.product-card { background: var(--white); position: relative; overflow: hidden; }
+/* Cartes style homepage */
+.product-card { background: #e8e8ed; position: relative; overflow: hidden; cursor: pointer; }
 .product-card-img {
-  width: 100%; aspect-ratio: 3/4;
-  background: var(--light);
+  width: 100%; aspect-ratio: 2/3;
   position: relative; overflow: hidden;
 }
-.product-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.6s var(--ease); }
-.product-card:hover .product-card-img img { transform: scale(1.04); }
-.sold-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.35); z-index: 1; }
-.product-badge {
-  position: absolute; top: 10px; left: 10px; z-index: 2;
-  font-size: 8px; font-weight: 700; letter-spacing: 0.15em;
-  text-transform: uppercase; padding: 4px 10px;
-  border-radius: var(--radius-btn);
-}
-.badge-new { background: var(--black); color: var(--white); }
-.badge-sold { background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); color: var(--white); }
+.product-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.p-card-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%); z-index: 2; }
+.sold-out-overlay { position: absolute; inset: 0; z-index: 3; background: rgba(0,0,0,0.52); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; }
 .col-tag {
-  position: absolute; left: 50%; top: 0; bottom: 60px;
+  position: absolute; left: 50%; top: 0; bottom: 80px;
   transform: translateX(-50%);
   display: flex; align-items: center; justify-content: center;
-  pointer-events: none; z-index: 1;
+  pointer-events: none; z-index: 4;
 }
 .col-tag span {
-  font-size: 9px; font-weight: 900; letter-spacing: 0.08em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  font-size: 0.65rem; font-weight: 900; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
   writing-mode: vertical-rl; transform: rotate(180deg);
 }
-.product-card-info { padding: 1rem 1rem 1.2rem; }
-.product-card-name { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
-.product-card-desc { font-size: 0.62rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
-.product-card-bottom { display: flex; align-items: center; justify-content: space-between; }
-.product-card-price { font-size: 0.85rem; font-weight: 800; letter-spacing: -0.02em; }
-.product-card-price.sold { color: rgba(0,0,0,0.3); text-decoration: line-through; font-size: 0.75rem; }
-.product-card-btn {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; padding: 6px 14px;
-  border-radius: var(--radius-btn); border: 1px solid rgba(0,0,0,0.2);
-  background: transparent; color: var(--black);
-  cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
+.product-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.2rem 1.4rem; z-index: 5;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 70%, transparent 100%);
+  display: flex; flex-direction: column; gap: 0.2rem;
 }
-.product-card-btn.primary { background: var(--black); color: var(--white); border-color: var(--black); }
+.product-card-name { font-size: 0.88rem; font-weight: 800; letter-spacing: 0.04em; color: var(--white); text-transform: uppercase; }
+.product-card-desc { font-size: 0.68rem; color: rgba(255,255,255,0.45); line-height: 1.4; margin-bottom: 0.5rem; }
+.product-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.product-card-price { font-size: 0.82rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+.product-card-price.sold { color: rgba(255,255,255,0.35); text-decoration: line-through; font-size: 0.75rem; }
+.product-card-btn {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--radius-btn); padding: 0.46rem 1.1rem;
+  font-family: var(--font); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+  transition: background 0.2s, transform 0.15s; white-space: nowrap;
+}
+.product-card-btn:hover { background: var(--white); color: var(--black); border-color: var(--white); transform: scale(0.97); }
 
+
+/* ── FOOTER (copié homepage) ── */
+footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
+.foot-insta { padding: 2.8rem 2rem 0; }
+.foot-insta-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; padding: 0 0.2rem; }
+.foot-insta-handle { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; }
+.foot-insta-handle:hover { opacity: 0.7; }
+.foot-follow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; color: var(--black); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 1px; }
+.foot-feed-wrap { position: relative; overflow: hidden; }
+.foot-feed { display: flex; gap: 6px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; cursor: grab; }
+.foot-feed::-webkit-scrollbar { display: none; }
+.foot-feed-item { flex: 0 0 140px; height: 140px; background: #ddd; overflow: hidden; border-radius: 2px; }
+.foot-feed-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foot-newsletter { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+.foot-nl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; margin-bottom: 1.4rem; }
+.foot-nl-form { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 440px; margin: 0 auto 1.8rem; border-bottom: 1px solid rgba(0,0,0,0.35); }
+.foot-nl-input { flex: 1; background: transparent; border: none; outline: none; font-family: var(--font); font-size: 16px; color: #0a0a0a; padding: 0.6rem 0.8rem 0.6rem 0; letter-spacing: 0.02em; }
+.foot-nl-input::placeholder { color: rgba(0,0,0,0.35); }
+.foot-nl-btn { background: transparent; border: none; cursor: pointer; font-family: var(--font); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #0a0a0a; padding: 0.6rem 0; white-space: nowrap; }
+.foot-socials { display: flex; align-items: center; justify-content: center; gap: 1.6rem; }
+.foot-social-icon { color: #0a0a0a; opacity: 0.75; transition: opacity 0.2s; text-decoration: none; display: flex; }
+.foot-social-icon:hover { opacity: 1; }
+.foot-legal { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.4rem 2rem; }
+.foot-copy { font-size: 0.62rem; color: rgba(0,0,0,0.5); letter-spacing: 0.02em; word-break: break-word; }
+.foot-legal-links { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: center; }
+.foot-legal-links a { font-size: 0.68rem; color: rgba(0,0,0,0.55); text-decoration: none; letter-spacing: 0.04em; }
+.foot-legal-links a:hover { color: #0a0a0a; }
 /* ── STORY BANNER ── */
 .story-banner {
   background: var(--black); color: var(--white);
@@ -291,9 +320,9 @@ nav {
   <div class="product-card" data-tags="sold set jacket">
     <div class="product-card-img">
       <img src="{{ 'prod-storm.jpg' | asset_url }}" alt="Storm Jacket">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Storm Set</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Storm Jacket</div>
@@ -308,9 +337,9 @@ nav {
   <div class="product-card" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'storm-set-img-09.jpg' | asset_url }}" alt="Storm Jogger">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Storm Set</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Storm Jogger</div>
@@ -325,9 +354,9 @@ nav {
   <div class="product-card" data-tags="sold jacket">
     <div class="product-card-img">
       <img src="{{ 'prod-pink.jpg' | asset_url }}" alt="Pink Puffer">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Puffer</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Pink Puffer</div>
@@ -344,9 +373,9 @@ nav {
   <div class="product-card" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-grey.jpg' | asset_url }}" alt="Tear-Off Grey">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Tear-Off</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Grey</div>
@@ -361,9 +390,9 @@ nav {
   <div class="product-card" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-blue.jpg' | asset_url }}" alt="Blue Set">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Blue Set</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Blue Set</div>
@@ -378,9 +407,9 @@ nav {
   <div class="product-card" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-black.jpg' | asset_url }}" alt="Tear-Off Black">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Full Black</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Black</div>
@@ -395,9 +424,9 @@ nav {
   <div class="product-card" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-kaki.jpg' | asset_url }}" alt="Kaki Set">
-      <div class="sold-overlay"></div>
+      <div class="p-card-bg-overlay"></div>
+      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Kaki Set</span></div>
-      <span class="product-badge badge-sold">Sold Out</span>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Kaki Set</div>
@@ -423,44 +452,56 @@ nav {
   </div>
 </div>
 
-<!-- ══ FOOTER SOCIAL ══ -->
-<div class="footer-insta">
-  <div class="footer-insta-header">
-    <span class="footer-handle">@slumkid.clo</span>
-    <a class="footer-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
-  </div>
-</div>
-
-<!-- ══ FOOTER NEWSLETTER ══ -->
-<div class="footer-newsletter">
-  <div class="footer-nl-title">Sign up to our newsletter &amp; get a gift on your birthday</div>
-  {% form 'customer' %}
-    <div class="footer-nl-form">
-      <input class="footer-nl-input" type="email" name="contact[email]" placeholder="Enter your email">
-      <button class="footer-nl-btn" type="submit">Subscribe</button>
+<!-- ═══ FOOTER (identique homepage) ═══ -->
+<footer>
+  <div class="foot-insta">
+    <div class="foot-insta-header">
+      <a class="foot-insta-handle" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">@slumkid.clo</a>
+      <a class="foot-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
     </div>
-  {% endform %}
-  <div class="footer-socials">
-    <a class="footer-social" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a class="footer-social" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
-    </a>
+    <div class="foot-feed-wrap">
+      <div class="foot-feed" id="footFeed">
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- ══ FOOTER LEGAL ══ -->
-<div class="footer-legal">
-  <span class="footer-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
-  <div class="footer-links">
-    <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
-    <a href="{{ routes.root_url }}pages/support">Support</a>
-    <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
-    <a href="{{ routes.root_url }}pages/legal-notice">Legal notice</a>
-    <a href="{{ routes.root_url }}policies/privacy-policy">Privacy policy</a>
+  <div class="foot-newsletter">
+    <p class="foot-nl-title">Sign up to our newsletter &amp; get a gift on your birthday</p>
+    {% form 'customer', id: 'newsletter-form-cat' %}
+      <div class="foot-nl-form">
+        <input class="foot-nl-input" type="email" name="contact[email]" placeholder="Enter your email" required>
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <button class="foot-nl-btn" type="submit">Subscribe</button>
+      </div>
+    {% endform %}
+    <div class="foot-socials">
+      <a class="foot-social-icon" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="foot-social-icon" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+      </a>
+    </div>
   </div>
-</div>
+  <div class="foot-legal">
+    <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+    <div class="foot-legal-links">
+      <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
+      <a href="{{ routes.root_url }}pages/support">Support</a>
+      <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
+      <a href="{{ routes.root_url }}policies/terms-of-service">Terms of service</a>
+      <a href="{{ routes.root_url }}policies/legal-notice">Legal notice</a>
+      <a href="{{ routes.root_url }}policies/privacy-policy">Privacy policy</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* ── Filtre ── */
