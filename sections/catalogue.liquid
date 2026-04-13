@@ -1,127 +1,507 @@
-{% comment %}
-  Section  : Catalogue Slum Kid
-    Fichier  : sections/catalogue.liquid
-    {% endcomment %}
-    
-    <script>bute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
-      else { var m = document.createElement('meta'); m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; document.head.appendChild(m); }
-        document.documentElement.style.overflowX = 'hidden';
-          document.documentElement.style.maxWidth = '100%';
-            document.body && (document.body.style.overflowX = 'hidden');
-              document.body && (document.body.style.maxWidth = '100%');
-              })();
-              </script>
+<script>
+(function() {
+  var vp = document.querySelector('meta[name="viewport"]');
+  if (vp) { vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
+  else { var m = document.createElement('meta'); m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; document.head.appendChild(m); }
+  document.documentElement.style.overflowX = 'hidden';
+  document.documentElement.style.maxWidth = '100%';
+  document.body && (document.body.style.overflowX = 'hidden');
+})();
+</script>
 
-              <style>t: #f5f5f7; --mid: #e0e0e0;
-                  --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                    --ease: cubic-bezier(0.4,0,0.2,1); --radius-btn: 980px;
-                    }
-                    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-                    body { font-family: var(--font); background: var(--white); color: var(--black); }
+<script>
+function skMenuOpen() {
+  document.getElementById('skMenuOverlay').classList.add('open');
+  document.getElementById('skMenuDrawer').classList.add('open');
+  document.getElementById('skMenuBtn').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function skMenuClose() {
+  document.getElementById('skMenuOverlay').classList.remove('open');
+  document.getElementById('skMenuDrawer').classList.remove('open');
+  document.getElementById('skMenuBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
 
-                    nav {
-                      position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
-                        background: rgba(10,10,10,0.95);
-                          backdrop-filter: saturate(180%) blur(20px);
-                            -webkit-backdrop-filter: saturate(180%) blur(20px);
-                              display: flex; align-items: center; justify-content: space-between;
-                                padding: 0 2.4rem; transition: background 0.4s;
-                                }
-                                nav.scrolled { background: rgba(10,10,10,0.75); }
-                                .nav-logo { display: flex; align-items: center; text-decoration: none; }
-                                .nav-logo img { height: 24px; width: auto; display: block; filter: brightness(0) invert(1); }
-                                .nav-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
-                                .nav-back:hover { color: #fff; }
+<style>
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; }
+body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff; --black: #0a0a0a; --gray: #86868b;
+  --light: #f5f5f7; --mid: #e0e0e0;
+  --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+  --radius-btn: 980px;
+}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); background: var(--white); color: var(--black); }
 
-                                .page-header { padding: 7rem 2.4rem 3rem; background: var(--black); color: var(--white); }
-                                .page-header-eyebrow { font-size: 0.62rem; letter-spacing: 0.35em; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 1rem; }
-                                .page-header-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; }
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200; height: 52px;
+  background: rgba(255,255,255,0.94); backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 22px; width: auto; display: block; filter: brightness(0); }
+.nav-logo-text { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+.nav-back { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(0,0,0,0.45); text-decoration: none; text-transform: uppercase; }
+.sk-menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; }
+.sk-menu-btn span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: all 0.3s; }
+.sk-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.sk-menu-btn.open span:nth-child(2) { opacity: 0; }
+.sk-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-                                .catalogue-section { padding: 4rem 2.4rem 6rem; background: var(--white); }
-                                .catalogue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
-                                .prod-card { display: block; text-decoration: none; color: var(--black); border-radius: 2px; overflow: hidden; background: var(--light); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
-                                .prod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
-                                .prod-card-img-wrap { position: relative; width: 100%; padding-top: 120%; overflow: hidden; background: var(--mid); }
-                                .prod-card-img-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
-                                .prod-card:hover .prod-card-img-wrap img { transform: scale(1.04); }
-                                .sold-out-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.55); display: flex; align-items: center; justify-content: center; z-index: 1; }
-                                .sold-out-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; border: 1px solid rgba(255,255,255,0.5); padding: 0.4em 1em; border-radius: var(--radius-btn); }
-                                .prod-card-info { padding: 1rem 1.2rem 1.2rem; }
-                                .prod-card-name { font-size: 0.88rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                                .prod-card-price { font-size: 0.82rem; color: var(--gray); font-weight: 500; }
-                                .no-products { grid-column: 1 / -1; text-align: center; font-size: 1rem; color: var(--gray); padding: 4rem 0; }
+/* ── MENU DRAWER ── */
+.sk-menu-overlay { position: fixed; inset: 0; z-index: 299; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+.sk-menu-overlay.open { opacity: 1; pointer-events: all; }
+.sk-menu-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: min(340px, 85vw); background: #0a0a0a; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.sk-menu-drawer.open { transform: translateX(0); }
+.sk-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.sk-menu-close { background: rgba(255,255,255,0.08); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: #fff; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+.sk-menu-links { flex: 1; display: flex; flex-direction: column; padding: 2rem 1.6rem; gap: 0.3rem; }
+.sk-menu-link { display: flex; align-items: baseline; gap: 0.8rem; font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #fff; text-decoration: none; line-height: 1.15; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); opacity: 0; transform: translateX(20px); transition: opacity 0.4s, transform 0.4s; }
+.sk-menu-drawer.open .sk-menu-link { opacity: 1; transform: translateX(0); }
+.sk-menu-drawer.open .sk-menu-link:nth-child(1) { transition-delay: 0.05s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(2) { transition-delay: 0.10s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(3) { transition-delay: 0.15s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(4) { transition-delay: 0.20s; }
+.sk-menu-link:last-child { border-bottom: none; }
+.sk-menu-sub { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); text-transform: uppercase; flex-shrink: 0; }
+.sk-menu-footer { padding: 1.6rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; gap: 1rem; }
+.sk-menu-socials { display: flex; gap: 1rem; align-items: center; }
+.sk-menu-social { color: rgba(255,255,255,0.6); transition: color 0.2s; display: flex; text-decoration: none; }
+.sk-menu-social:hover { color: #fff; }
+.sk-menu-copy { font-size: 0.55rem; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
 
-                                .page-footer { background: var(--black); color: rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding: 1.4rem 2.4rem; font-size: 0.62rem; letter-spacing: 0.08em; }
-                                .foot-logo { color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+/* ── HERO ── */
+.cat-hero {
+  background: var(--black); color: var(--white);
+  padding: 3rem 2rem 2.5rem;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.cat-hero-left .eyebrow { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
+.cat-hero-title { font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; }
+.cat-hero-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.8rem; }
+.cat-hero-count { text-align: right; }
+.cat-hero-count-num { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); line-height: 1; }
+.cat-hero-count-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; text-transform: uppercase; }
 
-                                @media (max-width: 700px) {
-                                  .catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-                                    .catalogue-section { padding: 3rem 1rem 4rem; }
-                                      .page-header { padding: 6rem 1.2rem 2.5rem; }
-                                        nav { padding: 0 1.2rem; }
-                                          .page-footer { padding: 1.2rem; flex-direction: column; text-align: center; }
-                                            input, button, select, textarea { font-size: 16px !important; }
-                                            }
-                                            </style>
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: flex; gap: 0.5rem; padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  overflow-x: auto; scrollbar-width: none;
+  position: sticky; top: 52px; z-index: 100;
+  background: rgba(255,255,255,0.94); backdrop-filter: blur(20px);
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-pill {
+  flex-shrink: 0; padding: 5px 14px;
+  border-radius: var(--radius-btn); border: 1px solid rgba(0,0,0,0.15);
+  font-family: var(--font); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: transparent; color: rgba(0,0,0,0.5);
+  cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+.filter-pill.active { background: var(--black); color: var(--white); border-color: var(--black); }
 
-                                            <nav id="mainNav">
-                                              <a class="nav-back" href="/">&#8592; Retour</a>
-                                                <a class="nav-logo" href="/"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid"></a>
-                                                </nav>
+/* ── GRID ── */
+.divider-label {
+  grid-column: 1 / -1;
+  background: var(--light); padding: 10px 14px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(0,0,0,0.08);
+}
+@media (max-width: 600px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
-                                                <section class="page-header">
-                                                  <p class="page-header-eyebrow">Slum Kid — Collection</p>
-                                                    <h1 class="page-header-title">CATALOGUE</h1>
-                                                    </section>
+.product-card { background: var(--white); position: relative; overflow: hidden; }
+.product-card-img {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--light);
+  position: relative; overflow: hidden;
+}
+.product-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.6s var(--ease); }
+.product-card:hover .product-card-img img { transform: scale(1.04); }
+.sold-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.35); z-index: 1; }
+.product-badge {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 4px 10px;
+  border-radius: var(--radius-btn);
+}
+.badge-new { background: var(--black); color: var(--white); }
+.badge-sold { background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); color: var(--white); }
+.col-tag {
+  position: absolute; left: 50%; top: 0; bottom: 60px;
+  transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; z-index: 1;
+}
+.col-tag span {
+  font-size: 9px; font-weight: 900; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  writing-mode: vertical-rl; transform: rotate(180deg);
+}
+.product-card-info { padding: 12px 14px 16px; }
+.product-card-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px; }
+.product-card-desc { font-size: 9px; color: rgba(0,0,0,0.4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+.product-card-bottom { display: flex; align-items: center; justify-content: space-between; }
+.product-card-price { font-size: 12px; font-weight: 800; letter-spacing: -0.02em; }
+.product-card-price.sold { color: rgba(0,0,0,0.3); text-decoration: line-through; }
+.product-card-btn {
+  font-size: 8px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 5px 12px;
+  border-radius: var(--radius-btn); border: 1px solid rgba(0,0,0,0.2);
+  background: transparent; color: var(--black);
+  cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
+}
+.product-card-btn.primary { background: var(--black); color: var(--white); border-color: var(--black); }
 
-                                                    <section class="catalogue-section">
-                                                      <div class="catalogue-grid">
-                                                          {% for product in collections.all.products %}
-                                                                <a class="prod-card" href="{{ product.url }}">
-                                                                        <div class="prod-card-img-wrap">
-                                                                                  {% if product.featured_image %}
-                                                                                              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" loading="lazy">
-                                                                                                        {% else %}
-                                                                                                                    <div style="position:absolute;inset:0;background:var(--mid);"></div>
-                                                                                                                              {% endif %}
-                                                                                                                                        {% unless product.available %}
-                                                                                                                                                    <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
-                                                                                                                                                              {% endunless %}
-                                                                                                                                                                      </div>
-                                                                                                                                                                              <div class="prod-card-info">
-                                                                                                                                                                                        <div class="prod-card-name">{{ product.title }}</div>
-                                                                                                                                                                                                  <div class="prod-card-price">{{ product.price | money }}</div>
-                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                </a>
-                                                                                                                                                                                                                    {% else %}
-                                                                                                                                                                                                                          <p class="no-products">Aucun produit disponible pour le moment.</p>
-                                                                                                                                                                                                                              {% endfor %}
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                </section>
+/* ── STORY BANNER ── */
+.story-banner {
+  background: var(--black); color: var(--white);
+  padding: 2.5rem 2rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; align-items: center;
+  margin-top: 1px;
+}
+.story-banner-eyebrow { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.6rem; }
+.story-banner-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; margin-bottom: 1rem; }
+.story-banner-body { font-size: 10px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.2rem; }
+.story-banner-btn { display: inline-block; padding: 8px 18px; background: var(--white); color: var(--black); border-radius: var(--radius-btn); font-family: var(--font); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+.story-banner-img { aspect-ratio: 3/4; overflow: hidden; border-radius: 4px; }
+.story-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
-                                                                                                                                                                                                                                <div class="page-footer">
-                                                                                                                                                                                                                                  <span class="foot-logo">Slum Kid</span>
-                                                                                                                                                                                                                                    <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés.</span>
-                                                                                                                                                                                                                                    </div>
+/* ── FOOTER INSTAGRAM ── */
+.footer-insta { padding: 1.5rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); }
+.footer-insta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+.footer-handle { font-size: 11px; font-weight: 800; letter-spacing: 0.01em; text-transform: uppercase; }
+.footer-follow { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.3); padding-bottom: 1px; text-decoration: none; color: var(--black); }
+.footer-feed { display: flex; gap: 4px; }
+.footer-feed-item { flex: 1; aspect-ratio: 1; background: #f0f0f0; border-radius: 2px; overflow: hidden; }
+.footer-feed-item:nth-child(odd) { background: #e8e8e8; }
 
-                                                                                                                                                                                                                                    <script>
-                                                                                                                                                                                                                                    window.addEventListener('scroll', function() {
-                                                                                                                                                                                                                                      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                      </script>
+/* ── FOOTER NEWSLETTER ── */
+.footer-newsletter { text-align: center; padding: 1.5rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); }
+.footer-nl-title { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+.footer-nl-form { display: flex; max-width: 320px; margin: 0 auto 1rem; border-bottom: 1px solid rgba(0,0,0,0.3); }
+.footer-nl-input { flex: 1; border: none; outline: none; font-family: var(--font); font-size: 11px; padding: 6px 0; background: transparent; }
+.footer-nl-btn { border: none; background: transparent; font-family: var(--font); font-size: 9px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; }
+.footer-socials { display: flex; justify-content: center; gap: 1.2rem; margin-top: 1rem; }
+.footer-social { color: rgba(0,0,0,0.5); text-decoration: none; transition: color 0.2s; display: flex; }
+.footer-social:hover { color: var(--black); }
 
-                                                                                                                                                                                                                                      {% schema %}
-                                                                                                                                                                                                                                      {
-                                                                                                                                                                                                                                        "name": "Catalogue",
-                                                                                                                                                                                                                                          "settings": []
-                                                                                                                                                                                                                                          }
-                                                                                                                                                                                                                                          {% endschema %}
-              html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; }
-              body { overflow-x: hidden; max-width: 100%; }
-              *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-              :root {
-                --white: #ffffff; --black: #0a0a0a; --gray: #86868b;
-                  --ligh
-    (function() {
-      var vp = document.querySelector('meta[name="viewport"]');
-        if (vp) { vp.setAttri}
+/* ── FOOTER LEGAL ── */
+.footer-legal { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); flex-wrap: wrap; gap: 0.5rem; }
+.footer-copy { font-size: 8px; color: rgba(0,0,0,0.4); }
+.footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.footer-links a { font-size: 8px; color: rgba(0,0,0,0.4); text-decoration: none; }
+.footer-links a:hover { color: var(--black); }
+
+@media (max-width: 600px) {
+  nav { padding: 0 1.2rem; }
+  .cat-hero { padding: 2rem 1.2rem 2rem; }
+  .filter-bar { padding: 0.8rem 1.2rem; }
+  .story-banner { grid-template-columns: 1fr; }
+  .story-banner-img { aspect-ratio: 4/3; }
+  .footer-legal { flex-direction: column; text-align: center; }
+  input, button, select, textarea { font-size: 16px !important; }
+}
+</style>
+
+<!-- ══ MENU DRAWER ══ -->
+<div class="sk-menu-overlay" id="skMenuOverlay" onclick="skMenuClose()"></div>
+<div class="sk-menu-drawer" id="skMenuDrawer">
+  <div class="sk-menu-header">
+    <a href="{{ routes.root_url }}" style="display:flex;align-items:center;"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0) invert(1);"></a>
+    <button class="sk-menu-close" onclick="skMenuClose()">✕</button>
+  </div>
+  <div class="sk-menu-links">
+    <a class="sk-menu-link" href="{{ routes.root_url }}"><span class="sk-menu-sub">W26</span>Dernière collection</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/catalogue"><span class="sk-menu-sub">Toutes les pièces</span>Catalogue</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/notre-histoire"><span class="sk-menu-sub">Slum Kid</span>Notre Histoire</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/contact"><span class="sk-menu-sub">Nous joindre</span>Contact</a>
+  </div>
+  <div class="sk-menu-footer">
+    <div class="sk-menu-socials">
+      <a class="sk-menu-social" href="https://wa.me/41000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a class="sk-menu-social" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="sk-menu-social" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+      </a>
+    </div>
+    <span class="sk-menu-copy">© 2026 Slum Kid by BÖRJA SWISS SOLUTIONS</span>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-back" href="/">&#8592; Retour</a>
+  <a class="nav-logo" href="/"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0);"></a>
+  <button class="sk-menu-btn" id="skMenuBtn" onclick="skMenuOpen()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="cat-hero">
+  <div class="cat-hero-left">
+    <div class="eyebrow">Slum Kid — Season 26</div>
+    <div class="cat-hero-title">COLLEC<br>TION</div>
+    <div class="cat-hero-sub">From Slum to Fashion</div>
+  </div>
+  <div class="cat-hero-count">
+    <div class="cat-hero-count-num">7</div>
+    <div class="cat-hero-count-label">pièces</div>
+  </div>
+</div>
+
+<!-- ══ FILTER BAR ══ -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-pill active" data-filter="all">Tout</button>
+  <button class="filter-pill" data-filter="available">Disponible</button>
+  <button class="filter-pill" data-filter="set">Sets</button>
+  <button class="filter-pill" data-filter="jacket">Vestes</button>
+  <button class="filter-pill" data-filter="sold">Sold Out</button>
+</div>
+
+<!-- ══ GRID ══ -->
+<div class="product-grid" id="productGrid">
+
+  <div class="divider-label">— W26 · New In</div>
+
+  <!-- STORM JACKET -->
+  <div class="product-card" data-tags="sold set jacket">
+    <div class="product-card-img">
+      <img src="{{ 'prod-storm.jpg' | asset_url }}" alt="Storm Jacket">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Storm Set</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Storm Jacket</div>
+      <div class="product-card-desc">Imperméable · Réflectif</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">129.90 CHF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORM JOGGER -->
+  <div class="product-card" data-tags="sold set">
+    <div class="product-card-img">
+      <img src="{{ 'storm-set-img-09.jpg' | asset_url }}" alt="Storm Jogger">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Storm Set</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Storm Jogger</div>
+      <div class="product-card-desc">Imperméable · SK Logo</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">84.90 CHF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PINK PUFFER -->
+  <div class="product-card" data-tags="sold jacket">
+    <div class="product-card-img">
+      <img src="{{ 'prod-pink.jpg' | asset_url }}" alt="Pink Puffer">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Puffer</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Pink Puffer</div>
+      <div class="product-card-desc">Doudoune · Édition hivernale</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">160.00 CHF</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-label">— Collections précédentes · Sold Out</div>
+
+  <!-- TEAR-OFF GREY -->
+  <div class="product-card" data-tags="sold set">
+    <div class="product-card-img">
+      <img src="{{ 'prod-grey.jpg' | asset_url }}" alt="Tear-Off Grey">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Tear-Off</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Tear-Off Grey</div>
+      <div class="product-card-desc">Ensemble · Coton lourd</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLUE SET -->
+  <div class="product-card" data-tags="sold set">
+    <div class="product-card-img">
+      <img src="{{ 'prod-blue.jpg' | asset_url }}" alt="Blue Set">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Blue Set</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Blue Set</div>
+      <div class="product-card-desc">Tee oversized · Shorts</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL BLACK -->
+  <div class="product-card" data-tags="sold set">
+    <div class="product-card-img">
+      <img src="{{ 'prod-black.jpg' | asset_url }}" alt="Tear-Off Black">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Full Black</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Tear-Off Black</div>
+      <div class="product-card-desc">Ensemble · Full Black</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KAKI SET -->
+  <div class="product-card" data-tags="sold set">
+    <div class="product-card-img">
+      <img src="{{ 'prod-kaki.jpg' | asset_url }}" alt="Kaki Set">
+      <div class="sold-overlay"></div>
+      <div class="col-tag"><span>Kaki Set</span></div>
+      <span class="product-badge badge-sold">Sold Out</span>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Kaki Set</div>
+      <div class="product-card-desc">Tee · Shorts Summer</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price sold">—</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ STORY BANNER ══ -->
+<div class="story-banner">
+  <div>
+    <div class="story-banner-eyebrow">Slum Kid — Notre Histoire</div>
+    <div class="story-banner-title">FROM<br>SLUM<br>TO<br>FASHION</div>
+    <div class="story-banner-body">On vient pas forcément des bidonvilles mais on a la même dalle. La même faim. Le même feu.</div>
+    <a href="{{ routes.root_url }}pages/notre-histoire" class="story-banner-btn">Lire notre histoire →</a>
+  </div>
+  <div class="story-banner-img">
+    <img src="{{ 'prod-grey.jpg' | asset_url }}" alt="Slum Kid">
+  </div>
+</div>
+
+<!-- ══ FOOTER INSTAGRAM ══ -->
+<div class="footer-insta">
+  <div class="footer-insta-header">
+    <span class="footer-handle">@slumkid.clo</span>
+    <a class="footer-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
+  </div>
+  <div class="footer-feed">
+    <div class="footer-feed-item"></div>
+    <div class="footer-feed-item"></div>
+    <div class="footer-feed-item"></div>
+    <div class="footer-feed-item"></div>
+    <div class="footer-feed-item"></div>
+  </div>
+</div>
+
+<!-- ══ FOOTER NEWSLETTER ══ -->
+<div class="footer-newsletter">
+  <div class="footer-nl-title">Sign up to our newsletter &amp; get a gift on your birthday</div>
+  {% form 'customer' %}
+    <div class="footer-nl-form">
+      <input class="footer-nl-input" type="email" name="contact[email]" placeholder="Enter your email">
+      <button class="footer-nl-btn" type="submit">Subscribe</button>
+    </div>
+  {% endform %}
+  <div class="footer-socials">
+    <a class="footer-social" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="footer-social" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══ FOOTER LEGAL ══ -->
+<div class="footer-legal">
+  <span class="footer-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+  <div class="footer-links">
+    <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
+    <a href="{{ routes.root_url }}pages/support">Support</a>
+    <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
+    <a href="{{ routes.root_url }}pages/legal-notice">Legal notice</a>
+    <a href="{{ routes.root_url }}policies/privacy-policy">Privacy policy</a>
+  </div>
+</div>
+
+<script>
+/* ── Filtre ── */
+(function() {
+  var pills = document.querySelectorAll('.filter-pill');
+  var cards = document.querySelectorAll('.product-card');
+  var labels = document.querySelectorAll('.divider-label');
+
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      pills.forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      var filter = pill.dataset.filter;
+      cards.forEach(function(card) {
+        var tags = card.dataset.tags || '';
+        card.style.display = (filter === 'all' || tags.indexOf(filter) !== -1) ? '' : 'none';
+      });
+      labels.forEach(function(label) {
+        var next = label.nextElementSibling;
+        var hasVisible = false;
+        while (next && !next.classList.contains('divider-label')) {
+          if (next.classList.contains('product-card') && next.style.display !== 'none') hasVisible = true;
+          next = next.nextElementSibling;
+        }
+        label.style.display = hasVisible ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Catalogue",
+  "settings": []
+}
+{% endschema %}
