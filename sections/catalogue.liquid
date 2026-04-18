@@ -58,24 +58,26 @@ nav {
 /* ── MENU DRAWER ── */
 .sk-menu-overlay { position: fixed; inset: 0; z-index: 299; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.35s; }
 .sk-menu-overlay.open { opacity: 1; pointer-events: all; }
-.sk-menu-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: min(340px, 85vw); background: #0a0a0a; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.sk-menu-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: min(360px, 88vw); background: #ffffff; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: -8px 0 40px rgba(0,0,0,0.12); }
 .sk-menu-drawer.open { transform: translateX(0); }
-.sk-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.sk-menu-close { background: rgba(255,255,255,0.08); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: #fff; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
-.sk-menu-links { flex: 1; display: flex; flex-direction: column; padding: 2rem 1.6rem; gap: 0.3rem; }
-.sk-menu-link { display: flex; align-items: baseline; gap: 0.8rem; font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #fff; text-decoration: none; line-height: 1.15; padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); opacity: 0; transform: translateX(20px); transition: opacity 0.4s, transform 0.4s; }
+.sk-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.6rem; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.sk-menu-close { background: rgba(0,0,0,0.06); border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; color: #0a0a0a; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.sk-menu-close:hover { background: rgba(0,0,0,0.12); }
+.sk-menu-links { flex: 1; display: flex; flex-direction: column; padding: 1.5rem 1.6rem; gap: 0; }
+.sk-menu-link { display: flex; flex-direction: column; gap: 0.15rem; font-size: 1.8rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #0a0a0a; text-decoration: none; line-height: 1.0; padding: 0.9rem 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0; transform: translateX(20px); transition: opacity 0.4s, transform 0.4s, color 0.2s; }
 .sk-menu-drawer.open .sk-menu-link { opacity: 1; transform: translateX(0); }
 .sk-menu-drawer.open .sk-menu-link:nth-child(1) { transition-delay: 0.05s; }
 .sk-menu-drawer.open .sk-menu-link:nth-child(2) { transition-delay: 0.10s; }
 .sk-menu-drawer.open .sk-menu-link:nth-child(3) { transition-delay: 0.15s; }
 .sk-menu-drawer.open .sk-menu-link:nth-child(4) { transition-delay: 0.20s; }
 .sk-menu-link:last-child { border-bottom: none; }
-.sk-menu-sub { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); text-transform: uppercase; flex-shrink: 0; }
-.sk-menu-footer { padding: 1.6rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; gap: 1rem; }
-.sk-menu-socials { display: flex; gap: 1rem; align-items: center; }
-.sk-menu-social { color: rgba(255,255,255,0.6); transition: color 0.2s; display: flex; text-decoration: none; }
-.sk-menu-social:hover { color: #fff; }
-.sk-menu-copy { font-size: 0.55rem; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+.sk-menu-link:hover { color: rgba(0,0,0,0.45); }
+.sk-menu-sub { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(0,0,0,0.3); text-transform: uppercase; display: block; margin-bottom: 0.1rem; }
+.sk-menu-footer { padding: 1.6rem; border-top: 1px solid rgba(0,0,0,0.07); display: flex; flex-direction: column; gap: 1rem; }
+.sk-menu-socials { display: flex; gap: 1.2rem; align-items: center; }
+.sk-menu-social { color: rgba(0,0,0,0.45); transition: color 0.2s; display: flex; text-decoration: none; }
+.sk-menu-social:hover { color: #0a0a0a; }
+.sk-menu-copy { font-size: 0.55rem; color: rgba(0,0,0,0.25); letter-spacing: 0.06em; }
 
 /* ── HERO ── */
 .cat-hero {
@@ -142,7 +144,7 @@ nav {
 }
 .product-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .p-card-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%); z-index: 2; }
-.sold-out-overlay { position: absolute; inset: 0; z-index: 3; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding-bottom: 40%; pointer-events: none; }
+.sold-out-overlay { display: none; }
 .sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; }
 .col-tag {
   position: absolute; left: 50%; top: 0; bottom: 80px;
@@ -157,15 +159,15 @@ nav {
 }
 .product-card-info {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 8rem 1.4rem 1.8rem; z-index: 5;
-  background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
-  display: flex; flex-direction: column; gap: 0.4rem;
+  padding: 6rem 1.4rem 1.6rem; z-index: 5;
+  background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.55) 50%, transparent 100%);
+  display: flex; flex-direction: column; gap: 0.3rem;
 }
-.product-card-name { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.02em; color: var(--white); text-transform: uppercase; line-height: 1.0; }
-.product-card-desc { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.4; margin-bottom: 0.4rem; }
-.product-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-.product-card-price { font-size: 0.95rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
-.product-card-price.sold { color: rgba(255,255,255,0.4); text-decoration: line-through; font-size: 0.85rem; }
+.product-card-name { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.03em; color: var(--white); text-transform: uppercase; line-height: 1.0; }
+.product-card-desc { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.4; margin-bottom: 0.3rem; }
+.product-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.4rem; }
+.product-card-price { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.5); text-decoration: line-through; }
+.sold-badge { display: inline-flex; align-items: center; background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 980px; }
 .product-card-btn {
   background: transparent; color: var(--white);
   border: 1px solid rgba(255,255,255,0.6);
@@ -260,7 +262,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 <div class="sk-menu-overlay" id="skMenuOverlay" onclick="skMenuClose()"></div>
 <div class="sk-menu-drawer" id="skMenuDrawer">
   <div class="sk-menu-header">
-    <a href="{{ routes.root_url }}" style="display:flex;align-items:center;"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0) invert(1);"></a>
+    <a href="{{ routes.root_url }}" style="display:flex;align-items:center;"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0);"></a>
     <button class="sk-menu-close" onclick="skMenuClose()">✕</button>
   </div>
   <div class="sk-menu-links">
@@ -326,14 +328,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-storm.jpg' | asset_url }}" alt="Storm Jacket">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Storm Set</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Storm Jacket</div>
       <div class="product-card-desc">Imperméable · Réflectif</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">129.90 CHF</span>
+        <span class="product-card-price">129.90 CHF</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -343,14 +345,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'storm-set-img-09.jpg' | asset_url }}" alt="Storm Jogger">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Storm Set</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Storm Jogger</div>
       <div class="product-card-desc">Imperméable · SK Logo</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">84.90 CHF</span>
+        <span class="product-card-price">84.90 CHF</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -360,14 +362,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-pink.jpg' | asset_url }}" alt="Pink Puffer">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Puffer</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Pink Puffer</div>
       <div class="product-card-desc">Doudoune · Édition hivernale</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">160.00 CHF</span>
+        <span class="product-card-price">160.00 CHF</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -379,14 +381,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-grey.jpg' | asset_url }}" alt="Tear-Off Grey">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Tear-Off</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Grey</div>
       <div class="product-card-desc">Ensemble · Coton lourd</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">—</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -396,14 +397,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-blue.jpg' | asset_url }}" alt="Blue Set">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Blue Set</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Blue Set</div>
       <div class="product-card-desc">Tee oversized · Shorts</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">—</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -413,14 +413,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-black.jpg' | asset_url }}" alt="Tear-Off Black">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Full Black</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Black</div>
       <div class="product-card-desc">Ensemble · Full Black</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">—</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
@@ -430,14 +429,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-img">
       <img src="{{ 'prod-kaki.jpg' | asset_url }}" alt="Kaki Set">
       <div class="p-card-bg-overlay"></div>
-      <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
       <div class="col-tag"><span>Kaki Set</span></div>
     </div>
     <div class="product-card-info">
       <div class="product-card-name">Kaki Set</div>
       <div class="product-card-desc">Tee · Shorts Summer</div>
       <div class="product-card-bottom">
-        <span class="product-card-price sold">—</span>
+        <span class="sold-badge">Sold Out</span>
       </div>
     </div>
   </div>
