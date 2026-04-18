@@ -152,6 +152,28 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 .sk-menu-social { color: rgba(0,0,0,0.45); transition: color 0.2s; display: flex; text-decoration: none; }
 .sk-menu-social:hover { color: #0a0a0a; }
 .sk-menu-copy { font-size: 0.55rem; color: rgba(0,0,0,0.25); letter-spacing: 0.06em; }
+
+/* ════════ MOBILE BOTTOM NAV ════════ */
+@media (max-width: 768px) {
+  .sk-menu-btn { display: none !important; }
+  .mob-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+    height: 60px;
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; align-items: center; justify-content: space-around;
+    padding: 0 0.5rem;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mob-nav-btn {
+    background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #0a0a0a; padding: 0.5rem; flex: 1;
+  }
+  body { padding-bottom: 60px; }
+}
+@media (min-width: 769px) { .mob-nav { display: none !important; } }
 </style>
 
 <!-- ══ MENU DRAWER ══ -->
@@ -189,6 +211,23 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- ════ MOBILE BOTTOM NAV ════ -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.search_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.cart_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.account_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="skMenuOpen()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</div>
+
 
 <section class="hero">
   <div class="hero-bg" style="background-image: url('{{ 'story-img-00.jpg' | asset_url }}');"></div>
@@ -322,6 +361,22 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 window.addEventListener('scroll', function() {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
 });
+</script>
+
+<script>
+(function() {
+  var _o = window.skMenuOpen, _c = window.skMenuClose;
+  window.skMenuOpen = function() {
+    if (_o) _o();
+    var m = document.getElementById('mobNav');
+    if (m) { m.style.transform = 'translateY(100%)'; m.style.transition = 'transform 0.3s'; }
+  };
+  window.skMenuClose = function() {
+    if (_c) _c();
+    var m = document.getElementById('mobNav');
+    if (m) { m.style.transform = ''; }
+  };
+})();
 </script>
 
 {% schema %}
