@@ -197,7 +197,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .btn-storm-ghost:hover { background: rgba(255,255,255,0.1); border-color: #ffffff; }
 
 /* ── SOLD OUT ── */
-.sold-out-overlay { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,0.52); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.sold-out-overlay { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,0.52); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 185px; pointer-events: none; }
 .sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; white-space: nowrap; }
 
 /* ── RESPONSIVE ── */
@@ -412,16 +412,15 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="carousel-inner" id="carouselInner">
 
       <div class="p-card" data-ci="0">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-storm.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
         <div class="p-card-vtitle"><span>STORM SET</span></div>
         <div class="p-card-info">
-          <span class="p-badge new">✦ New In</span>
+          <span class="p-badge">Collection</span>
           <div class="p-name">Storm Set<br>White</div>
           <div class="p-desc">Veste + Jogger<br>Imperméable &amp; Réflectif</div>
-          <div class="p-card-footer">
-            <a href="{{ routes.root_url }}products/storm-set" class="btn-cart">View</a>
-          </div>
+          <div class="p-card-footer"></div>
         </div>
       </div>
 
