@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gp_section_541484725068366778": {
+      "settings": {
+        "checksum": "98dab83062ed53de01faf320cb8ff37f223675f01812194592452c25969e8816_1_1_0_0__1",
+        "ggB3HNL_pO6_label": "ADD TO BAG",
+        "ggB3HNL_pO6_outOfStockLabel": "Out of stock",
+        "ggB3HNL_pO6_unavailableLabel": "Unavailable",
+        "ggpcA0gYTRG_childItem_0": "<p>DETAILS DU PRODUIT</p>",
+        "ggpcA0gYTRG_childItem_1": "<p>GUIDE DES TAILLES</p>",
+        "ggpcA0gYTRG_childItem_2": "<p>LIVRAISON ET RETOUR</p>",
+        "ggvnbDmjtwd_text": "<p><strong>Temps de livraison:</strong><br>Le délai de livraison est généralement de 7 à 14 jours à compter de la date de commande.</p><p>Les délais de livraison peuvent varier en fonction des conditions de production et de transport.<br><br><strong>Frais de livraison:</strong></p><ul><li><strong>Suisse:</strong> 4.90 CHF</li><li><strong>France:</strong> 9.90 €</li><li><strong>DROM &amp; COM:</strong> 40.95 € to 58.90 €</li><li><strong>UE:</strong> 14.50 €</li><li><strong>Hors de l'UE:</strong> 35.90 € to 70.80 €</li></ul><p>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/shipping-policy\"><u>Conditions de livraisons</u></a></p><p>&nbsp;</p><p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);font-size:16px;\"><strong>Retour</strong></span></p><p>Nous n'acceptons pas les retours. Toutes les ventes sont finales.<br><br>Check <a href=\"https://b1i9bd-14.myshopify.com/pages/exchange-return-refund\"><u>Echange, Remboursement &amp; Ret</u></a><u>our</u></p>",
+        "ggyCGyi0-_L_text": "<strong>Details du produit</strong><ul><li>Coupe classique</li><li>Taille élastique aux manches et à l'ourlet</li><li>Logo Slum Kid brodé</li><li>Fermeture éclair personnalisée SK</li><li>Intérieur en soie</li><li>100% cotton</li><li>500 GSM</li><li>Le premier model mesure 177 cm et porte du M</li><li>Le second model mesure 187 cm et porte du L<br><br>Instructions de lavage:<br>&nbsp;</li><li>Laver à 30 degrés &nbsp;</li><li>Laver avec des couleurs similaires</li></ul>",
+        "section_preload": "true"
+      },
+      "type": "gp-section-541484725068366778"
+    },
+    "gp_section_541486920182531248": {
+      "settings": {
+        "checksum": "3b09ba3173cb19929fa8ef3a6a95918f23fb4a1a0d85580c1246251a6544692c_1_1_0_0__1",
+        "ggBZGK-1jj4_text": "ASSORTI AVEC"
+      },
+      "type": "gp-section-541486920182531248"
+    }
+  },
+  "order": [
+    "gp_section_541484725068366778",
+    "gp_section_541486920182531248"
+  ]
+}
