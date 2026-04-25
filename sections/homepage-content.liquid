@@ -1,109 +1,663 @@
+{% comment %}
+  ═══════════════════════════════════════════════
+  Section : Homepage Slum Kid
+  Fichier  : sections/homepage-slumkid.liquid
+  ═══════════════════════════════════════════════
+{% endcomment %}
+
+<script>
+/* ── Fix viewport ── */
+(function() {
+  var vp = document.querySelector('meta[name="viewport"]');
+  if (vp) {
+    vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+  } else {
+    var m = document.createElement('meta');
+    m.name = 'viewport';
+    m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.head.appendChild(m);
+  }
+  document.documentElement.style.overflowX = 'hidden';
+  document.documentElement.style.maxWidth = '100%';
+  document.body && (document.body.style.overflowX = 'hidden');
+  document.body && (document.body.style.maxWidth = '100%');
+})();
+</script>
+<script>
+function skMenuOpen() {
+  document.getElementById('skMenuOverlay').classList.add('open');
+  document.getElementById('skMenuDrawer').classList.add('open');
+  if (document.getElementById('skMenuBtn')) document.getElementById('skMenuBtn').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  var mob = document.getElementById('mobNav');
+  if (mob) mob.classList.add('hidden');
+}
+function skMenuClose() {
+  document.getElementById('skMenuOverlay').classList.remove('open');
+  document.getElementById('skMenuDrawer').classList.remove('open');
+  if (document.getElementById('skMenuBtn')) document.getElementById('skMenuBtn').classList.remove('open');
+  document.body.style.overflow = '';
+  var mob = document.getElementById('mobNav');
+  if (mob) mob.classList.remove('hidden');
+}
+</script>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: #ffffff !important;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-
-  .cs-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .cs-logo {
-    width: 200px;
-    max-width: 70vw;
-    display: block;
-  }
-
-  .cs-email-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .cs-email-form input[type="email"] {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1px solid #000;
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; }
+body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white:  #ffffff;
+  --black:  #0a0a0a;
+  --gray:   #888;
+  --light:  #f5f5f7;
+  --radius-btn: 980px;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+  --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); background: #ffffff; color: #0a0a0a; }
+nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 56px;
+  background: rgba(255,255,255,0);
+  backdrop-filter: saturate(180%) blur(0px);
+  -webkit-backdrop-filter: saturate(180%) blur(0px);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 2.4rem;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 22px; width: auto; display: block; }
+@media (min-width: 769px) { .nav-logo img { height: 28px; } }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { font-size: 0.72rem; letter-spacing: 0.14em; font-weight: 500; color: rgba(255,255,255,0.8); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+nav.scrolled .nav-links a { color: rgba(0,0,0,0.65); }
+nav.scrolled .nav-links a:hover { color: var(--black); }
+.nav-actions { display: flex; gap: 0.8rem; align-items: center; }
+.nav-icon-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.8); transition: color 0.2s; padding: 0.3rem; display: flex; }
+.nav-icon-btn:hover { color: var(--white); }
+nav.scrolled .nav-icon-btn { color: rgba(0,0,0,0.65); }
+nav.scrolled .nav-icon-btn:hover { color: var(--black); }
+.hero { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+.hero-track { display: flex; width: 300%; height: 100%; transition: transform 0.9s var(--ease); }
+.hero-slide { width: 33.333%; height: 100%; position: relative; flex-shrink: 0; display: flex; align-items: flex-end; }
+.hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center top; }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.1) 70%, transparent 100%); }
+.slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 3.5rem 4.5rem; opacity: 0; transform: translateY(28px); transition: opacity 0.8s 0.25s var(--ease), transform 0.8s 0.25s var(--ease); }
+.hero-slide.active .slide-content { opacity: 1; transform: translateY(0); }
+.slide-eyebrow { font-size: 0.65rem; letter-spacing: 0.22em; font-weight: 500; color: rgba(255,255,255,0.55); text-transform: uppercase; display: block; margin-bottom: 0.9rem; }
+.slide-title { font-size: clamp(4rem, 10vw, 9rem); font-weight: 900; letter-spacing: -0.03em; line-height: 0.92; color: var(--white); text-transform: uppercase; margin-bottom: 1.2rem; }
+.slide-body { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.6; letter-spacing: 0.02em; margin-bottom: 2rem; max-width: 480px; }
+.slide-cta-row { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.35rem; background: #ffffff; color: #0a0a0a; border: none; border-radius: var(--radius-btn); padding: 0.72rem 1.6rem; font-family: var(--font); font-size: 0.82rem; font-weight: 600; letter-spacing: -0.01em; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.15s; }
+.btn-primary:hover { opacity: 0.88; transform: scale(0.98); }
+.hero-arrows { display: none; }
+.hero-dots { position: absolute; bottom: 2.4rem; right: 2.8rem; display: flex; gap: 8px; z-index: 10; align-items: center; }
+.hero-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; border: none; transition: all 0.35s; }
+.hero-dot.active { background: var(--white); transform: scale(1.2); }
+.hero-progress { position: absolute; bottom: 0; left: 0; height: 2px; background: rgba(0,0,0,0.5); width: 0%; z-index: 10; }
+.products-section { background: #f5f5f7; padding: 0; margin-top: 0; border-top: none; }
+.carousel-scene { position: relative; width: 100%; height: 560px; overflow: hidden; }
+.carousel-inner { display: flex; height: 100%; transition: transform 0.7s var(--ease); }
+.p-card { flex: 0 0 33.333%; height: 100%; border-radius: 0; overflow: hidden; background: #e8e8ed; cursor: pointer; will-change: filter, opacity; transition: filter 0.7s var(--ease), opacity 0.7s var(--ease); position: relative; border-right: 1px solid rgba(255,255,255,0.04); }
+.p-card.pos-center { filter: none; z-index: 10; }
+.p-card.pos-left   { filter: brightness(0.3) blur(3px); z-index: 5; }
+.p-card.pos-right  { filter: brightness(0.3) blur(3px); z-index: 5; }
+.p-card.pos-far-left  { filter: brightness(0.15) blur(5px); opacity: 0.5; z-index: 1; }
+.p-card.pos-far-right { filter: brightness(0.15) blur(5px); opacity: 0.5; z-index: 1; }
+.p-card.pos-hidden { filter: brightness(0); opacity: 0; pointer-events: none; }
+.p-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.p-card-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%), linear-gradient(to left, rgba(0,0,0,0.4) 0%, transparent 55%); }
+.p-card-divider { position: absolute; top: 0; left: 50%; bottom: 0; width: 1px; background: rgba(255,255,255,0.25); z-index: 3; }
+.p-card-vtitle { position: absolute; left: 50%; top: 0; bottom: 180px; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; z-index: 4; overflow: hidden; }
+.p-card-vtitle span { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: 0.02em; color: #ffffff; text-transform: uppercase; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); line-height: 1; white-space: nowrap; max-height: 100%; overflow: hidden; }
+.p-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem 1.4rem 1.6rem; z-index: 5; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 70%, transparent 100%); display: flex; flex-direction: column; gap: 0.3rem; min-height: 170px; }
+.p-badge { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: block; margin-bottom: 0.2rem; }
+.p-badge.new { color: var(--black); }
+.p-name  { font-size: 0.88rem; font-weight: 800; letter-spacing: 0.04em; color: var(--white); line-height: 1.2; text-transform: uppercase; margin-bottom: 0.2rem; }
+.p-desc  { font-size: 0.7rem; color: rgba(255,255,255,0.4); line-height: 1.4; margin-bottom: 0.8rem; }
+.p-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.p-price { display: none; }
+.btn-cart { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.6); border-radius: var(--radius-btn); padding: 0.46rem 1.1rem; font-family: var(--font); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; }
+.btn-cart:hover { background: var(--white); color: var(--black); border-color: var(--white); transform: scale(0.97); }
+.carousel-ctrl { display: flex; align-items: center; justify-content: flex-end; gap: 2px; padding: 1rem 2rem 0; }
+.c-arrow { width: 44px; height: 44px; border-radius: 0; background: rgba(0,0,0,0.07); border: 1px solid rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.85rem; color: var(--black); transition: background 0.2s; }
+.c-arrow:hover { background: rgba(0,0,0,0.15); }
+.c-dots { display: flex; gap: 6px; align-items: center; margin-right: auto; padding-left: 2rem; }
+.c-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.2); cursor: pointer; border: none; transition: all 0.3s; }
+.c-dot.active { background: var(--black); width: 18px; border-radius: 3px; }
+footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
+.foot-insta { padding: 2.8rem 2rem 0; }
+.foot-insta-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; padding: 0 0.2rem; }
+.foot-insta-handle { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; }
+.foot-insta-handle:hover { opacity: 0.7; }
+.foot-follow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; color: var(--black); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 1px; }
+.foot-follow:hover { border-color: var(--black); }
+.foot-feed-wrap { position: relative; overflow: hidden; }
+.foot-feed { display: flex; gap: 6px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; cursor: grab; }
+.foot-feed:active { cursor: grabbing; }
+.foot-feed::-webkit-scrollbar { display: none; }
+.foot-feed-item { flex: 0 0 140px; height: 140px; background: #ddd; overflow: hidden; cursor: pointer; transition: opacity 0.25s; border-radius: 2px; }
+.foot-feed-item:hover { opacity: 0.8; }
+.foot-feed-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foot-newsletter { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+.foot-nl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; margin-bottom: 1.4rem; }
+.foot-nl-form { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 440px; margin: 0 auto 1.8rem; border-bottom: 1px solid rgba(0,0,0,0.35); }
+.foot-nl-input { flex: 1; background: transparent; border: none; outline: none; font-family: var(--font); font-size: 16px; color: #0a0a0a; padding: 0.6rem 0.8rem 0.6rem 0; letter-spacing: 0.02em; }
+.foot-nl-input::placeholder { color: rgba(0,0,0,0.35); }
+.foot-nl-btn { background: transparent; border: none; cursor: pointer; font-family: var(--font); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #0a0a0a; padding: 0.6rem 0; white-space: nowrap; transition: opacity 0.2s; }
+.foot-nl-btn:hover { opacity: 0.6; }
+.foot-socials { display: flex; align-items: center; justify-content: center; gap: 1.6rem; }
+.foot-social-icon { color: #0a0a0a; opacity: 0.75; transition: opacity 0.2s; text-decoration: none; display: flex; }
+.foot-social-icon:hover { opacity: 1; }
+.foot-legal { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.4rem 2rem; }
+.foot-copy { font-size: 0.62rem; color: rgba(0,0,0,0.5); letter-spacing: 0.02em; white-space: normal; word-break: break-word; text-align: center; }
+.foot-legal-links { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: center; }
+.foot-legal-links a { font-size: 0.68rem; color: rgba(0,0,0,0.55); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.foot-legal-links a:hover { color: #0a0a0a; }
+.slogan-section { background: #f5f5f7; padding: 4rem 2rem; border-top: none; display: flex; align-items: center; justify-content: center; min-height: 28vh; }
+.slogan-inner { text-align: center; max-width: 900px; }
+.slogan-label { font-size: 0.65rem; letter-spacing: 0.22em; font-weight: 500; color: rgba(0,0,0,0.45); text-transform: uppercase; display: block; margin-bottom: 1.8rem; }
+.slogan-text { font-size: clamp(2.2rem, 5vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; color: var(--black); text-transform: uppercase; min-height: 1.2em; }
+.slogan-cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--black); margin-left: 4px; vertical-align: middle; animation: blink 0.75s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.storm-banner { position: relative; width: 100%; height: 70vh; overflow: hidden; display: flex; align-items: center; }
+.storm-banner-bg { position: absolute; inset: 0; background-size: cover; background-position: center 30%; background-image: url('{{ "slide-banner-clean.jpg" | asset_url }}'); }
+.storm-banner-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%); }
+.storm-banner-content { position: absolute; z-index: 2; bottom: 2.5rem; left: 0; right: 0; padding: 0 2rem; text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+.storm-banner-eyebrow { font-size: 0.6rem; letter-spacing: 0.3em; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; justify-content: flex-end; }
+.storm-banner-eyebrow::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.3); }
+.storm-banner-title { font-size: clamp(3rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.88; text-transform: uppercase; color: #ffffff; margin-bottom: 1.4rem; }
+.storm-banner-sub { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 2.4rem; max-width: 380px; text-align: right; }
+.storm-banner-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; }
+.btn-storm-primary { display: inline-flex; align-items: center; gap: 0.4rem; background: #ffffff; color: #0a0a0a; border: none; border-radius: 980px; padding: 0.82rem 2rem; font-family: var(--font); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.15s; }
+.btn-storm-primary:hover { opacity: 0.88; transform: scale(0.98); }
+.btn-storm-ghost { display: inline-flex; align-items: center; background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.45); border-radius: 980px; padding: 0.82rem 2rem; font-family: var(--font); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+.btn-storm-ghost:hover { background: rgba(255,255,255,0.1); border-color: #ffffff; }
+.sold-out-overlay { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,0.52); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 185px; pointer-events: none; }
+.sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; white-space: nowrap; }
+.hero { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+.products-section { margin-top: 0 !important; padding-top: 0 !important; border-top: none !important; }
+@media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { display: none; }
+  input, button, select, textarea { font-size: 16px !important; }
+  .slide-content { padding: 0 1.5rem 8.5rem; }
+  .slide-title { font-size: clamp(3rem, 14vw, 5rem); }
+  .carousel-scene { height: 480px; }
+  .carousel-ctrl .c-arrow { display: none; }
+  .foot-feed-item { flex: 0 0 100px; height: 100px; }
+  .foot-legal { flex-direction: column; text-align: center; }
+  .foot-legal-links { justify-content: center; }
+  .storm-banner { height: 100vw; min-height: unset; padding: 0; }
+  .storm-banner-content { bottom: 1.8rem; padding: 0 1.5rem; }
+  .storm-banner-title { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .storm-banner-sub { font-size: 0.78rem; }
+}
+.sk-menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; z-index: 310; }
+.sk-menu-btn span { display: block; width: 22px; height: 1.5px; background: currentColor; transition: all 0.3s; }
+.sk-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.sk-menu-btn.open span:nth-child(2) { opacity: 0; }
+.sk-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.sk-menu-overlay { position: fixed; inset: 0; z-index: 299; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+.sk-menu-overlay.open { opacity: 1; pointer-events: all; }
+.sk-menu-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: min(360px, 88vw); background: #ffffff; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: -8px 0 40px rgba(0,0,0,0.12); }
+.sk-menu-drawer.open { transform: translateX(0); }
+.sk-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.6rem; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.sk-menu-close { background: rgba(0,0,0,0.06); border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; color: #0a0a0a; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.sk-menu-close:hover { background: rgba(0,0,0,0.12); }
+.sk-menu-links { flex: 1; display: flex; flex-direction: column; padding: 1.5rem 1.6rem; gap: 0; }
+.sk-menu-link { display: flex; flex-direction: column; gap: 0.15rem; font-size: 1.8rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #0a0a0a; text-decoration: none; line-height: 1.0; padding: 0.9rem 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0; transform: translateX(20px); transition: opacity 0.4s, transform 0.4s, color 0.2s; }
+.sk-menu-drawer.open .sk-menu-link { opacity: 1; transform: translateX(0); }
+.sk-menu-drawer.open .sk-menu-link:nth-child(1) { transition-delay: 0.05s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(2) { transition-delay: 0.10s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(3) { transition-delay: 0.15s; }
+.sk-menu-drawer.open .sk-menu-link:nth-child(4) { transition-delay: 0.20s; }
+.sk-menu-link:last-child { border-bottom: none; }
+.sk-menu-link:hover { color: rgba(0,0,0,0.45); }
+.sk-menu-sub { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(0,0,0,0.3); text-transform: uppercase; display: block; margin-bottom: 0.1rem; }
+.sk-menu-footer { padding: 1.6rem; border-top: 1px solid rgba(0,0,0,0.07); display: flex; flex-direction: column; gap: 1rem; }
+.sk-menu-socials { display: flex; gap: 1.2rem; align-items: center; }
+.sk-menu-social { color: rgba(0,0,0,0.45); transition: color 0.2s; display: flex; text-decoration: none; }
+.sk-menu-social:hover { color: #0a0a0a; }
+.sk-menu-copy { font-size: 0.55rem; color: rgba(0,0,0,0.25); letter-spacing: 0.06em; }
+@media (max-width: 768px) {
+  nav#mainNav { display: none !important; }
+  .mob-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    height: 60px;
     background: transparent;
-    color: #000;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    outline: none;
-    text-align: center;
-    -webkit-appearance: none;
-    font-family: inherit;
+    border-bottom: 1px solid transparent;
+    display: flex; align-items: center; justify-content: space-around;
+    padding: 0 0.5rem;
+    padding-top: env(safe-area-inset-top);
+    transition: background 0.35s, border-color 0.35s;
   }
-
-  .cs-email-form input[type="email"]::placeholder {
-    color: #aaa;
-    letter-spacing: 0.1em;
+  .mob-nav.scrolled {
+    background: rgba(255,255,255,0.95);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
   }
-
-  .cs-btn {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    background: #000;
-    color: #fff;
-    border: none;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: inherit;
+  .mob-nav.hidden { transform: translateY(-110%); transition: transform 0.3s; }
+  .mob-nav-btn {
+    background: none; border: none; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #ffffff; padding: 0.5rem; flex: 1;
+    transition: color 0.35s, opacity 0.2s;
   }
-
-  .cs-btn:hover {
-    background: #222;
-  }
-
+  .mob-nav.scrolled .mob-nav-btn { color: #0a0a0a; }
+  .mob-nav-btn:hover { opacity: 0.6; }
+  body { padding-bottom: 0; }
+}
+@media (min-width: 769px) {
+  .mob-nav { display: none !important; }
+}
 </style>
 
-<div class="cs-wrap">
-
-  <img
-    src="{{ 'logo-slumkid.png' | asset_url }}"
-    alt="{{ shop.name }}"
-    class="cs-logo"
-    width="200"
-    height="auto"
-  />
-
-  <div class="cs-email-form">
-    {% form 'customer' %}
-      <input type="hidden" name="contact[tags]" value="newsletter">
-      <input
-        type="email"
-        name="contact[email]"
-        placeholder="VOTRE EMAIL"
-        autocomplete="email"
-        required
-      />
-      <button type="submit" class="cs-btn">REJOINDRE</button>
-    {% endform %}
+<div class="sk-menu-overlay" id="skMenuOverlay" onclick="skMenuClose()"></div>
+<div class="sk-menu-drawer" id="skMenuDrawer">
+  <div class="sk-menu-header">
+    <a href="{{ routes.root_url }}" style="display:flex;align-items:center;">
+      <img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0);">
+    </a>
+    <button class="sk-menu-close" onclick="skMenuClose()">✕</button>
   </div>
-
-
+  <div class="sk-menu-links">
+    <a class="sk-menu-link" href="{{ routes.root_url }}"><span class="sk-menu-sub">W26</span>Dernière collection</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/catalogue"><span class="sk-menu-sub">Toutes les pièces</span>Catalogue</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/notre-histoire"><span class="sk-menu-sub">Slum Kid</span>Notre Histoire</a>
+    <a class="sk-menu-link" href="{{ routes.root_url }}pages/contact"><span class="sk-menu-sub">Nous joindre</span>Contact</a>
+  </div>
+  <div class="sk-menu-footer">
+    <div class="sk-menu-socials">
+      <a class="sk-menu-social" href="https://wa.me/41000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a class="sk-menu-social" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="sk-menu-social" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+      </a>
+    </div>
+    <span class="sk-menu-copy">© 2026 Slum Kid by BÖRJA SWISS SOLUTIONS</span>
+  </div>
 </div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="{{ routes.root_url }}">
+    <img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:30px;width:auto;filter:brightness(0) invert(1);max-width:160px;object-fit:contain;">
+  </a>
+  <button class="sk-menu-btn" id="skMenuBtn" onclick="skMenuOpen()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-nav" id="mobNav">
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.search_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.cart_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="window.location.href='{{ routes.account_url }}'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </button>
+  <button class="mob-nav-btn" onclick="skMenuOpen()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</div>
+
+<section class="hero">
+  <div class="hero-track" id="heroTrack">
+
+    <div class="hero-slide active">
+      <div class="hero-bg" style="background-image: url('{{ '_SK__embrodery_on_202604201502.png' | asset_url }}');"></div>
+      <div class="slide-content">
+        <span class="slide-eyebrow">Season 26</span>
+        <h1 class="slide-title">NEW<br>IN</h1>
+        <p class="slide-body">Storm Set</p>
+        <div class="slide-cta-row">
+          <a href="{{ routes.root_url }}products/storm-set" class="btn-primary">Shop Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image: url('{{ 'slide-2.jpg' | asset_url }}');"></div>
+      <div class="slide-content">
+        <span class="slide-eyebrow">What's About</span>
+        <h1 class="slide-title">SLUM<br>LIFE</h1>
+        <p class="slide-body">Be part of it</p>
+        <div class="slide-cta-row">
+          <a href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" class="btn-primary">Discover</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-bg" style="background-image: url('{{ 'Captured_on_a_202604201519.png' | asset_url }}');"></div>
+      <div class="slide-content">
+        <span class="slide-eyebrow">Find Your Favorite Design</span>
+        <h1 class="slide-title">BEST<br>SELLER</h1>
+        <p class="slide-body">Be part of it</p>
+        <div class="slide-cta-row">
+          <a href="#catalogue" class="btn-primary">Availability</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-dots">
+    <button class="hero-dot active" data-i="0"></button>
+    <button class="hero-dot" data-i="1"></button>
+    <button class="hero-dot" data-i="2"></button>
+  </div>
+  <div class="hero-progress" id="heroProgress"></div>
+</section>
+
+<section class="storm-banner">
+  <div class="storm-banner-bg"></div>
+  <div class="storm-banner-content">
+    <p class="storm-banner-eyebrow">W26 Collection — Now Available</p>
+    <h2 class="storm-banner-title">STORM<br>SET</h2>
+    <p class="storm-banner-sub">Imperméable. Réflectif. Technique. Le Storm Set est disponible maintenant.</p>
+    <div class="storm-banner-actions">
+      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-primary">Buy Now →</a>
+      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-ghost">En savoir plus</a>
+    </div>
+  </div>
+</section>
+
+<section class="products-section" id="catalogue">
+  <div class="carousel-scene" id="carouselScene">
+    <div class="carousel-inner" id="carouselInner">
+      <div class="p-card" data-ci="0">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-storm.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>STORM SET</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Collection</span>
+          <div class="p-name">Storm Set<br>White</div>
+          <div class="p-desc">Veste + Jogger<br>Imperméable &amp; Réflectif</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+      <div class="p-card" data-ci="1">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-pink.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>PUFFER</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Collection</span>
+          <div class="p-name">Puffer<br>Pink</div>
+          <div class="p-desc">Doudoune matelassée<br>Édition hivernale</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+      <div class="p-card" data-ci="2">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-grey.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>TEAR-OFF</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Bestseller</span>
+          <div class="p-name">Tear-Off<br>Grey</div>
+          <div class="p-desc">Ensemble tear-off<br>Coton lourd</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+      <div class="p-card" data-ci="3">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-blue.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>BLUE SET</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Collection</span>
+          <div class="p-name">Blue<br>Set</div>
+          <div class="p-desc">Oversized Tee<br>&amp; Shorts</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+      <div class="p-card" data-ci="4">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-black.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>FULL BLACK</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Collection</span>
+          <div class="p-name">Tear-Off<br>Black</div>
+          <div class="p-desc">Ensemble tear-off<br>Full Black</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+      <div class="p-card" data-ci="5">
+        <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'prod-kaki.jpg' | asset_url }}');"></div>
+        <div class="p-card-divider"></div>
+        <div class="p-card-vtitle"><span>KAKI SET</span></div>
+        <div class="p-card-info">
+          <span class="p-badge">Collection</span>
+          <div class="p-name">Kaki<br>Set</div>
+          <div class="p-desc">Tee &amp; Shorts<br>Summer Edition</div>
+          <div class="p-card-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-ctrl">
+    <button class="c-arrow" id="cPrev">←</button>
+    <div class="c-dots" id="cDots"></div>
+    <button class="c-arrow" id="cNext">→</button>
+  </div>
+</section>
+
+<section class="slogan-section">
+  <div class="slogan-inner">
+    <span class="slogan-label">Slum Kid — From Slum to Fashion</span>
+    <div class="slogan-text" id="sloganText"><span class="slogan-cursor"></span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-insta">
+    <div class="foot-insta-header">
+      <a class="foot-insta-handle" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">@slumkid.clo</a>
+      <a class="foot-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
+    </div>
+    <div class="foot-feed-wrap">
+      <div class="foot-feed" id="footFeed">
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-newsletter">
+    <p class="foot-nl-title">Sign up to our newsletter &amp; get a gift on your birthday</p>
+    {% form 'customer', id: 'newsletter-form' %}
+      <div class="foot-nl-form">
+        <input class="foot-nl-input" type="email" name="contact[email]" placeholder="Enter your email" required>
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <button class="foot-nl-btn" type="submit">Subscribe</button>
+      </div>
+    {% endform %}
+    <div class="foot-socials">
+      <a class="foot-social-icon" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="foot-social-icon" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+    <div class="foot-legal-links">
+      <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
+      <a href="{{ routes.root_url }}pages/support">Support</a>
+      <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
+      <a href="{{ routes.root_url }}policies/terms-of-service">Terms of service</a>
+      <a href="{{ routes.root_url }}policies/legal-notice">Legal notice</a>
+      <a href="{{ routes.root_url }}policies/privacy-policy">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  var scrolled = window.scrollY > 40;
+  var mainNav = document.getElementById('mainNav');
+  if (mainNav) mainNav.classList.toggle('scrolled', scrolled);
+  var mob = document.getElementById('mobNav');
+  if (mob) mob.classList.toggle('scrolled', scrolled);
+});
+window.addEventListener('scroll', function() {
+  var logo = document.querySelector('#mainNav .nav-logo img');
+  if (!logo) return;
+  if (window.scrollY > 40) {
+    logo.style.filter = 'brightness(0)';
+  } else {
+    logo.style.filter = 'brightness(0) invert(1)';
+  }
+});
+const DURATION = 5500;
+const hSlides = document.querySelectorAll('.hero-slide');
+const hDots   = document.querySelectorAll('.hero-dot');
+const hTrack  = document.getElementById('heroTrack');
+const hProg   = document.getElementById('heroProgress');
+let hCur = 0, hTimer, hStart, hRaf;
+function hGo(n) {
+  hSlides[hCur].classList.remove('active'); hDots[hCur].classList.remove('active');
+  hCur = ((n % hSlides.length) + hSlides.length) % hSlides.length;
+  hSlides[hCur].classList.add('active'); hDots[hCur].classList.add('active');
+  hTrack.style.transform = 'translateX(-' + (hCur * 33.333) + '%)';
+}
+function hProgress() {
+  cancelAnimationFrame(hRaf); hProg.style.transition = 'none'; hProg.style.width = '0%';
+  hStart = performance.now();
+  (function tick(now) {
+    var p = Math.min((now - hStart) / DURATION * 100, 100);
+    hProg.style.width = p + '%';
+    if (p < 100) hRaf = requestAnimationFrame(tick);
+  })(hStart);
+}
+function hAuto() { clearInterval(hTimer); hProgress(); hTimer = setInterval(function() { hGo(hCur + 1); hProgress(); }, DURATION); }
+hDots.forEach(function(d) { d.addEventListener('click', function() { clearInterval(hTimer); hGo(+d.dataset.i); hAuto(); }); });
+var htx = 0;
+document.querySelector('.hero').addEventListener('touchstart', function(e) { htx = e.touches[0].clientX; }, { passive: true });
+document.querySelector('.hero').addEventListener('touchend', function(e) {
+  var dx = e.changedTouches[0].clientX - htx;
+  if (Math.abs(dx) > 50) { clearInterval(hTimer); hGo(dx < 0 ? hCur + 1 : hCur - 1); hAuto(); }
+});
+hAuto();
+(function () {
+  var scene     = document.getElementById('carouselScene');
+  var inner     = document.getElementById('carouselInner');
+  var origCards = Array.from(document.querySelectorAll('.p-card'));
+  var ptotal    = origCards.length;
+  var pDots     = document.getElementById('cDots');
+  var CLONE     = 3;
+  for (var i = 0; i < CLONE; i++) {
+    origCards.forEach(function(c) { var cl = c.cloneNode(true); cl.setAttribute('data-clone', '1'); inner.appendChild(cl); });
+  }
+  for (var i = 0; i < CLONE; i++) {
+    origCards.slice().reverse().forEach(function(c) { var cl = c.cloneNode(true); cl.setAttribute('data-clone', '1'); inner.prepend(cl); });
+  }
+  var allCards = Array.from(inner.querySelectorAll('.p-card'));
+  var total    = allCards.length;
+  var pActive  = CLONE * ptotal;
+  origCards.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'c-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', function() { pGo(CLONE * ptotal + i); });
+    pDots.appendChild(d);
+  });
+  function updateDots() {
+    var origIdx = ((pActive - CLONE * ptotal) % ptotal + ptotal) % ptotal;
+    document.querySelectorAll('.c-dot').forEach(function(d, i) { d.classList.toggle('active', i === origIdx); });
+  }
+  function applyClasses() {
+    var L  = (pActive - 1 + total) % total;
+    var R  = (pActive + 1) % total;
+    var FL = (pActive - 2 + total) % total;
+    var FR = (pActive + 2) % total;
+    allCards.forEach(function(c, i) {
+      c.className = 'p-card';
+      if      (i === pActive) c.classList.add('pos-center');
+      else if (i === L)       c.classList.add('pos-left');
+      else if (i === R)       c.classList.add('pos-right');
+      else if (i === FL)      c.classList.add('pos-far-left');
+      else if (i === FR)      c.classList.add('pos-far-right');
+      else                    c.classList.add('pos-hidden');
+    });
+  }
+  function slide(animated) {
+    inner.style.transition = animated ? 'transform 0.7s cubic-bezier(0.4,0,0.2,1)' : 'none';
+    inner.style.transform  = 'translateX(-' + (pActive * 33.333 - 33.333) + '%)';
+  }
+  function pGo(idx, animated) {
+    if (animated === undefined) animated = true;
+    pActive = idx;
+    applyClasses(); slide(animated); updateDots();
+    inner.addEventListener('transitionend', function onEnd() {
+      inner.removeEventListener('transitionend', onEnd);
+      if (pActive < CLONE * ptotal)              { pActive += ptotal; slide(false); applyClasses(); }
+      else if (pActive >= (CLONE + 1) * ptotal)  { pActive -= ptotal; slide(false); applyClasses(); }
+    });
+  }
+  document.getElementById('cPrev').onclick = function() { pGo(pActive - 1); };
+  document.getElementById('cNext').onclick = function() { pGo(pActive + 1); };
+  var ctx = 0;
+  scene.addEventListener('touchstart', function(e) { ctx = e.touches[0].clientX; }, { passive: true });
+  scene.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - ctx;
+    if (Math.abs(dx) > 45) pGo(dx < 0 ? pActive + 1 : pActive - 1);
+  });
+  var autoTimer = setInterval(function() { pGo(pActive + 1); }, 3500);
+  scene.addEventListener('touchstart', function() { clearInterval(autoTimer); }, { passive: true });
+  pGo(pActive, false);
+})();
+(function () {
+  var slogans = ['FROM SLUM TO FASHION','WEAR WHAT YOU ARE','BE PART OF IT','NEW DROP — SEASON 26','SLUM LIFE'];
+  var el = document.getElementById('sloganText');
+  var si = 0, ci = 0, deleting = false;
+  var SPEED_TYPE = 80, SPEED_DEL = 40, PAUSE = 2200;
+  function tick() {
+    var word = slogans[si];
+    if (!deleting) {
+      ci++;
+      el.innerHTML = word.slice(0, ci) + '<span class="slogan-cursor"></span>';
+      if (ci === word.length) { deleting = true; setTimeout(tick, PAUSE); return; }
+    } else {
+      ci--;
+      el.innerHTML = word.slice(0, ci) + '<span class="slogan-cursor"></span>';
+      if (ci === 0) { deleting = false; si = (si + 1) % slogans.length; }
+    }
+    setTimeout(tick, deleting ? SPEED_DEL : SPEED_TYPE);
+  }
+  setTimeout(tick, 600);
+})();
+</script>
 
 {% schema %}
 {
-  "name": "Homepage Coming Soon",
+  "name": "Homepage Slum Kid",
   "settings": []
 }
 {% endschema %}
