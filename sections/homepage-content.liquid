@@ -189,19 +189,6 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* ══ STORM BANNER ══ */
-.storm-banner { position: relative; width: 100%; height: 70vh; overflow: hidden; display: flex; align-items: center; }
-.storm-banner-bg { position: absolute; inset: 0; background-size: cover; background-position: center 30%; background-image: url('{{ "slide-banner-clean.jpg" | asset_url }}'); }
-.storm-banner-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%); }
-.storm-banner-content { position: absolute; z-index: 2; bottom: 2.5rem; left: 0; right: 0; padding: 0 2rem; text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
-.storm-banner-eyebrow { font-size: 0.6rem; letter-spacing: 0.3em; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; justify-content: flex-end; }
-.storm-banner-eyebrow::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.3); }
-.storm-banner-title { font-size: clamp(3rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.88; text-transform: uppercase; color: #ffffff; margin-bottom: 1.4rem; }
-.storm-banner-sub { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 2.4rem; max-width: 380px; text-align: right; }
-.storm-banner-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; }
-.btn-storm-primary { display: inline-flex; align-items: center; gap: 0.4rem; background: #ffffff; color: #0a0a0a; border: none; border-radius: 980px; padding: 0.82rem 2rem; font-family: var(--font); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.15s; }
-.btn-storm-primary:hover { opacity: 0.88; transform: scale(0.98); }
-.btn-storm-ghost { display: inline-flex; align-items: center; background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.45); border-radius: 980px; padding: 0.82rem 2rem; font-family: var(--font); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.2s; }
-.btn-storm-ghost:hover { background: rgba(255,255,255,0.1); border-color: #ffffff; }
 
 /* ── SOLD OUT ── */
 .sold-out-overlay { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,0.52); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 185px; pointer-events: none; }
@@ -221,10 +208,6 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   .foot-feed-item { flex: 0 0 100px; height: 100px; }
   .foot-legal { flex-direction: column; text-align: center; }
   .foot-legal-links { justify-content: center; }
-  .storm-banner { height: 100vw; min-height: unset; padding: 0; }
-  .storm-banner-content { bottom: 1.8rem; padding: 0 1.5rem; }
-  .storm-banner-title { font-size: clamp(2.8rem, 12vw, 4rem); }
-  .storm-banner-sub { font-size: 0.78rem; }
 }
 
 /* ══ MENU HAMBURGER ══ */
@@ -360,16 +343,16 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
       <div class="slide-content">
         <span class="slide-eyebrow">Season 26</span>
         <h1 class="slide-title">NEW<br>IN</h1>
-        <p class="slide-body">Storm Set</p>
+        <p class="slide-body">XX.XX.2026</p>
         <div class="slide-cta-row">
-          <a href="{{ routes.root_url }}products/storm-set" class="btn-primary">Shop Now</a>
+          <a href="{{ routes.root_url }}pages/catalogue" class="btn-primary">preview</a>
         </div>
       </div>
     </div>
 
     <div class="hero-slide">
       <div class="hero-bg hero-bg-desktop" style="background-image: url('{{ 'oeuil-SK.jpeg' | asset_url }}');"></div>
-      <div class="hero-bg hero-bg-mobile" style="background-image: url('{{ 'slumkidgolf-mobile.jpeg' | asset_url }}');"></div>
+      <div class="hero-bg hero-bg-mobile" style="background-image: url('{{ 'oeuil-SK-mobile.jpeg' | asset_url }}');"></div>
       <div class="slide-content">
         <span class="slide-eyebrow">What's About</span>
         <h1 class="slide-title">SLUM<br>LIFE</h1>
@@ -403,18 +386,6 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 </section>
 
 <!-- ═══ STORM BANNER ═══ -->
-<section class="storm-banner">
-  <div class="storm-banner-bg"></div>
-  <div class="storm-banner-content">
-    <p class="storm-banner-eyebrow">W26 Collection — Now Available</p>
-    <h2 class="storm-banner-title">STORM<br>SET</h2>
-    <p class="storm-banner-sub">Imperméable. Réflectif. Technique. Le Storm Set est disponible maintenant.</p>
-    <div class="storm-banner-actions">
-      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-primary">Buy Now →</a>
-      <a href="{{ routes.root_url }}products/storm-set" class="btn-storm-ghost">En savoir plus</a>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ S2 : CAROUSEL ═══ -->
 <section class="products-section" id="catalogue">
@@ -423,7 +394,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 
       <div class="p-card" data-ci="0">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
-        <div class="p-card-bg" style="background-image: url('{{ 'prod-storm.jpg' | asset_url }}');"></div>
+        <div class="p-card-bg" style="background-image: url('{{ 'oeuil-SK.jpeg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
         <div class="p-card-vtitle"><span>STORM SET</span></div>
         <div class="p-card-info">
