@@ -108,8 +108,11 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* FIX : titre réduit sur mobile */
 .cat-hero-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; white-space: nowrap; }
 @media (max-width: 600px) {
-  .cat-hero-title { font-size: clamp(1.6rem, 9vw, 2.8rem); white-space: normal; }
-  .cat-hero-count-num { font-size: clamp(2rem, 10vw, 3.5rem); }
+  .cat-hero-title { font-size: clamp(1.3rem, 8vw, 2.2rem); white-space: normal; letter-spacing: -0.02em; }
+  .cat-hero-count-num { font-size: clamp(1.8rem, 9vw, 3rem); }
+  .cat-hero { padding: 5rem 1rem 1.5rem; gap: 0.5rem; }
+  .cat-hero-left .eyebrow { font-size: 0.5rem; letter-spacing: 0.15em; }
+  .cat-hero-sub { font-size: 0.55rem; }
 }
 .cat-hero-sub { font-size: 0.65rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1rem; }
 .cat-hero-count { text-align: right; }
@@ -189,7 +192,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 @media (max-width: 768px) {
   .story-banner { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; min-height: unset; }
   .story-banner-left { padding-right: 0; margin-bottom: 2rem; }
-  .story-banner-img { min-height: 260px; aspect-ratio: 4/3; }
+  .story-banner-img { min-height: unset; aspect-ratio: 9 / 16; max-height: 55vw; }
   .story-banner-title { font-size: clamp(2rem, 10vw, 3rem); }
 }
 
