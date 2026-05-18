@@ -124,7 +124,6 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
   input, button, select, textarea { font-size: 16px !important; }
 }
 
-/* ══ MENU HAMBURGER ══ */
 .sk-menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; z-index: 310; }
 .sk-menu-btn span { display: block; width: 22px; height: 1.5px; background: currentColor; transition: all 0.3s; }
 .sk-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -153,24 +152,10 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 .sk-menu-social:hover { color: #0a0a0a; }
 .sk-menu-copy { font-size: 0.55rem; color: rgba(0,0,0,0.25); letter-spacing: 0.06em; }
 
-/* ════════ MOBILE BOTTOM NAV ════════ */
 @media (max-width: 768px) {
   .sk-menu-btn { display: none !important; }
-  .mob-nav {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
-    height: 60px;
-    background: rgba(255,255,255,0.96);
-    border-top: 1px solid rgba(0,0,0,0.08);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    display: flex; align-items: center; justify-content: space-around;
-    padding: 0 0.5rem;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .mob-nav-btn {
-    background: none; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: #0a0a0a; padding: 0.5rem; flex: 1;
-  }
+  .mob-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; height: 60px; background: rgba(255,255,255,0.96); border-top: 1px solid rgba(0,0,0,0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: space-around; padding: 0 0.5rem; padding-bottom: env(safe-area-inset-bottom); }
+  .mob-nav-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #0a0a0a; padding: 0.5rem; flex: 1; }
   body { padding-bottom: 60px; }
 }
 @media (min-width: 769px) { .mob-nav { display: none !important; } }
@@ -204,6 +189,7 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
     <span class="sk-menu-copy">© 2026 Slum Kid by BÖRJA SWISS SOLUTIONS</span>
   </div>
 </div>
+
 <nav id="mainNav">
   <a class="nav-back" href="/">&#8592; Retour</a>
   <a class="nav-logo" href="/"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid"></a>
@@ -212,7 +198,6 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
   </button>
 </nav>
 
-<!-- ════ MOBILE BOTTOM NAV ════ -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-nav-btn" onclick="window.location.href='{{ routes.search_url }}'">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -227,7 +212,6 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
 </div>
-
 
 <section class="hero">
   <div class="hero-bg" style="background-image: url('{{ 'LA-SK-mobile.jpeg' | asset_url }}');"></div>
@@ -265,7 +249,7 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
     <p class="mosaic-eyebrow">Une mentalité</p>
     <h2 class="mosaic-title">LA DALLE<br>DES<br>BIDONVILLES</h2>
     <p class="mosaic-body">
-      Slum kid c'est une marque de vêtement mais avant tout c'est une mentalité inspirée des enfants des bidonvilles. Un petit qui part de rien, de zéro et qui veut arriver au sommet. Qui veut s'en sortir coûte que coûte. Pour lui. Pour les siens. Un rêveur qui passe à l'action.
+      Slum kid c'est une marque de vêtement mais avant tout c'est une mentalité inspirée des enfants des bidonvilles. Un petit qui part de rien, de zéro et qui veut arriver au sommet. Qui veut s'en sortir coûte que coûte. Pour lui. Pour les siens. Un rêveur qui passe à l'action et qui n'attend pas que ça tombe du ciel.
     </p>
   </div>
 </section>
@@ -289,11 +273,11 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
   </div>
   <div class="ftb-right">
     <p class="ftb-body">
-      Y'a une phrase qu'on dit souvent : <strong>From Slum to Fashion</strong>. Du bidonville à la mode. C'est une phrase qui nous correspond. Mais c'est une phrase qui peut correspondre à chacun.
+      <strong>From Slum to Fashion</strong>. Du bidonville à la mode. C'est une phrase qui nous correspond. Mais c'est une phrase qui peut correspondre à chacun.
       <br><br>
-      Parce qu'un slum kid ça appartient pas qu'au statut, c'est une mentalité. Ça peut être <strong>from slum to football</strong>, from slum to médecin, from slum to n'importe quoi.
+      Parce qu'un slum kid ça appartient pas qu'au statut, c'est une mentalité. Ça peut être <strong>from slum to football</strong>, from slum to médecin, from slum to n'importe quoi. On aura pas tous la même fin mais ce qui est sûr c'est qu'on a tous la même faim!
       <br><br>
-      Peu importe ce que tu veux faire, peu importe ton rêve. Notre rêve à nous c'est la mode. Donc <strong>from slum to fashion</strong>.
+      Peu importe ce que tu veux faire, peu importe ton rêve. Notre rêve à nous c'est la mode. Donc <strong>from slum to fashion</strong>..
     </p>
   </div>
 </section>
@@ -311,11 +295,11 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 <section class="mosaic-1">
   <div class="mosaic-text">
     <p class="mosaic-eyebrow">Notre philosophie</p>
-    <h2 class="mosaic-title">ON FORCE<br>PERSONNE</h2>
+    <h2 class="mosaic-title">PAS UNE<br>MARQUE POUR<br>TOUT LE MONDE</h2>
     <p class="mosaic-body">
-      On crée ce qu'on aime, ce qu'on veut, ce qu'on aimerait avoir. On fait pas des sappes pour les gens, on fait des sappes pour nous avant tout — en espérant que les gens comme nous nous rejoignent.
+      On crée ce qu'on aime, ce qu'on veut, ce qu'on aimerait porter.
       <br><br>
-      Si t'es comme nous, tant mieux. Si c'est pas le cas, continue ton chemin. Des marques y'en a plein. On force personne.
+      Si t'es comme nous, tant mieux. Si c'est pas le cas, continue ton chemin.
     </p>
   </div>
   <div class="mosaic-img">
@@ -340,9 +324,7 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
   <div class="cta-content">
     <span class="cta-eyebrow">T'es au bon endroit</span>
     <h2 class="cta-title">T'ES UN<br>SLUM KID ?</h2>
-    <p class="cta-sub">
-      Voilà avec ces quelques petites phrases je pense que tu commences à capter ce que c'est un slum kid. Si t'es un slum kid, t'es au bon endroit.
-    </p>
+    <p class="cta-sub">Si t'es un slum kid t'es au bon endroit.</p>
     <a href="/#catalogue" class="btn-white">Voir la collection</a>
   </div>
 </section>
