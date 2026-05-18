@@ -91,9 +91,7 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 .manifesto { background: var(--light); padding: 10rem 5rem; text-align: center; }
 .manifesto-pre { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); margin-bottom: 3rem; display: block; }
 .manifesto-lines { max-width: 800px; margin: 0 auto; }
-.manifesto-line { font-size: clamp(1.5rem, 3.5vw, 3rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; text-transform: uppercase; color: var(--black); padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.08); opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s var(--ease) forwards; }
-.manifesto-line:last-child { border-bottom: none; }
-@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+/* manifesto-line remplacé par typewriter */
 
 .cta-section { background: var(--black); padding: 10rem 5rem; text-align: center; position: relative; overflow: hidden; }
 .cta-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.25; }
@@ -310,14 +308,70 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
 <section class="manifesto">
   <span class="manifesto-pre">Le Manifeste Slum Kid</span>
   <div class="manifesto-lines">
-    <div class="manifesto-line" style="animation-delay:.05s">La même dalle</div>
-    <div class="manifesto-line" style="animation-delay:.10s">La même faim</div>
-    <div class="manifesto-line" style="animation-delay:.15s">La même détermination</div>
-    <div class="manifesto-line" style="animation-delay:.20s">Les mêmes rêves</div>
-    <div class="manifesto-line" style="animation-delay:.25s">Les mêmes ambitions</div>
-    <div class="manifesto-line" style="animation-delay:.30s">From Slum to Fashion</div>
+    <div class="manifesto-typewriter" id="manifestoText"><span class="manifesto-cursor"></span></div>
   </div>
 </section>
+
+<style>
+.manifesto-typewriter {
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--black);
+  min-height: 1.2em;
+  text-align: center;
+}
+.manifesto-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: var(--black);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: mBlink 0.75s step-end infinite;
+}
+@keyframes mBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>
+
+<script>
+(function() {
+  var phrases = [
+    'La même dalle',
+    'La même faim',
+    'La même détermination',
+    'Les mêmes rêves',
+    'Les mêmes ambitions',
+    'From Slum to Fashion'
+  ];
+  var el = document.getElementById('manifestoText');
+  var si = 0, ci = 0, deleting = false;
+  var SPEED_TYPE = 90, SPEED_DEL = 45, PAUSE = 2000;
+
+  function tick() {
+    var word = phrases[si];
+    if (!deleting) {
+      ci++;
+      el.innerHTML = word.slice(0, ci) + '<span class="manifesto-cursor"></span>';
+      if (ci === word.length) {
+        deleting = true;
+        setTimeout(tick, PAUSE);
+        return;
+      }
+    } else {
+      ci--;
+      el.innerHTML = word.slice(0, ci) + '<span class="manifesto-cursor"></span>';
+      if (ci === 0) {
+        deleting = false;
+        si = (si + 1) % phrases.length;
+      }
+    }
+    setTimeout(tick, deleting ? SPEED_DEL : SPEED_TYPE);
+  }
+  setTimeout(tick, 800);
+})();
+</script>
 
 <section class="cta-section">
   <div class="cta-bg" style="background-image: url('{{ 'story-img-00.jpg' | asset_url }}');"></div>
