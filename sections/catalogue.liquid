@@ -103,9 +103,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
   margin-top: -52px;
   display: flex; align-items: flex-end; justify-content: space-between;
 }
+.cat-hero-left { max-width: 55%; }
 .cat-hero-left .eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
 .cat-hero-left .eyebrow::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.25); }
-/* FIX : titre réduit sur mobile */
 .cat-hero-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; white-space: nowrap; }
 @media (max-width: 600px) {
   .cat-hero-title { font-size: clamp(1.3rem, 8vw, 2.2rem); white-space: normal; letter-spacing: -0.02em; }
@@ -148,15 +148,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 }
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: rgba(0,0,0,0.08);
   width: 100%; margin: 0;
-}
-@media (max-width: 768px) {
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
-  .product-card-name { font-size: 0.95rem; }
-  .product-card-desc { font-size: 0.65rem; }
 }
 .product-card { background: #e8e8ed; position: relative; overflow: hidden; cursor: pointer; }
 .product-card-img { width: 100%; aspect-ratio: 9 / 16; position: relative; overflow: hidden; }
@@ -192,7 +187,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 @media (max-width: 768px) {
   .story-banner { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; min-height: unset; }
   .story-banner-left { padding-right: 0; margin-bottom: 2rem; }
-  .story-banner-img { min-height: unset; aspect-ratio: 9 / 16; max-height: 55vw; }
+  .story-banner-img { min-height: unset; aspect-ratio: 4 / 3; max-height: none; width: 100%; }
+  .story-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .story-banner-title { font-size: clamp(2rem, 10vw, 3rem); }
 }
 
@@ -203,11 +199,13 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .foot-insta-handle { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; }
 .foot-insta-handle:hover { opacity: 0.7; }
 .foot-follow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; color: var(--black); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 1px; }
-.foot-feed-wrap { position: relative; overflow: hidden; }
-.foot-feed { display: flex; gap: 6px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; cursor: grab; }
+.foot-feed-wrap { position: relative; overflow: hidden; width: 100%; }
+.foot-feed { display: flex; gap: 6px; scrollbar-width: none; padding-bottom: 4px; width: max-content; animation: feedScroll 30s linear infinite; }
 .foot-feed::-webkit-scrollbar { display: none; }
+.foot-feed-wrap:hover .foot-feed { animation-play-state: paused; }
 .foot-feed-item { flex: 0 0 140px; height: 140px; background: #ddd; overflow: hidden; border-radius: 2px; }
 .foot-feed-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes feedScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .foot-newsletter { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
 .foot-nl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; margin-bottom: 1.4rem; }
 .foot-nl-form { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 440px; margin: 0 auto 1.8rem; border-bottom: 1px solid rgba(0,0,0,0.35); }
@@ -321,7 +319,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="cat-hero-sub">From Slum to Fashion</div>
   </div>
   <div class="cat-hero-count">
-    <div class="cat-hero-count-num">7</div>
+    <div class="cat-hero-count-num">8</div>
     <div class="cat-hero-count-label">pièces</div>
   </div>
 </div>
@@ -401,6 +399,23 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
       <div class="product-card-bottom">
         <span class="product-card-price">160.00 CHF</span>
         <span class="sold-badge">Sold Out</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROSE GOLD SET -->
+  <div class="product-card" data-tags="available set" onclick="window.location.href='{{ routes.root_url }}pages/rose-gold-set'">
+    <div class="product-card-img">
+      <img src="{{ 'rose-gold-img-00.jpg' | asset_url }}" alt="Rose Gold Set">
+      <div class="p-card-bg-overlay"></div>
+      <div class="col-tag"><span>Rose Gold</span></div>
+    </div>
+    <div class="product-card-info">
+      <div class="product-card-name">Rose Gold Set</div>
+      <div class="product-card-desc">T-Shirt + Short · 100% Cotton</div>
+      <div class="product-card-bottom">
+        <span class="product-card-price">69.90 CHF</span>
+        <a href="{{ routes.root_url }}pages/rose-gold-set" class="sold-badge" style="background:rgba(255,255,255,0.2);text-decoration:none;">Shop Now →</a>
       </div>
     </div>
   </div>
@@ -495,6 +510,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
       </div>
     </div>
   </div>
