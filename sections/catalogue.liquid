@@ -1,8 +1,3 @@
-{% comment %}
-  Section : Catalogue Slum Kid
-  Fichier  : sections/catalogue.liquid
-{% endcomment %}
-
 <script>
 (function() {
   var vp = document.querySelector('meta[name="viewport"]');
@@ -62,11 +57,12 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 22px; width: auto; display: block; filter: brightness(0) invert(1); transition: filter 0.4s; }
 #skNav.scrolled .nav-logo img { filter: brightness(0); }
+.nav-logo-text { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; transition: color 0.4s; }
+#skNav.scrolled .nav-logo-text { color: #0a0a0a; }
 .nav-back { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.8); text-decoration: none; text-transform: uppercase; transition: color 0.4s; }
 #skNav.scrolled .nav-back { color: rgba(0,0,0,0.55); }
 .sk-menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; }
-.sk-menu-btn span { display: block; width: 22px; height: 1.5px; background: #ffffff; transition: all 0.3s; }
-#skNav.scrolled .sk-menu-btn span { background: #0a0a0a; }
+.sk-menu-btn span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: all 0.3s; }
 .sk-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .sk-menu-btn.open span:nth-child(2) { opacity: 0; }
 .sk-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -98,22 +94,14 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* ── HERO ── */
 .cat-hero {
   background: var(--black); color: var(--white);
-  padding: 52px 2rem 2rem;
-  min-height: 28vh;
+  padding: 52px 2rem 3rem;
+  min-height: 45vh;
   margin-top: -52px;
   display: flex; align-items: flex-end; justify-content: space-between;
 }
-.cat-hero-left { max-width: 55%; }
 .cat-hero-left .eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
 .cat-hero-left .eyebrow::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.25); }
 .cat-hero-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; white-space: nowrap; }
-@media (max-width: 600px) {
-  .cat-hero-title { font-size: clamp(1.3rem, 8vw, 2.2rem); white-space: normal; letter-spacing: -0.02em; }
-  .cat-hero-count-num { font-size: clamp(1.8rem, 9vw, 3rem); }
-  .cat-hero { padding: 4rem 1rem 1.2rem; gap: 0.5rem; }
-  .cat-hero-left .eyebrow { font-size: 0.5rem; letter-spacing: 0.15em; }
-  .cat-hero-sub { font-size: 0.55rem; }
-}
 .cat-hero-sub { font-size: 0.65rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1rem; }
 .cat-hero-count { text-align: right; }
 .cat-hero-count-num { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; letter-spacing: -0.04em; color: var(--white); line-height: 1; }
@@ -148,65 +136,75 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 }
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: rgba(0,0,0,0.08);
-  width: 100%; margin: 0;
+  width: 100%;
+  margin: 0;
 }
-.product-card { background: #e8e8ed; position: relative; overflow: hidden; cursor: pointer; }
-.product-card-link { position: absolute; inset: 0; z-index: 10; display: block; }
-.product-card-img { width: 100%; aspect-ratio: 9 / 16; position: relative; overflow: hidden; }
+@media (max-width: 768px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-card-name { font-size: 0.95rem; }
+  .product-card-desc { font-size: 0.65rem; }
+}
+
+/* Cartes style homepage */
+.product-card { background: #e8e8ed; position: relative; overflow: hidden; cursor: pointer; display: block; text-decoration: none; color: inherit; }
+.product-card-img {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  position: relative; overflow: hidden;
+}
 .product-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
 .p-card-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%); z-index: 2; }
 .sold-out-overlay { display: none; }
 .sold-out-label { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.5rem 1.3rem; border-radius: 980px; }
-.col-tag { position: absolute; left: 50%; top: 0; bottom: 80px; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 4; }
-.col-tag span { font-size: 0.65rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); writing-mode: vertical-rl; transform: rotate(180deg); }
-.product-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 5rem 1.2rem 1.4rem; z-index: 5; background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.55) 45%, transparent 100%); display: flex; flex-direction: column; gap: 0.2rem; }
+.col-tag {
+  position: absolute; left: 50%; top: 0; bottom: 80px;
+  transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; z-index: 4;
+}
+.col-tag span {
+  font-size: 0.65rem; font-weight: 900; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  writing-mode: vertical-rl; transform: rotate(180deg);
+}
+.product-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 5rem 1.2rem 1.4rem; z-index: 5;
+  background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.55) 45%, transparent 100%);
+  display: flex; flex-direction: column; gap: 0.2rem;
+}
 .product-card-name { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.04em; color: var(--white); text-transform: uppercase; line-height: 0.95; }
 .product-card-desc { font-size: 0.7rem; color: rgba(255,255,255,0.5); line-height: 1.4; margin-bottom: 0.5rem; }
 .product-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.3rem; }
 .product-card-price { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.45); text-decoration: line-through; }
 .sold-badge { display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.45rem 1rem; border-radius: 980px; white-space: nowrap; }
-
-/* ── STORY BANNER ── */
-.story-banner {
-  background: var(--black); color: var(--white);
-  padding: 3rem 2.5rem;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0; align-items: stretch;
-  margin-top: 1px; min-height: 50vh;
+.product-card-btn {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--radius-btn); padding: 0.46rem 1.1rem;
+  font-family: var(--font); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+  transition: background 0.2s, transform 0.15s; white-space: nowrap;
 }
-.story-banner-left { display: flex; flex-direction: column; justify-content: center; padding-right: 2rem; }
-.story-banner-eyebrow { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.8rem; }
-.story-banner-title { font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; margin-bottom: 1.2rem; }
-.story-banner-body { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 1.6rem; }
-.story-banner-btn { display: inline-block; padding: 0.65rem 1.4rem; background: var(--white); color: var(--black); border-radius: var(--radius-btn); font-family: var(--font); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; }
-.story-banner-btn:hover { opacity: 0.88; }
-.story-banner-img { overflow: hidden; min-height: 400px; }
-.story-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-@media (max-width: 768px) {
-  .story-banner { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; min-height: unset; }
-  .story-banner-left { padding-right: 0; margin-bottom: 2rem; }
-  .story-banner-img { min-height: unset; aspect-ratio: 4 / 3; max-height: none; width: 100%; }
-  .story-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-  .story-banner-title { font-size: clamp(2rem, 10vw, 3rem); }
-}
+.product-card-btn:hover { background: var(--white); color: var(--black); border-color: var(--white); transform: scale(0.97); }
 
-/* ── FOOTER ── */
+
+/* ── FOOTER (copié homepage) ── */
 footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .foot-insta { padding: 2.8rem 2rem 0; }
 .foot-insta-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; padding: 0 0.2rem; }
 .foot-insta-handle { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; }
 .foot-insta-handle:hover { opacity: 0.7; }
 .foot-follow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; color: var(--black); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 1px; }
-.foot-feed-wrap { position: relative; overflow: hidden; width: 100%; }
-.foot-feed { display: flex; gap: 6px; scrollbar-width: none; padding-bottom: 4px; width: max-content; animation: feedScroll 30s linear infinite; }
+.foot-feed-wrap { position: relative; overflow: hidden; }
+.foot-feed { display: flex; gap: 6px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; cursor: grab; }
 .foot-feed::-webkit-scrollbar { display: none; }
-.foot-feed-wrap:hover .foot-feed { animation-play-state: paused; }
 .foot-feed-item { flex: 0 0 140px; height: 140px; background: #ddd; overflow: hidden; border-radius: 2px; }
 .foot-feed-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@keyframes feedScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .foot-newsletter { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
 .foot-nl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; margin-bottom: 1.4rem; }
 .foot-nl-form { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 440px; margin: 0 auto 1.8rem; border-bottom: 1px solid rgba(0,0,0,0.35); }
@@ -221,18 +219,64 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 .foot-legal-links { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: center; }
 .foot-legal-links a { font-size: 0.68rem; color: rgba(0,0,0,0.55); text-decoration: none; letter-spacing: 0.04em; }
 .foot-legal-links a:hover { color: #0a0a0a; }
+/* ── STORY BANNER ── */
+.story-banner {
+  background: var(--black); color: var(--white);
+  padding: 4rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; align-items: stretch;
+  margin-top: 1px; min-height: 50vh;
+}
+.story-banner-eyebrow { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.6rem; }
+.story-banner-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; margin-bottom: 1rem; }
+.story-banner-body { font-size: 10px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.2rem; }
+.story-banner-btn { display: inline-block; padding: 8px 18px; background: var(--white); color: var(--black); border-radius: var(--radius-btn); font-family: var(--font); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+.story-banner-img { overflow: hidden; border-radius: 0; min-height: 400px; }
+.story-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+/* ── FOOTER INSTAGRAM ── */
+.footer-insta { padding: 1.5rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); }
+.footer-insta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+.footer-handle { font-size: 11px; font-weight: 800; letter-spacing: 0.01em; text-transform: uppercase; }
+.footer-follow { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.3); padding-bottom: 1px; text-decoration: none; color: var(--black); }
+.footer-feed { display: flex; gap: 4px; }
+.footer-feed-item { flex: 1; aspect-ratio: 1; background: #f0f0f0; border-radius: 2px; overflow: hidden; }
+.footer-feed-item:nth-child(odd) { background: #e8e8e8; }
+
+/* ── FOOTER NEWSLETTER ── */
+.footer-newsletter { text-align: center; padding: 1.5rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); }
+.footer-nl-title { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+.footer-nl-form { display: flex; max-width: 320px; margin: 0 auto 1rem; border-bottom: 1px solid rgba(0,0,0,0.3); }
+.footer-nl-input { flex: 1; border: none; outline: none; font-family: var(--font); font-size: 11px; padding: 6px 0; background: transparent; }
+.footer-nl-btn { border: none; background: transparent; font-family: var(--font); font-size: 9px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; }
+.footer-socials { display: flex; justify-content: center; gap: 1.2rem; margin-top: 1rem; }
+.footer-social { color: rgba(0,0,0,0.5); text-decoration: none; transition: color 0.2s; display: flex; }
+.footer-social:hover { color: var(--black); }
+
+/* ── FOOTER LEGAL ── */
+.footer-legal { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-top: 1px solid rgba(0,0,0,0.07); flex-wrap: wrap; gap: 0.5rem; }
+.footer-copy { font-size: 8px; color: rgba(0,0,0,0.4); }
+.footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.footer-links a { font-size: 8px; color: rgba(0,0,0,0.4); text-decoration: none; }
+.footer-links a:hover { color: var(--black); }
 
 @media (max-width: 600px) {
   nav { padding: 0 1.2rem; }
-  .cat-hero { padding: 3.5rem 1.2rem 1.2rem; }
+  .cat-hero { padding: 2rem 1.2rem 2rem; }
   .filter-bar { padding: 0.8rem 1.2rem; }
-  .foot-legal { flex-direction: column; text-align: center; }
+  .story-banner { grid-template-columns: 1fr; }
+  .story-banner-img { aspect-ratio: 4/3; }
+  .footer-legal { flex-direction: column; text-align: center; }
   input, button, select, textarea { font-size: 16px !important; }
 }
 
-/* ════ MOBILE BOTTOM NAV ════ */
+/* ════════ MOBILE BOTTOM NAV ════════ */
 @media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  /* Masquer le bouton hamburger dans la nav sur mobile */
   .sk-menu-btn { display: none !important; }
+
+  /* Barre fixe en bas — blanche, blur Apple */
   .mob-nav {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998;
     height: 60px;
@@ -283,14 +327,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
       </a>
     </div>
-    <span class="sk-menu-copy">© {{ 'now' | date: '%Y' }} Slum Kid by BÖRJA SWISS SOLUTIONS</span>
+    <span class="sk-menu-copy">© 2026 Slum Kid by BÖRJA SWISS SOLUTIONS</span>
   </div>
 </div>
 
 <!-- ══ NAV ══ -->
 <nav id="skNav">
-  <a class="nav-back" href="{{ routes.root_url }}">&#8592; Retour</a>
-  <a class="nav-logo" href="{{ routes.root_url }}"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0) invert(1);transition:filter 0.4s;"></a>
+  <a class="nav-back" href="/">&#8592; Retour</a>
+  <a class="nav-logo" href="/"><img src="{{ 'slumkid-logo.png' | asset_url }}" alt="Slum Kid" style="height:22px;width:auto;filter:brightness(0);"></a>
   <button class="sk-menu-btn" id="skMenuBtn" onclick="skMenuOpen()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -320,7 +364,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="cat-hero-sub">From Slum to Fashion</div>
   </div>
   <div class="cat-hero-count">
-    <div class="cat-hero-count-num">8</div>
+    <div class="cat-hero-count-num">7</div>
     <div class="cat-hero-count-label">pièces</div>
   </div>
 </div>
@@ -339,24 +383,8 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 
   <div class="divider-label">— W26 · New In</div>
 
-  <!-- BIENTÔT DISPONIBLE -->
-  <div class="product-card" data-tags="available">
-    <div class="product-card-img">
-      <div style="position:absolute;inset:0;background:#0a0a0a;z-index:1;"></div>
-      <div class="p-card-bg-overlay" style="z-index:2;"></div>
-      <div class="col-tag" style="z-index:4;"><span>W26</span></div>
-    </div>
-    <div class="product-card-info">
-      <div class="product-card-name" style="font-size:clamp(1.2rem,3vw,2rem);">Bientôt<br>disponible</div>
-      <div class="product-card-desc">XX.XX.2026</div>
-      <div class="product-card-bottom"></div>
-    </div>
-  </div>
-
   <!-- STORM JACKET -->
-  <div class="product-card" data-tags="sold set jacket">
-    <a href="{{ routes.root_url }}pages/product-storm-set" class="product-card-link" aria-label="Storm Jacket"></a>
-
+  <a class="product-card" href="/products/storm-jacket" data-tags="sold set jacket">
     <div class="product-card-img">
       <img src="{{ 'prod-storm.jpg' | asset_url }}" alt="Storm Jacket">
       <div class="p-card-bg-overlay"></div>
@@ -370,12 +398,10 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <span class="sold-badge">Sold Out</span>
       </div>
     </div>
-    </div>
+  </a>
 
   <!-- STORM JOGGER -->
-  <div class="product-card" data-tags="sold set">
-    <a href="{{ routes.root_url }}pages/product-storm-set" class="product-card-link" aria-label="Storm Jogger"></a>
-
+  <a class="product-card" href="/products/storm-set" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'storm-set-img-09.jpg' | asset_url }}" alt="Storm Jogger">
       <div class="p-card-bg-overlay"></div>
@@ -389,12 +415,10 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <span class="sold-badge">Sold Out</span>
       </div>
     </div>
-    </div>
+  </a>
 
   <!-- PINK PUFFER -->
-  <div class="product-card" data-tags="sold jacket">
-    <a href="{{ routes.root_url }}pages/product-pink-puffer" class="product-card-link" aria-label="Pink Puffer"></a>
-
+  <a class="product-card" href="/products/pink-puffer" data-tags="sold jacket">
     <div class="product-card-img">
       <img src="{{ 'prod-pink.jpg' | asset_url }}" alt="Pink Puffer">
       <div class="p-card-bg-overlay"></div>
@@ -408,33 +432,12 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <span class="sold-badge">Sold Out</span>
       </div>
     </div>
-    </div>
-
-  <!-- ROSE GOLD SET -->
-  <div class="product-card" data-tags="available set">
-    <a href="{{ routes.root_url }}pages/product-rose-gold-set" class="product-card-link" aria-label="Rose Gold Set"></a>
-
-    <div class="product-card-img">
-      <img src="{{ 'rose-gold-img-00.jpg' | asset_url }}" alt="Rose Gold Set">
-      <div class="p-card-bg-overlay"></div>
-      <div class="col-tag"><span>Rose Gold</span></div>
-    </div>
-    <div class="product-card-info">
-      <div class="product-card-name">Rose Gold Set</div>
-      <div class="product-card-desc">T-Shirt + Short · 100% Cotton</div>
-      <div class="product-card-bottom">
-        <span class="product-card-price">69.90 CHF</span>
-        <a href="{{ routes.root_url }}pages/product-rose-gold-set" class="sold-badge" style="background:rgba(255,255,255,0.2);text-decoration:none;">Shop Now →</a>
-      </div>
-    </div>
-    </div>
+  </a>
 
   <div class="divider-label">— Collections précédentes · Sold Out</div>
 
   <!-- TEAR-OFF GREY -->
-  <div class="product-card" data-tags="sold set">
-    <a href="{{ routes.root_url }}pages/product-grey-tearoff" class="product-card-link" aria-label="Tear-Off Grey"></a>
-
+  <a class="product-card" href="/products/grey-tearoff" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-grey.jpg' | asset_url }}" alt="Tear-Off Grey">
       <div class="p-card-bg-overlay"></div>
@@ -443,14 +446,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Grey</div>
       <div class="product-card-desc">Ensemble · Coton lourd</div>
-      <div class="product-card-bottom"><span class="sold-badge">Sold Out</span></div>
+      <div class="product-card-bottom">
+        <span class="sold-badge">Sold Out</span>
+      </div>
     </div>
-    </div>
+  </a>
 
   <!-- BLUE SET -->
-  <div class="product-card" data-tags="sold set">
-    <a href="{{ routes.root_url }}pages/product-blue-set" class="product-card-link" aria-label="Blue Set"></a>
-
+  <a class="product-card" href="/products/blue-set" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-blue.jpg' | asset_url }}" alt="Blue Set">
       <div class="p-card-bg-overlay"></div>
@@ -459,14 +462,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-info">
       <div class="product-card-name">Blue Set</div>
       <div class="product-card-desc">Tee oversized · Shorts</div>
-      <div class="product-card-bottom"><span class="sold-badge">Sold Out</span></div>
+      <div class="product-card-bottom">
+        <span class="sold-badge">Sold Out</span>
+      </div>
     </div>
-    </div>
+  </a>
 
   <!-- FULL BLACK -->
-  <div class="product-card" data-tags="sold set">
-    <a href="{{ routes.root_url }}pages/catalogue" class="product-card-link" aria-label="Full Black"></a>
-
+  <a class="product-card" href="/products/black-tearoff" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-black.jpg' | asset_url }}" alt="Tear-Off Black">
       <div class="p-card-bg-overlay"></div>
@@ -475,14 +478,14 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-info">
       <div class="product-card-name">Tear-Off Black</div>
       <div class="product-card-desc">Ensemble · Full Black</div>
-      <div class="product-card-bottom"><span class="sold-badge">Sold Out</span></div>
+      <div class="product-card-bottom">
+        <span class="sold-badge">Sold Out</span>
+      </div>
     </div>
-    </div>
+  </a>
 
   <!-- KAKI SET -->
-  <div class="product-card" data-tags="sold set">
-    <a href="{{ routes.root_url }}pages/product-kaki-set" class="product-card-link" aria-label="Kaki Set"></a>
-
+  <a class="product-card" href="/products/kaki-set" data-tags="sold set">
     <div class="product-card-img">
       <img src="{{ 'prod-kaki.jpg' | asset_url }}" alt="Kaki Set">
       <div class="p-card-bg-overlay"></div>
@@ -491,15 +494,17 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
     <div class="product-card-info">
       <div class="product-card-name">Kaki Set</div>
       <div class="product-card-desc">Tee · Shorts Summer</div>
-      <div class="product-card-bottom"><span class="sold-badge">Sold Out</span></div>
+      <div class="product-card-bottom">
+        <span class="sold-badge">Sold Out</span>
+      </div>
     </div>
-    </div>
+  </a>
 
 </div>
 
 <!-- ══ STORY BANNER ══ -->
 <div class="story-banner">
-  <div class="story-banner-left">
+  <div>
     <div class="story-banner-eyebrow">Slum Kid — Notre Histoire</div>
     <div class="story-banner-title">FROM<br>SLUM<br>TO<br>FASHION</div>
     <div class="story-banner-body">On vient pas forcément des bidonvilles mais on a la même dalle. La même faim. Le même feu.</div>
@@ -510,7 +515,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   </div>
 </div>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ═══ FOOTER (identique homepage) ═══ -->
 <footer>
   <div class="foot-insta">
     <div class="foot-insta-header">
@@ -518,7 +523,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
       <a class="foot-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
     </div>
     <div class="foot-feed-wrap">
-      <div class="foot-feed">
+      <div class="foot-feed" id="footFeed">
         <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
@@ -527,14 +532,6 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
         <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-2.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-3.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-4.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-5.jpg' | asset_url }}" alt="Slum Kid"></div>
-        <div class="foot-feed-item"><img src="{{ 'feed-1.jpg' | asset_url }}" alt="Slum Kid"></div>
       </div>
     </div>
   </div>
@@ -575,6 +572,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   var pills = document.querySelectorAll('.filter-pill');
   var cards = document.querySelectorAll('.product-card');
   var labels = document.querySelectorAll('.divider-label');
+
   pills.forEach(function(pill) {
     pill.addEventListener('click', function() {
       pills.forEach(function(p) { p.classList.remove('active'); });
@@ -599,13 +597,12 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
 </script>
 
 <script>
-/* ── Menu mobile — var mob correctement déclarée ── */
 var _skOrigOpen = window.skMenuOpen;
 var _skOrigClose = window.skMenuClose;
 window.skMenuOpen = function() {
   if (_skOrigOpen) _skOrigOpen();
   var mob = document.getElementById('mobNav');
-  if (mob) { mob.style.transform = 'translateY(110%)'; mob.style.transition = 'transform 0.3s'; }
+  if (mob) { mob.style.transform = 'translateY(100%)'; mob.style.transition = 'transform 0.3s'; }
 };
 window.skMenuClose = function() {
   if (_skOrigClose) _skOrigClose();
