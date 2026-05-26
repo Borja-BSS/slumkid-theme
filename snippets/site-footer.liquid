@@ -1,0 +1,124 @@
+<style>
+/* ── SITE FOOTER ── */
+footer.site-footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
+footer.site-footer .foot-insta { padding: 2.8rem 2rem 0; }
+footer.site-footer .foot-insta-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; padding: 0 0.2rem; }
+footer.site-footer .foot-insta-handle { font-size: 1rem; font-weight: 800; letter-spacing: 0.01em; color: #0a0a0a; text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; }
+footer.site-footer .foot-insta-handle:hover { opacity: 0.7; }
+footer.site-footer .foot-follow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 1px; }
+footer.site-footer .foot-follow:hover { border-color: #0a0a0a; }
+footer.site-footer .foot-feed-wrap { position: relative; overflow: hidden; }
+footer.site-footer .foot-feed { display: flex; gap: 6px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; cursor: grab; user-select: none; }
+footer.site-footer .foot-feed.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+footer.site-footer .foot-feed::-webkit-scrollbar { display: none; }
+footer.site-footer .foot-feed-item { flex: 0 0 140px; height: 140px; background: #ddd; overflow: hidden; cursor: pointer; transition: opacity 0.25s; border-radius: 2px; }
+footer.site-footer .foot-feed-item:hover { opacity: 0.8; }
+footer.site-footer .foot-feed-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+footer.site-footer .foot-newsletter { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+footer.site-footer .foot-nl-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #0a0a0a; text-transform: uppercase; margin-bottom: 1.4rem; }
+footer.site-footer .foot-nl-form { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 440px; margin: 0 auto 1.8rem; border-bottom: 1px solid rgba(0,0,0,0.35); }
+footer.site-footer .foot-nl-input { flex: 1; background: transparent; border: none; outline: none; font-family: inherit; font-size: 16px; color: #0a0a0a; padding: 0.6rem 0.8rem 0.6rem 0; letter-spacing: 0.02em; }
+footer.site-footer .foot-nl-input::placeholder { color: rgba(0,0,0,0.35); }
+footer.site-footer .foot-nl-btn { background: transparent; border: none; cursor: pointer; font-family: inherit; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: #0a0a0a; padding: 0.6rem 0; white-space: nowrap; transition: opacity 0.2s; }
+footer.site-footer .foot-nl-btn:hover { opacity: 0.6; }
+footer.site-footer .foot-socials { display: flex; align-items: center; justify-content: center; gap: 1.6rem; }
+footer.site-footer .foot-social-icon { color: #0a0a0a; opacity: 0.75; transition: opacity 0.2s; text-decoration: none; display: flex; }
+footer.site-footer .foot-social-icon:hover { opacity: 1; }
+footer.site-footer .foot-legal { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.4rem 2rem; }
+footer.site-footer .foot-copy { font-size: 0.62rem; color: rgba(0,0,0,0.5); letter-spacing: 0.02em; white-space: normal; word-break: break-word; text-align: center; }
+footer.site-footer .foot-legal-links { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: center; }
+footer.site-footer .foot-legal-links a { font-size: 0.68rem; color: rgba(0,0,0,0.55); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+footer.site-footer .foot-legal-links a:hover { color: #0a0a0a; }
+@media (max-width: 768px) {
+  footer.site-footer .foot-feed-item { flex: 0 0 100px; height: 100px; }
+  footer.site-footer .foot-legal { flex-direction: column; text-align: center; }
+  footer.site-footer .foot-legal-links { justify-content: center; }
+}
+</style>
+
+<footer class="site-footer">
+  <div class="foot-insta">
+    <div class="foot-insta-header">
+      <a class="foot-insta-handle" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">@slumkid.clo</a>
+      <a class="foot-follow" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener">Follow Us</a>
+    </div>
+    <div class="foot-feed-wrap">
+      <div class="foot-feed" id="footFeed">
+        <div class="foot-feed-item"><img src="{{ 'feed-01.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-02.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-03.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-04.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-05.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-06.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-07.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-08.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-09.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-10.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-11.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-12.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-13.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-14.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-15.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-16.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-17.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-18.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-19.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-20.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-21.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-22.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-23.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-24.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+        <div class="foot-feed-item"><img src="{{ 'feed-25.jpg' | asset_url }}" alt="Slum Kid" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-newsletter">
+    <p class="foot-nl-title">Sign up to our newsletter &amp; get a gift on your birthday</p>
+    {% form 'customer', id: 'site-newsletter-form' %}
+      <div class="foot-nl-form">
+        <input class="foot-nl-input" type="email" name="contact[email]" placeholder="Enter your email" required>
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <button class="foot-nl-btn" type="submit">Subscribe</button>
+      </div>
+    {% endform %}
+    <div class="foot-socials">
+      <a class="foot-social-icon" href="https://www.instagram.com/slumkid.clo" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="foot-social-icon" href="https://www.tiktok.com/@slumkid.clo" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
+    <div class="foot-legal-links">
+      <a href="{{ routes.root_url }}pages/notre-histoire">Notre Histoire</a>
+      <a href="{{ routes.root_url }}pages/support">Support</a>
+      <a href="{{ routes.root_url }}policies/shipping-policy">Shipping terms</a>
+      <a href="{{ routes.root_url }}policies/terms-of-service">Terms of service</a>
+      <a href="{{ routes.root_url }}policies/legal-notice">Legal notice</a>
+      <a href="{{ routes.root_url }}policies/privacy-policy">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var feed = document.getElementById('footFeed');
+  if (!feed) return;
+  var isDragging = false, startX = 0, scrollStart = 0;
+  feed.addEventListener('mousedown', function(e) {
+    isDragging = true; startX = e.pageX; scrollStart = feed.scrollLeft;
+    feed.classList.add('is-dragging');
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    feed.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false; feed.classList.remove('is-dragging');
+  });
+  feed.addEventListener('click', function(e) { if (isDragging) e.preventDefault(); });
+})();
+</script>
