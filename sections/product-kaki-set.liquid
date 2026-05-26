@@ -1,3 +1,13 @@
+﻿<script>
+(function() {
+  var vp = document.querySelector('meta[name="viewport"]');
+  if (vp) { vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
+  else { var m = document.createElement('meta'); m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; document.head.appendChild(m); }
+  document.documentElement.style.overflowX = 'hidden';
+  document.documentElement.style.maxWidth = '100%';
+  document.body && (document.body.style.overflowX = 'hidden');
+})();
+</script>
 <style>
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,7 +21,7 @@
   --ease: cubic-bezier(0.4,0,0.2,1);
   --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; max-width: 100%; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { font-family: var(--font); background: var(--white); color: var(--black); overflow-x: hidden; }
 
 /* NAV */
@@ -132,15 +142,27 @@ nav {
 .foot-copy { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
 
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; height: auto; }
-  .gallery { position: relative; top: 0; height: 80vw; grid-template-columns: 60px 1fr; }
-  .product-panel { padding: 2rem 1.5rem; }
-  .detail-row { grid-template-columns: 1fr; }
-  .detail-row.reverse { direction: ltr; }
-  .detail-img { position: relative; height: 60vw; top: 0; }
-  .detail-body { padding: 3rem 1.5rem; }
-  .full-banner { height: 60vw; }
-  .banner-overlay { padding: 2rem; }
+  .hero { display: block !important; height: auto !important; padding-top: 52px; }
+  .gallery { display: flex !important; flex-direction: column !important; position: relative !important; top: 0 !important; height: auto !important; width: 100vw !important; }
+  .main-view { order: 1; width: 100vw !important; height: 120vw !important; overflow: hidden; background: var(--light); }
+  .main-view img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center top; display: block; }
+  .thumbs-col { order: 2; flex-direction: row !important; gap: 6px; padding: 8px; overflow-x: auto; overflow-y: visible; width: 100vw !important; scrollbar-width: none; }
+  .thumbs-col::-webkit-scrollbar { display: none; }
+  .thumb { flex-shrink: 0; width: 72px; height: 90px; }
+  .product-panel { width: 100vw !important; box-sizing: border-box !important; padding: 2rem 1.4rem !important; height: auto !important; overflow: hidden !important; justify-content: flex-start; }
+  .size-grid { width: 100% !important; box-sizing: border-box !important; }
+  .buy-stack { width: 100% !important; box-sizing: border-box !important; }
+  .btn-primary, .btn-glass { width: 100% !important; box-sizing: border-box !important; font-size: 0.75rem !important; letter-spacing: 0.05em !important; padding: 0.85rem 1rem !important; }
+  input, select, textarea { font-size: 16px !important; }
+  .detail-row { display: block !important; direction: ltr !important; width: 100% !important; overflow: hidden; }
+  .detail-row.reverse { display: block !important; direction: ltr !important; }
+  .detail-row > * { direction: ltr !important; width: 100% !important; box-sizing: border-box; }
+  .detail-img { display: block !important; position: relative !important; top: 0 !important; width: 100% !important; height: auto !important; aspect-ratio: 3 / 4; overflow: hidden !important; }
+  .detail-img img { width: 100% !important; height: 100% !important; object-fit: cover; object-position: center top; display: block; }
+  .detail-body { padding: 2.5rem 1.5rem; width: 100%; box-sizing: border-box; }
+  .full-banner { height: auto !important; aspect-ratio: 3 / 4; width: 100% !important; overflow: hidden; }
+  .full-banner img { width: 100% !important; height: 100% !important; object-fit: cover; object-position: center top; }
+  .banner-overlay { padding: 1.8rem; }
   nav { padding: 0 1.2rem; }
 }
 
@@ -226,16 +248,15 @@ nav {
       <span class="size-guide" onclick="sqOpen()">Guide des tailles</span>
     </div>
     <div class="size-grid">
-      <button class="size-btn active" onclick="pick(this)">XS</button>
-      <button class="size-btn" onclick="pick(this)">S</button>
-      <button class="size-btn" onclick="pick(this)">M</button>
-      <button class="size-btn" onclick="pick(this)">L</button>
-      <button class="size-btn" onclick="pick(this)">XL</button>
+      <button class="size-btn sold" disabled>XS</button>
+      <button class="size-btn sold" disabled>S</button>
+      <button class="size-btn sold" disabled>M</button>
+      <button class="size-btn sold" disabled>L</button>
+      <button class="size-btn sold" disabled>XL</button>
     </div>
 
     <div class="buy-stack">
-      <button class="btn-primary" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Ajouter au panier</button>
-      <button class="btn-glass" onclick="if(window.SKShopify){window.SKShopify.buyNow();}else{window.location.href='/cart';}">Acheter maintenant</button>
+      <button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed;background:#888;">Sold Out</button>
     </div>
 
     <div class="delivery">
@@ -371,7 +392,7 @@ nav {
     <div>
       <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Green Kaki Set — 49.95 CHF</p>
       <h2 style="font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;color:#fff;margin-bottom:1.8rem;">GREEN<br>KAKI</h2>
-      <button class="btn-glass" style="width:auto;padding:.75rem 1.8rem;font-size:0.75rem;" onclick="cartGo('/kaki-set')">Ajouter au panier</button>
+      <button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed;background:#888;">Sold Out</button>
     </div>
   </div>
 </div>

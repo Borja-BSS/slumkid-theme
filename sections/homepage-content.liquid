@@ -1,4 +1,4 @@
-{% comment %}
+﻿{% comment %}
   ═══════════════════════════════════════════════
   Section : Homepage Slum Kid
   Fichier  : sections/homepage-slumkid.liquid
@@ -392,7 +392,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   <div class="carousel-scene" id="carouselScene">
     <div class="carousel-inner" id="carouselInner">
 
-      <div class="p-card" data-ci="0">
+      <div class="p-card" data-ci="0" data-href="/products/storm-set">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'story-img-01.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -405,7 +405,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      <div class="p-card" data-ci="1">
+      <div class="p-card" data-ci="1" data-href="/products/pink-puffer">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-pink.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -418,7 +418,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      <div class="p-card" data-ci="2">
+      <div class="p-card" data-ci="2" data-href="/products/grey-tearoff">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-grey.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -431,7 +431,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      <div class="p-card" data-ci="3">
+      <div class="p-card" data-ci="3" data-href="/products/blue-set">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-blue.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -444,7 +444,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      <div class="p-card" data-ci="4">
+      <div class="p-card" data-ci="4" data-href="/products/black-tearoff">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-black.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -457,7 +457,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
         </div>
       </div>
 
-      <div class="p-card" data-ci="5">
+      <div class="p-card" data-ci="5" data-href="/products/kaki-set">
         <div class="sold-out-overlay"><span class="sold-out-label">Sold Out</span></div>
         <div class="p-card-bg" style="background-image: url('{{ 'prod-kaki.jpg' | asset_url }}');"></div>
         <div class="p-card-divider"></div>
@@ -561,40 +561,93 @@ window.addEventListener('scroll', function() {
   }
 });
 
-/* ── HERO SLIDER ── */
-const DURATION = 5500;
-const hSlides = document.querySelectorAll('.hero-slide');
-const hDots   = document.querySelectorAll('.hero-dot');
-const hTrack  = document.getElementById('heroTrack');
-const hProg   = document.getElementById('heroProgress');
-let hCur = 0, hTimer, hStart, hRaf;
+/* ── HERO SLIDER — INFINITE LOOP ── */
+(function () {
+  var track    = document.getElementById('heroTrack');
+  var hDots    = document.querySelectorAll('.hero-dot');
+  var hProg    = document.getElementById('heroProgress');
+  var DURATION = 5500;
 
-function hGo(n) {
-  hSlides[hCur].classList.remove('active'); hDots[hCur].classList.remove('active');
-  hCur = ((n % hSlides.length) + hSlides.length) % hSlides.length;
-  hSlides[hCur].classList.add('active'); hDots[hCur].classList.add('active');
-  hTrack.style.transform = 'translateX(-' + (hCur * 33.333) + '%)';
-}
-function hProgress() {
-  cancelAnimationFrame(hRaf); hProg.style.transition = 'none'; hProg.style.width = '0%';
-  hStart = performance.now();
-  (function tick(now) {
-    var p = Math.min((now - hStart) / DURATION * 100, 100);
-    hProg.style.width = p + '%';
-    if (p < 100) hRaf = requestAnimationFrame(tick);
-  })(hStart);
-}
-function hAuto() { clearInterval(hTimer); hProgress(); hTimer = setInterval(function() { hGo(hCur + 1); hProgress(); }, DURATION); }
+  var realSlides = Array.from(track.querySelectorAll('.hero-slide'));
+  var N = realSlides.length;
+  var cloneLast  = realSlides[N - 1].cloneNode(true);
+  var cloneFirst = realSlides[0].cloneNode(true);
+  cloneLast.classList.remove('active');
+  cloneFirst.classList.remove('active');
+  track.insertBefore(cloneLast, realSlides[0]);
+  track.appendChild(cloneFirst);
 
-hDots.forEach(function(d) { d.addEventListener('click', function() { clearInterval(hTimer); hGo(+d.dataset.i); hAuto(); }); });
-var htx = 0;
-document.querySelector('.hero').addEventListener('touchstart', function(e) { htx = e.touches[0].clientX; }, { passive: true });
-document.querySelector('.hero').addEventListener('touchend', function(e) {
-  var dx = e.changedTouches[0].clientX - htx;
-  if (Math.abs(dx) > 50) { clearInterval(hTimer); hGo(dx < 0 ? hCur + 1 : hCur - 1); hAuto(); }
-});
-hAuto();
+  var total = N + 2;
+  track.style.width = (total * 100) + '%';
+  Array.from(track.querySelectorAll('.hero-slide')).forEach(function(s) {
+    s.style.width = (100 / total) + '%';
+  });
 
+  var hDom = 1, hCur = 0, hTimer, hStart, hRaf, animating = false;
+
+  function setPos(dom, anim) {
+    track.style.transition = anim ? 'transform 0.9s var(--ease)' : 'none';
+    track.style.transform = 'translateX(-' + (dom / total * 100) + '%)';
+  }
+
+  function updateUI() {
+    realSlides.forEach(function(s, i) { s.classList.toggle('active', i === hCur); });
+    hDots.forEach(function(d, i) { d.classList.toggle('active', i === hCur); });
+  }
+
+  track.addEventListener('transitionend', function(e) {
+    if (e.propertyName !== 'transform') return;
+    animating = false;
+    if (hDom >= N + 1) { hDom = 1; setPos(hDom, false); }
+    else if (hDom <= 0) { hDom = N; setPos(hDom, false); }
+  });
+
+  function hSlide(dir) {
+    if (animating) return;
+    animating = true;
+    hDom += dir;
+    hCur = ((hDom - 1) % N + N) % N;
+    updateUI();
+    setPos(hDom, true);
+  }
+
+  function goToReal(idx) {
+    hCur = ((idx % N) + N) % N;
+    hDom = hCur + 1;
+    updateUI();
+    setPos(hDom, true);
+  }
+
+  function hProgress() {
+    cancelAnimationFrame(hRaf);
+    hProg.style.transition = 'none'; hProg.style.width = '0%';
+    hStart = performance.now();
+    (function tick(now) {
+      var p = Math.min((now - hStart) / DURATION * 100, 100);
+      hProg.style.width = p + '%';
+      if (p < 100) hRaf = requestAnimationFrame(tick);
+    })(hStart);
+  }
+
+  function hAuto() {
+    clearInterval(hTimer); hProgress();
+    hTimer = setInterval(function() { hSlide(1); hProgress(); }, DURATION);
+  }
+
+  hDots.forEach(function(d) {
+    d.addEventListener('click', function() { clearInterval(hTimer); goToReal(+d.dataset.i); hAuto(); });
+  });
+
+  var htx = 0;
+  document.querySelector('.hero').addEventListener('touchstart', function(e) { htx = e.touches[0].clientX; }, { passive: true });
+  document.querySelector('.hero').addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - htx;
+    if (Math.abs(dx) > 50) { clearInterval(hTimer); hSlide(dx < 0 ? 1 : -1); hAuto(); }
+  });
+
+  setPos(hDom, false);
+  hAuto();
+})();
 /* ── CAROUSEL ── */
 (function () {
   var scene     = document.getElementById('carouselScene');
@@ -662,11 +715,19 @@ hAuto();
   document.getElementById('cPrev').onclick = function() { pGo(pActive - 1); };
   document.getElementById('cNext').onclick = function() { pGo(pActive + 1); };
 
-  var ctx = 0;
-  scene.addEventListener('touchstart', function(e) { ctx = e.touches[0].clientX; }, { passive: true });
+  var ctx = 0, wasDrag = false;
+  scene.addEventListener('touchstart', function(e) { ctx = e.touches[0].clientX; wasDrag = false; }, { passive: true });
+  scene.addEventListener('touchmove', function(e) { if (Math.abs(e.touches[0].clientX - ctx) > 10) wasDrag = true; }, { passive: true });
   scene.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - ctx;
     if (Math.abs(dx) > 45) pGo(dx < 0 ? pActive + 1 : pActive - 1);
+  });
+  inner.addEventListener('click', function(e) {
+    if (wasDrag) return;
+    var card = e.target.closest ? e.target.closest('.p-card') : null;
+    if (!card) return;
+    var href = card.dataset.href;
+    if (href && card.classList.contains('pos-center')) window.location.href = href;
   });
 
   var autoTimer = setInterval(function() { pGo(pActive + 1); }, 3500);

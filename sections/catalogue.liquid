@@ -441,7 +441,7 @@ footer { background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }
   <!-- ROSE GOLD SET -->
   <a class="product-card" href="/products/rose-gold-set" data-tags="available set">
     <div class="product-card-img">
-      <img src="{{ 'rose-gold-img-00.jpg' | asset_url }}" alt="Rose Gold Set">
+      <img src="{{ 'rose-gold-img-00.jpg' | asset_url }}" alt="Rose Gold Set" onerror="this.style.opacity='0'">
       <div class="p-card-bg-overlay"></div>
       <div class="col-tag"><span>Rose Gold</span></div>
     </div>
@@ -634,6 +634,15 @@ window.skMenuClose = function() {
 <script>
 window.addEventListener('scroll', function() {
   document.getElementById('skNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+<script>
+document.querySelectorAll('.product-card-img img').forEach(function(img) {
+  img.addEventListener('error', function() {
+    this.style.opacity = '0';
+    this.parentElement.style.background = '#e8e8ed';
+  });
 });
 </script>
 
