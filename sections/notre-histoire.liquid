@@ -1,4 +1,4 @@
-<script>
+﻿<script>
 (function() {
   var vp = document.querySelector('meta[name="viewport"]');
   if (vp) { vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'); }
@@ -383,10 +383,8 @@ nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: saturate(180%) 
   </div>
 </section>
 
-<div class="page-footer">
-  <span class="foot-logo">Slum Kid</span>
-  <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
-</div>
+{% render 'site-footer' %}
+
 
 <script>
 window.addEventListener('scroll', function() {

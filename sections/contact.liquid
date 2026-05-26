@@ -1,4 +1,4 @@
-{% comment %}
+﻿{% comment %}
   Section  : Contact Slum Kid
   Fichier  : sections/contact.liquid
 {% endcomment %}
@@ -146,14 +146,8 @@
   {%- endif -%}
 </div>
 
-<footer class="page-footer">
-  <span class="page-footer__copy">&copy; {{ 'now' | date: '%Y' }} Slum Kid</span>
-  <nav class="page-footer__links">
-    <a href="/policies/privacy-policy">Privacy</a>
-    <a href="/policies/terms-of-service">Terms</a>
-    <a href="/pages/contact-1">Contact</a>
-  </nav>
-</footer>
+{% render 'site-footer' %}
+
 
 <script>
 (function() {

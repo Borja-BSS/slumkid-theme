@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -200,16 +200,15 @@ nav {
       <span class="size-guide" onclick="sqOpen()">Guide des tailles</span>
     </div>
     <div class="size-grid">
-      <button class="size-btn" onclick="pick(this)">XS</button>
-      <button class="size-btn" onclick="pick(this)">S</button>
-      <button class="size-btn active" onclick="pick(this)">M</button>
-      <button class="size-btn" onclick="pick(this)">L</button>
-      <button class="size-btn" onclick="pick(this)">XL</button>
-      <button class="size-btn sold">XXL</button>
+      <button class="size-btn sold" disabled>XS</button>
+      <button class="size-btn sold" disabled>S</button>
+      <button class="size-btn sold" disabled>M</button>
+      <button class="size-btn sold" disabled>L</button>
+      <button class="size-btn sold" disabled>XL</button>
+      <button class="size-btn sold" disabled>XXL</button>
     </div>
     <div class="buy-stack">
-      <button class="btn-primary" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Ajouter au panier</button>
-      <button class="btn-glass" onclick="if(window.SKShopify){window.SKShopify.buyNow();}else{window.location.href='/cart';}">Acheter maintenant</button>
+      <button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed;background:#888;">Sold Out</button>
       <button class="btn-glass" onclick="sqOpen()" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
         Find My Size
@@ -250,7 +249,7 @@ nav {
       <p class="banner-card-eyebrow">Built from the slum</p>
       <h3 class="banner-card-title">WEAR<br>WHAT<br>YOU ARE</h3>
       <p class="banner-card-sub">Chaque logo réflectif, chaque zip, chaque scratch — rien n'est laissé au hasard.</p>
-      <button class="btn-primary" style="width:auto;padding:.75rem 1.8rem;" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Shop Now</button>
+      <button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed;background:#888;">Shop Now</button>
     </div>
   </div>
 </div>
@@ -285,16 +284,14 @@ nav {
     <div>
       <p class="detail-eyebrow" style="color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">Storm Set — 129.90 CHF</p>
       <h2 style="font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;color:#fff;margin-bottom:1.8rem;">STORM<br>SET</h2>
-      <button class="btn-glass" style="width:auto;padding:.75rem 1.8rem;font-size:0.75rem;" onclick="if(window.SKShopify){window.SKShopify.addToCart();}else{cartGo();}">Ajouter au panier</button>
+      <button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed;background:#888;">Sold Out</button>
     </div>
   </div>
 </div>
 
 <div style="height:4px;background:#0a0a0a;"></div>
-<div class="page-footer">
-  <span class="foot-logo">Slum Kid</span>
-  <span class="foot-copy">© {{ 'now' | date: '%Y' }} Slum Kid. Tous droits réservés. By BÖRJA SWISS SOLUTIONS</span>
-</div>
+{% render 'site-footer' %}
+
 
 <div class="toast" id="toast">Ajouté au panier</div>
 
