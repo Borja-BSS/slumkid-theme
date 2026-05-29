@@ -44,7 +44,7 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
 .nav-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(0,0,0,0.45); text-decoration: none; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
 .nav-back:hover { color: var(--black); }
 .nav-icon-btn { background: none; border: none; cursor: pointer; color: rgba(0,0,0,0.65); padding: 0.3rem; display: flex; transition: color 0.2s; }
-.hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; align-items: start; padding-top: 52px; }
+.hero { display: grid; grid-template-columns: 1fr 1fr; align-items: start; padding-top: 52px; }
 .gallery { position: sticky; top: 52px; align-self: start; display: grid; grid-template-columns: 72px 1fr; gap: 6px; background: var(--light); }
 .thumbs-col { display: flex; flex-direction: column; gap: 6px; padding: 6px 0 6px 6px; overflow-y: auto; scrollbar-width: none; max-height: calc(100vh - 52px); }
 .thumbs-col::-webkit-scrollbar { display: none; }
@@ -144,7 +144,7 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
   .hero {
     display: block !important;
     height: auto !important;
-    min-height: auto !important;
+    min-height: 0 !important;
     align-items: unset !important;
     padding-top: 52px;
   }
@@ -153,16 +153,19 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
   .gallery {
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important;
     position: static !important;
     top: auto !important;
     align-self: auto !important;
     height: auto !important;
     width: 100vw !important;
+    background: var(--light);
   }
   .main-view {
     order: 1;
-    width: 100vw !important;
-    height: auto !important;
+    width: 100% !important;
+    max-width: calc(9 / 16 * (100vh - 52px)) !important;
+    max-height: calc(100vh - 52px) !important;
     aspect-ratio: 9 / 16 !important;
     overflow: hidden;
     background: var(--light);
