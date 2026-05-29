@@ -44,17 +44,17 @@ nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; height: 52px;
 .nav-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(0,0,0,0.45); text-decoration: none; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
 .nav-back:hover { color: var(--black); }
 .nav-icon-btn { background: none; border: none; cursor: pointer; color: rgba(0,0,0,0.65); padding: 0.3rem; display: flex; transition: color 0.2s; }
-.hero { display: grid; grid-template-columns: min(48vw, calc(9 / 16 * (100vh - 52px) + 78px)) 1fr; height: 100vh; padding-top: 52px; }
-.gallery { position: sticky; top: 52px; height: calc(100vh - 52px); display: grid; grid-template-columns: 72px 1fr; gap: 6px; background: var(--light); }
-.thumbs-col { display: flex; flex-direction: column; gap: 6px; padding: 6px 0 6px 6px; overflow-y: auto; scrollbar-width: none; }
+.hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; align-items: start; padding-top: 52px; }
+.gallery { position: sticky; top: 52px; display: grid; grid-template-columns: 72px 1fr; gap: 6px; background: var(--light); }
+.thumbs-col { display: flex; flex-direction: column; gap: 6px; padding: 6px 0 6px 6px; overflow-y: auto; scrollbar-width: none; max-height: calc(100vh - 52px); }
 .thumbs-col::-webkit-scrollbar { display: none; }
 .thumb { flex-shrink: 0; width: 66px; height: 82px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; border-radius: 2px; }
 .thumb.active { border-color: var(--black); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.main-view { position: relative; overflow: hidden; }
-.main-view img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: opacity 0.35s var(--ease); cursor: zoom-in; }
+.main-view { position: relative; overflow: hidden; aspect-ratio: 9 / 16; }
+.main-view img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: opacity 0.35s var(--ease); cursor: zoom-in; position: absolute; top: 0; left: 0; }
 .hero-badge { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(10,10,10,0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.45rem 0.9rem; border-radius: var(--radius-btn); }
-.product-panel { display: flex; flex-direction: column; justify-content: center; padding: 3.5rem 3rem; overflow-y: auto; background: var(--white); }
+.product-panel { display: flex; flex-direction: column; justify-content: flex-start; padding: 3.5rem 3rem 3.5rem 3rem; position: sticky; top: 52px; max-height: calc(100vh - 52px); overflow-y: auto; background: var(--white); }
 .product-season { font-size: 0.6rem; letter-spacing: 0.22em; font-weight: 600; color: var(--gray); text-transform: uppercase; margin-bottom: 0.7rem; }
 .product-name { font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; text-transform: uppercase; margin-bottom: 0.5rem; }
 .product-tagline { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2rem; font-weight: 500; }
