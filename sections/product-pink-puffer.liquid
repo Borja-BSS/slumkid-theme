@@ -463,7 +463,8 @@ var IMGS = {
 window.IMGS = IMGS;
 
 document.querySelectorAll('.thumb').forEach(function(th) {
-  th.addEventListener('click', function() {
+  th.addEventListener('click', function(e) {
+    e.stopImmediatePropagation();
     document.querySelectorAll('.thumb').forEach(function(t) { t.classList.remove('active'); });
     th.classList.add('active');
     document.getElementById('mainImg').src = window.IMGS[th.dataset.src];
