@@ -26,7 +26,10 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:200;height:52px;background:rg
 .product-panel{display:flex;flex-direction:column;justify-content:center;padding:3.5rem 3rem;overflow-y:auto;background:var(--white);}
 .product-season{font-size:0.6rem;letter-spacing:0.22em;font-weight:600;color:var(--gray);text-transform:uppercase;margin-bottom:0.7rem;}
 .product-name{font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:900;letter-spacing:-0.04em;line-height:0.9;text-transform:uppercase;margin-bottom:0.5rem;}
-.product-tagline{font-size:0.72rem;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2rem;font-weight:500;}
+.product-tagline{font-size:0.72rem;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.6rem;font-weight:500;}
+.type-tabs{display:flex;gap:6px;margin-bottom:1.6rem;}
+.type-tab{flex:1;padding:0.65rem 0.5rem;font-family:var(--font);font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:var(--radius-btn);background:rgba(0,0,0,0.05);color:rgba(0,0,0,0.45);border:1px solid rgba(0,0,0,0.1);transition:all 0.25s var(--ease);}
+.type-tab.active{background:var(--black);color:var(--white);border-color:var(--black);}
 .size-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;}
 .size-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);}
 .size-guide{font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);text-decoration:underline;cursor:pointer;}
@@ -158,10 +161,14 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:200;height:52px;background:rg
     <p class="product-season">Slum Kid — Collection</p>
     <h1 class="product-name">ROSE<br>GOLD</h1>
     <p class="product-tagline">T-Shirt + Short · 100% Cotton</p>
-
+    <div class="type-tabs">
+      <button class="type-tab" onclick="switchTab(this,'tshirt')">T-Shirt</button>
+      <button class="type-tab" onclick="switchTab(this,'short')">Short</button>
+      <button class="type-tab active" onclick="switchTab(this,'set')">Set</button>
+    </div>
     <div class="price-block">
-      <span class="price-main">69.90 CHF</span>
-      <span class="price-label">Rose Gold Set</span>
+      <span class="price-main" id="priceMain">69.90 CHF</span>
+      <span class="price-label" id="priceLabel">Rose Gold Set</span>
     </div>
 
     <div class="size-row">
@@ -387,6 +394,7 @@ window.IMGS=IMGS;
 })();
 function toggleAcc(id){var body=document.getElementById(id),trigger=body.previousElementSibling;body.classList.toggle('open');trigger.classList.toggle('open');}
 function cartGo(){var t=document.getElementById('toast');if(t){t.classList.add('show');setTimeout(function(){t.classList.remove('show');},1500);}}
+function switchTab(el,key){document.querySelectorAll('.type-tab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');var p={tshirt:['39.95 CHF','Rose Gold T-Shirt'],short:['34.95 CHF','Rose Gold Short'],set:['69.90 CHF','Rose Gold Set']};var pm=document.getElementById('priceMain'),pl=document.getElementById('priceLabel');if(pm)pm.textContent=p[key][0];if(pl)pl.textContent=p[key][1];}
 (function(){
   var SIZES=['XS','S','M','L','XL'],ans=[],finalSize='M';
   var SD={cols:['Taille','Largeur','Longueur','Épaule'],rows:[['XS','61 cm','66 cm','20 cm'],['S','62 cm','68 cm','21 cm'],['M','64 cm','70 cm','22 cm'],['L','65 cm','71 cm','23.7 cm'],['XL','68 cm','72.5 cm','25 cm']]};
